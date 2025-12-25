@@ -31,8 +31,11 @@ const app = express();
 app.set('port', process.env.PORT || 5000);
 
 // Habilitar CORS (configura según tus necesidades)
+// Habilitar CORS (configura según tus necesidades)
 app.use(cors({
-  origin: process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : '*',
+  origin: process.env.ALLOWED_ORIGINS
+    ? process.env.ALLOWED_ORIGINS.split(',')
+    : 'http://localhost:4200', // <-- Cambiado para que Angular funcione con credentials: true
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token'],
   credentials: true
