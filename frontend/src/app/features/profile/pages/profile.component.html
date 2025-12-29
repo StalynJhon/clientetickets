@@ -1,33 +1,46 @@
-<div class="perfil-container">
+<tr></tr>
+<h2 class="titulo">Mi Perfil</h2>
 
-  <h2>Mi Perfil</h2>
+<p *ngIf="cargando">Cargando perfil...</p>
+<p *ngIf="error" class="error">{{ error }}</p>
 
-  <!-- Cargando -->
-  <div *ngIf="cargando">
-    Cargando información...
+<div *ngIf="usuario && !cargando" class="perfil-card">
+  <p><strong>Nombre:</strong> {{ usuario.nameUser }}</p>
+  <p><strong>Usuario:</strong> {{ usuario.userName }}</p>
+  <p><strong>Email:</strong> {{ usuario.emailUser }}</p>
+  <p><strong>Teléfono:</strong> {{ usuario.phoneUser }}</p>
+
+  <button class="btn-editar" (click)="abrirModal()">Editar perfil</button>
+</div>
+
+<!-- MODAL -->
+<div class="modal-backdrop" *ngIf="mostrarModal">
+  <div class="modal">
+    <h3>Editar información</h3>
+
+    <div class="campo">
+      <label>Nombre</label>
+      <input type="text" [(ngModel)]="usuarioEdit.nameUser">
+    </div>
+
+    <div class="campo">
+      <label>Usuario</label>
+      <input type="text" [(ngModel)]="usuarioEdit.userName">
+    </div>
+
+    <div class="campo">
+      <label>Email</label>
+      <input type="email" [(ngModel)]="usuarioEdit.emailUser">
+    </div>
+
+    <div class="campo">
+      <label>Teléfono</label>
+      <input type="text" [(ngModel)]="usuarioEdit.phoneUser">
+    </div>
+
+    <div class="modal-actions">
+      <button class="guardar" (click)="guardarCambios()">Guardar</button>
+      <button class="cancelar" (click)="cerrarModal()">Cancelar</button>
+    </div>
   </div>
-
-  <!-- Perfil cargado -->
-  <div *ngIf="!cargando">
-    <ng-container *ngIf="usuario; else errorTemplate">
-
-      <p><strong>Nombre:</strong> {{ usuario.nameUsers }}</p>
-      <p><strong>Email:</strong> {{ usuario.emailUser }}</p>
-      <p><strong>Usuario:</strong> {{ usuario.userName }}</p>
-      <p><strong>Teléfono:</strong> {{ usuario.phoneUser || 'No registrado' }}</p>
-      <p><strong>Estado:</strong> {{ usuario.stateUser }}</p>
-      <p><strong>Roles:</strong> {{ rolesTexto }}</p>
-
-      <button>
-        Editar perfil
-      </button>
-
-    </ng-container>
-
-    <!-- Template para mostrar error -->
-    <ng-template #errorTemplate>
-      {{ error || 'No se pudo cargar el perfil' }}
-    </ng-template>
-  </div>
-
 </div>

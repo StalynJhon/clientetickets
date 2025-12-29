@@ -26,7 +26,25 @@ function descifrarDatos(cifrado) {
     }
 }
 
+function descifrarSeguro(valor) {
+    try {
+        if (!valor) return null;
+
+        const bytes = CryptoJS.AES.decrypt(valor, claveSecreta);
+        const texto = bytes.toString(CryptoJS.enc.Utf8);
+
+        if (!texto) return valor; // no estaba cifrado
+
+        return JSON.parse(texto);
+    } catch (error) {
+        // Si falla, devolvemos el valor original
+        return valor;
+    }
+}
+
+
 module.exports = {
     cifrarDatos,
-    descifrarDatos
+    descifrarDatos,
+    descifrarSeguro
 }

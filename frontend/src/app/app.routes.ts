@@ -3,6 +3,7 @@ import { DashboardComponent } from './layout/dashboard/dashboard.component';
 import { ClienteListComponent } from './features/clientes/pages/cliente-list.component';
 import { EventosComponent } from './features/eventos/pages/eventos.component';
 import { ProfileComponent } from './features/profile/pages/profile.component';
+import { HistorialComponent } from './features/historial/pages/historial.component';
 
 export const routes: Routes = [
   // Ruta principal → Dashboard
@@ -16,6 +17,7 @@ export const routes: Routes = [
 
   // Usuario
   { path: 'perfil', component: ProfileComponent},
+  { path: 'historial', component: HistorialComponent },
 
   // Cualquier ruta inválida → Dashboard
   { path: '**', redirectTo: 'dashboard' }

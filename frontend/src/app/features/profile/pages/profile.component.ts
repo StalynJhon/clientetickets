@@ -1,50 +1,76 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UsuarioService } from '../profile.service'; // ajusta la ruta si tu carpeta cambia
+import { UsuarioService } from '../profile.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
 
   usuario: any = null;
-  rolesTexto: string = '';   // Para mostrar roles como string
   cargando: boolean = true;
   error: string | null = null;
 
-  constructor(private usuarioService: UsuarioService) {}
+  // 🔹 Modal
+  mostrarModal: boolean = false;
+  usuarioEdit: any = {};
+
+  constructor(private usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
-    const usuarioId = 1; // ID temporal
+  const usuarioId = 1;
 
-    this.usuarioService.obtenerUsuario(usuarioId).subscribe({
-      next: (resp: any) => {
-        this.cargando = false; // marcamos que la carga terminó
+  this.usuarioService.obtenerUsuario(usuarioId).subscribe({
+    next: (resp: any) => {
+      this.cargando = false;
 
-        if (resp) {
-          this.usuario = resp;
-
-          // Convertimos roles a string para el HTML
-          this.rolesTexto = this.usuario.roles?.length
-            ? this.usuario.roles.map((r: any) => r.nameRole).join(', ')
-            : 'Sin roles asignados';
-
-        } else {
-          // Si no hay usuario, se muestra el mensaje de error
-          this.error = 'No se encontraron datos del usuario';
-          this.usuario = null;
-        }
-      },
-      error: (err) => {
-        console.error('Error al cargar usuario ❌', err);
-        this.cargando = false;
-        this.error = 'Error al conectar con el servidor';
-        this.usuario = null;
+      if (resp) {
+        this.usuario = {
+          ...resp,
+          // 🔥 normalizamos el nombre
+          nameUser: resp.nameUser ?? resp.nameUsers ?? ''
+        };
+      } else {
+        this.error = 'No se encontraron datos del usuario';
       }
-    });
+    },
+    error: () => {
+      this.cargando = false;
+      this.error = 'Error al conectar con el servidor';
+    }
+  });
+}
+
+  // 🔹 Abrir modal
+  abrirModal() {
+    this.usuarioEdit = { ...this.usuario }; // clonamos datos
+    this.mostrarModal = true;
+  }
+
+  // 🔹 Cerrar modal
+  cerrarModal() {
+    this.mostrarModal = false;
+  }
+
+  guardarCambios() {
+    this.usuarioService.actualizarUsuario(this.usuario.idUser, this.usuarioEdit)
+      .subscribe({
+        next: () => {
+          this.usuario = {
+            ...this.usuario,
+            ...this.usuarioEdit,
+            nameUser: this.usuarioEdit.nameUser || this.usuario.nameUser
+          };
+          this.mostrarModal = false;
+        },
+        error: () => {
+          alert('Error al actualizar datos');
+        }
+      });
   }
 }

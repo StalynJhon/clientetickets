@@ -270,6 +270,7 @@ app.use('/classification', require('../src/infrastructure/http/router/classifica
 app.use('/city', require('../src/infrastructure/http/router/city.router'));
 app.use('/country', require('../src/infrastructure/http/router/country.router'));
 app.use('/staff', require('../src/infrastructure/http/router/staff.router'));
+app.use('/tickets', require('../src/infrastructure/http/router/tickets.router'))
 
 // Configurar variables globales
 app.use((req, res, next) => {
