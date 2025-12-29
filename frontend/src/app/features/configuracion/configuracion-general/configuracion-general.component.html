@@ -1,0 +1,190 @@
+<div class="configuracion-container">
+  <h2>Configuración General de la Plataforma</h2>
+
+  <form (ngSubmit)="guardarConfiguracion()" #configForm="ngForm">
+    <!-- Configuración de la plataforma -->
+    <section class="config-section">
+      <h3>Parámetros de la Plataforma</h3>
+      
+      <div class="form-group">
+        <label for="nombreComercial">Nombre Comercial</label>
+        <input 
+          type="text" 
+          id="nombreComercial" 
+          name="nombreComercial"
+          [(ngModel)]="configData.nombreComercial" 
+          class="form-control"
+          placeholder="Nombre de la plataforma">
+      </div>
+
+      <div class="form-group">
+        <label for="logo">Logo (URL)</label>
+        <input 
+          type="text" 
+          id="logo" 
+          name="logo"
+          [(ngModel)]="configData.logo" 
+          class="form-control"
+          placeholder="URL del logo">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Colores Básicos</label>
+          <div class="color-pickers">
+            <div class="color-picker">
+              <label>Primario</label>
+              <input 
+                type="color" 
+                name="colorPrimario"
+                [(ngModel)]="configData.colores.primario" 
+                class="form-control">
+            </div>
+            <div class="color-picker">
+              <label>Secundario</label>
+              <input 
+                type="color" 
+                name="colorSecundario"
+                [(ngModel)]="configData.colores.secundario" 
+                class="form-control">
+            </div>
+            <div class="color-picker">
+              <label>Fondo</label>
+              <input 
+                type="color" 
+                name="colorFondo"
+                [(ngModel)]="configData.colores.fondo" 
+                class="form-control">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="emailContacto">Email de Contacto</label>
+        <input 
+          type="email" 
+          id="emailContacto" 
+          name="emailContacto"
+          [(ngModel)]="configData.contacto.email" 
+          class="form-control"
+          placeholder="Email de contacto">
+      </div>
+
+      <div class="form-group">
+        <label for="telefonoContacto">Teléfono de Contacto</label>
+        <input 
+          type="text" 
+          id="telefonoContacto" 
+          name="telefonoContacto"
+          [(ngModel)]="configData.contacto.telefono" 
+          class="form-control"
+          placeholder="Teléfono de contacto">
+      </div>
+
+      <div class="form-group">
+        <label for="direccionContacto">Dirección</label>
+        <input 
+          type="text" 
+          id="direccionContacto" 
+          name="direccionContacto"
+          [(ngModel)]="configData.contacto.direccion" 
+          class="form-control"
+          placeholder="Dirección de contacto">
+      </div>
+    </section>
+
+    <!-- Textos legales -->
+    <section class="config-section">
+      <h3>Textos Legales Configurables</h3>
+
+      <div class="form-group">
+        <label for="terminos">Términos y Condiciones</label>
+        <textarea 
+          id="terminos" 
+          name="terminos"
+          [(ngModel)]="configData.textosLegales.terminos" 
+          class="form-control"
+          rows="5"
+          placeholder="Términos y condiciones de la plataforma"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="politica">Política de Privacidad</label>
+        <textarea 
+          id="politica" 
+          name="politica"
+          [(ngModel)]="configData.textosLegales.politica" 
+          class="form-control"
+          rows="5"
+          placeholder="Política de privacidad"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="mensajesCompra">Mensajes Informativos en la Compra</label>
+        <textarea 
+          id="mensajesCompra" 
+          name="mensajesCompra"
+          [(ngModel)]="configData.textosLegales.mensajesCompra" 
+          class="form-control"
+          rows="3"
+          placeholder="Mensajes informativos que se mostrarán durante la compra"></textarea>
+      </div>
+    </section>
+
+    <!-- Configuración de negocio -->
+    <section class="config-section">
+      <h3>Configuración de Negocio</h3>
+
+      <div class="form-group">
+        <label for="moneda">Moneda por Defecto</label>
+        <select 
+          id="moneda" 
+          name="moneda"
+          [(ngModel)]="configData.negocio.moneda" 
+          class="form-control">
+          <option value="USD">USD - Dólar Estadounidense</option>
+          <option value="EUR">EUR - Euro</option>
+          <option value="COP">COP - Peso Colombiano</option>
+          <option value="MXN">MXN - Peso Mexicano</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="limiteTickets">Límite de Tickets por Cliente por Evento</label>
+        <input 
+          type="number" 
+          id="limiteTickets" 
+          name="limiteTickets"
+          [(ngModel)]="configData.negocio.limiteTickets" 
+          class="form-control"
+          min="1"
+          max="100">
+      </div>
+
+      <div class="form-group checkbox-group">
+        <label>
+          <input 
+            type="checkbox" 
+            name="transporteHabilitado"
+            [(ngModel)]="configData.negocio.transporteHabilitado">
+          Activar venta de transporte
+        </label>
+      </div>
+
+      <div class="form-group checkbox-group">
+        <label>
+          <input 
+            type="checkbox" 
+            name="productosHabilitados"
+            [(ngModel)]="configData.negocio.productosHabilitados">
+          Activar venta de productos adicionales
+        </label>
+      </div>
+    </section>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Guardar Configuración</button>
+    </div>
+  </form>
+</div>

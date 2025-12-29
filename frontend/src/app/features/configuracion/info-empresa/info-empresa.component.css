@@ -1,0 +1,288 @@
+.info-empresa-container {
+  padding: 30px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+  min-height: calc(100vh - 120px);
+}
+
+.header-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.header-section h2 {
+  color: #2c3e50;
+  font-size: 2.2rem;
+  margin: 0 0 10px 0;
+  font-weight: 600;
+}
+
+.subtitle {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+  color: #3498db;
+  font-size: 1.1rem;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(52, 152, 219, 0.2);
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+  color: #e74c3c;
+  font-size: 1.1rem;
+  background: #fdeded;
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.error i {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.empresa-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.empresa-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.empresa-header {
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+.empresa-logo-container {
+  margin-bottom: 20px;
+}
+
+.empresa-logo {
+  max-width: 180px;
+  max-height: 100px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  object-fit: contain;
+}
+
+.empresa-logo-placeholder {
+  width: 180px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px dashed rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 2rem;
+}
+
+.empresa-title h3 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.empresa-content {
+  padding: 30px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+@media (min-width: 768px) {
+  .empresa-content {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.empresa-description {
+  padding: 0;
+}
+
+.empresa-description h4 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #2c3e50;
+  margin: 0 0 15px 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.empresa-description p {
+  line-height: 1.8;
+  color: #34495e;
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.contact-info {
+  padding: 0;
+}
+
+.contact-info h4 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #2c3e50;
+  margin: 0 0 20px 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.contact-item:hover {
+  background: #edf2f7;
+}
+
+.contact-item i {
+  font-size: 1.5rem;
+  color: #3498db;
+  min-width: 24px;
+  margin-top: 3px;
+}
+
+.contact-details {
+  flex: 1;
+}
+
+.contact-label {
+  display: block;
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 5px;
+}
+
+.contact-value {
+  color: #34495e;
+  font-size: 1.1rem;
+  text-decoration: none;
+  display: block;
+}
+
+.contact-value:hover {
+  color: #3498db;
+  text-decoration: underline;
+}
+
+/* Iconos */
+.icon-building {
+  font-size: 3rem;
+}
+
+.icon-info, .icon-contact {
+  color: #3498db;
+}
+
+.icon-email {
+  color: #27ae60;
+}
+
+.icon-phone {
+  color: #e67e22;
+}
+
+.icon-location {
+  color: #e74c3c;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .info-empresa-container {
+    padding: 15px;
+    min-height: auto;
+  }
+  
+  .header-section h2 {
+    font-size: 1.8rem;
+  }
+  
+  .empresa-header {
+    padding: 30px 15px;
+  }
+  
+  .empresa-logo {
+    max-width: 150px;
+    max-height: 80px;
+  }
+  
+  .empresa-title h3 {
+    font-size: 1.5rem;
+  }
+  
+  .empresa-content {
+    padding: 20px;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .empresa-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .empresa-header {
+    padding: 20px 10px;
+  }
+  
+  .contact-item {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

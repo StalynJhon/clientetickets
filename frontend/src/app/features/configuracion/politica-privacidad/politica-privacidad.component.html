@@ -1,0 +1,44 @@
+<div class="privacidad-container">
+  <div class="header-section">
+    <h2>Política de Privacidad</h2>
+    <p class="subtitle">Protección de su información personal y datos</p>
+  </div>
+
+  <div *ngIf="cargando" class="loading">
+    <div class="spinner"></div>
+    <p>Cargando política de privacidad...</p>
+  </div>
+
+  <div *ngIf="error" class="error">
+    <i class="icon-error">⚠️</i>
+    <h3>Error al cargar la política de privacidad</h3>
+    <p>{{ error }}</p>
+  </div>
+
+  <div *ngIf="!cargando && !error && politica" class="privacidad-card">
+    <div class="privacidad-content">
+      <div class="privacidad-header">
+        <div class="privacidad-icon">🔒</div>
+        <div class="privacidad-title">
+          <h3>Política de Privacidad</h3>
+          <p class="privacidad-date" *ngIf="politica.fechaActualizacion">
+            Última actualización: {{ politica.fechaActualizacion | date:'mediumDate' }}
+          </p>
+        </div>
+      </div>
+      
+      <div *ngIf="politica.texto; else noContent" class="privacidad-body" [innerHTML]="politica.texto">
+      </div>
+      
+
+    </div>
+  </div>
+  
+  <ng-template #noContent>
+    <div class="no-content">
+      <div class="no-content-icon">🔒</div>
+      <h3>No hay política de privacidad disponible</h3>
+      <p>Actualmente no hay política de privacidad disponible. Por favor, inténtelo más tarde.</p>
+    </div>
+  </ng-template>
+</div>

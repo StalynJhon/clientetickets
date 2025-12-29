@@ -1,0 +1,39 @@
+<div class="ayuda-container">
+  <div class="header-section">
+    <h2>Ayuda / Preguntas Frecuentes</h2>
+    <p class="subtitle">Encuentre respuestas rápidas a sus preguntas comunes</p>
+  </div>
+
+  <div *ngIf="cargando" class="loading">
+    <div class="spinner"></div>
+    <p>Cargando ayuda y preguntas frecuentes...</p>
+  </div>
+
+  <div *ngIf="error" class="error">
+    <i class="icon-error">⚠️</i>
+    <h3>Error al cargar la ayuda y preguntas frecuentes</h3>
+    <p>{{ error }}</p>
+  </div>
+
+  <div *ngIf="!cargando && !error && ayuda" class="ayuda-card">
+    <div *ngIf="ayuda.faqs && ayuda.faqs.length > 0; else noFaqs" class="faq-list">
+      <div *ngFor="let faq of ayuda.faqs; let i = index" class="faq-item">
+        <div class="faq-question" (click)="toggleFaq(i)">
+          <h3>{{ faq.pregunta }}</h3>
+          <span class="faq-toggle">{{ faq.expandido ? '−' : '+' }}</span>
+        </div>
+        <div class="faq-answer" [class.expanded]="faq.expandido">
+          <p [innerHTML]="faq.respuesta"></p>
+        </div>
+      </div>
+    </div>
+    
+    <ng-template #noFaqs>
+      <div class="no-content">
+        <div class="no-content-icon">❓</div>
+        <h3>No hay preguntas frecuentes disponibles</h3>
+        <p>Actualmente no hay preguntas frecuentes disponibles. Por favor, contacte con soporte si necesita ayuda.</p>
+      </div>
+    </ng-template>
+  </div>
+</div>
