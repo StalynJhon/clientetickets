@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 
@@ -8,6 +8,7 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
   standalone: true,
   imports: [
     RouterOutlet,
+    RouterLink,
     CommonModule,
     NavbarComponent
   ],

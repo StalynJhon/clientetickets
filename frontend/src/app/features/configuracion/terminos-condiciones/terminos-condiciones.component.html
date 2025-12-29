@@ -1,0 +1,47 @@
+<div class="terminos-container">
+  <div class="header-section">
+    <h2>Términos y Condiciones</h2>
+    <p class="subtitle">Conoce las condiciones de uso de nuestra plataforma</p>
+  </div>
+
+  <div *ngIf="cargando" class="loading">
+    <div class="spinner"></div>
+    <p>Cargando términos y condiciones...</p>
+  </div>
+
+  <div *ngIf="error" class="error">
+    <i class="icon-error"></i>
+    <p>Error al cargar los términos y condiciones</p>
+  </div>
+
+  <div *ngIf="!cargando && !error && terminos" class="content">
+    <div class="terminos-card">
+      <div *ngIf="terminos.texto; else noContent" class="terminos-content">
+        <div class="terminos-header">
+          <div class="terminos-icon">
+            <i class="icon-document"></i>
+          </div>
+          <div class="terminos-title">
+            <h3>Condiciones de Uso</h3>
+            <p class="terminos-date">Última actualización: {{ getCurrentDate() }}</p>
+          </div>
+        </div>
+        
+        <div class="terminos-body" [innerHTML]="terminos.texto">
+        </div>
+        
+
+      </div>
+      
+      <ng-template #noContent>
+        <div class="no-content">
+          <div class="no-content-icon">
+            <i class="icon-document"></i>
+          </div>
+          <h3>No hay términos y condiciones disponibles</h3>
+          <p>Los términos y condiciones aún no han sido configurados por el administrador.</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

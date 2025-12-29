@@ -3,6 +3,10 @@ import { DashboardComponent } from './layout/dashboard/dashboard.component';
 import { ClienteListComponent } from './features/clientes/pages/cliente-list.component';
 import { EventosComponent } from './features/eventos/pages/eventos.component';
 import { ProfileComponent } from './features/profile/pages/profile.component';
+import { InfoEmpresaComponent } from './features/configuracion/info-empresa/info-empresa.component';
+import { TerminosCondicionesComponent } from './features/configuracion/terminos-condiciones/terminos-condiciones.component';
+import { PoliticaPrivacidadComponent } from './features/configuracion/politica-privacidad/politica-privacidad.component';
+import { AyudaFaqComponent } from './features/configuracion/ayuda-faq/ayuda-faq.component';
 
 export const routes: Routes = [
   // Ruta principal → Dashboard
@@ -16,6 +20,12 @@ export const routes: Routes = [
 
   // Usuario
   { path: 'perfil', component: ProfileComponent},
+
+  // Configuración informativa
+  { path: 'empresa', component: InfoEmpresaComponent},
+  { path: 'terminos', component: TerminosCondicionesComponent},
+  { path: 'privacidad', component: PoliticaPrivacidadComponent},
+  { path: 'ayuda', component: AyudaFaqComponent},
 
   // Cualquier ruta inválida → Dashboard
   { path: '**', redirectTo: 'dashboard' }

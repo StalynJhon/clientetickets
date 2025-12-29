@@ -1,0 +1,71 @@
+<div class="info-empresa-container">
+  <div class="header-section">
+    <h2>Sobre la Empresa</h2>
+    <p class="subtitle">Conoce más sobre nuestra plataforma y cómo trabajamos para ti</p>
+  </div>
+
+  <div *ngIf="cargando" class="loading">
+    <div class="spinner"></div>
+    <p>Cargando información de la empresa...</p>
+  </div>
+
+  <div *ngIf="error" class="error">
+    <i class="icon-error"></i>
+    <p>Error al cargar la información de la empresa</p>
+  </div>
+
+  <div *ngIf="!cargando && !error && infoEmpresa" class="content">
+    <div class="empresa-card">
+      <div class="empresa-header">
+        <div class="empresa-logo-container">
+          <img *ngIf="infoEmpresa.logo" [src]="infoEmpresa.logo" [alt]="'Logo de ' + (infoEmpresa.nombreComercial || 'la empresa')" class="empresa-logo">
+          <div class="empresa-logo-placeholder" *ngIf="!infoEmpresa.logo">
+            <i class="icon-building"></i>
+          </div>
+        </div>
+        <div class="empresa-title">
+          <h3>{{ infoEmpresa.nombreComercial || 'Nombre de la Empresa' }}</h3>
+        </div>
+      </div>
+
+      <div class="empresa-content">
+        <div class="empresa-description">
+          <h4><i class="icon-info"></i> Acerca de Nosotros</h4>
+          <p>
+            Somos una plataforma líder en la venta de tickets para eventos culturales, 
+            deportivos y de entretenimiento. Nos dedicamos a facilitar la experiencia 
+            de compra de entradas para nuestros clientes y proporcionar herramientas 
+            efectivas para la gestión de eventos a nuestros socios.
+          </p>
+        </div>
+
+        <div class="contact-info">
+          <h4><i class="icon-contact"></i> Información de Contacto</h4>
+          <div class="contact-item" *ngIf="infoEmpresa.contacto?.email">
+            <i class="icon-email"></i>
+            <div class="contact-details">
+              <span class="contact-label">Email</span>
+              <a [href]="'mailto:' + infoEmpresa.contacto.email" class="contact-value">{{ infoEmpresa.contacto.email }}</a>
+            </div>
+          </div>
+          
+          <div class="contact-item" *ngIf="infoEmpresa.contacto?.telefono">
+            <i class="icon-phone"></i>
+            <div class="contact-details">
+              <span class="contact-label">Teléfono</span>
+              <a [href]="'tel:' + infoEmpresa.contacto.telefono" class="contact-value">{{ infoEmpresa.contacto.telefono }}</a>
+            </div>
+          </div>
+          
+          <div class="contact-item" *ngIf="infoEmpresa.contacto?.direccion">
+            <i class="icon-location"></i>
+            <div class="contact-details">
+              <span class="contact-label">Dirección</span>
+              <span class="contact-value">{{ infoEmpresa.contacto.direccion }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
