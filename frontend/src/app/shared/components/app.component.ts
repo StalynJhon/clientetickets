@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     RouterOutlet,
+    RouterLink,
     CommonModule,
     NavbarComponent
   ],
@@ -33,4 +34,6 @@ export class AppComponent {
     event.preventDefault();
     this.router.navigate(['/eventos']);
   }
+
+
 }
