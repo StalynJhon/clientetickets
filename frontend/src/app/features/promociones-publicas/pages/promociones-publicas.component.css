@@ -1,0 +1,134 @@
+.page {
+  padding: 30px;
+  background: #f1f3f5; /* fondo gris externo */
+}
+
+/* 🔥 CUADRO BLANCO GRANDE */
+.page-box {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.1);
+}
+
+/* opcional: separar título */
+.page-box h2 {
+  margin-bottom: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.card-outer {
+  background: #f1f3f5;
+  padding: 12px;
+  border-radius: 16px;
+}
+
+.card-inner {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,.12);
+  transition: transform .3s;
+}
+
+.card-inner:hover {
+  transform: translateY(-6px);
+}
+
+.promo-img {
+  width: 100%;
+  height: 12rem;      
+  object-fit: contain; 
+  background-color: #f3f4f6;
+}
+
+.info {
+  padding: 15px;
+}
+
+.badge {
+  background: #e63946;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+.badge.used {
+  background: #999; /* gris para usada */
+}
+
+.btn-select {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  background: #1d3557;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.codigo-box {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+.codigo-box input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.codigo-box button {
+  background: #457b9d;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.auto {
+  margin-top: 8px;
+  color: green;
+  font-size: 14px;
+}
+
+.codigo {
+  margin-top: 8px;
+  color: #1d3557;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.precio-box {
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.precio-original {
+  text-decoration: line-through;
+  color: #999;
+  font-size: 14px;
+}
+
+.precio-final {
+  color: #1d3557;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* 🔹 CARD USADA */
+.card-used {
+  opacity: 0.5;           /* se ve gris */
+  pointer-events: none;    /* no se puede hacer click en nada dentro */
+}

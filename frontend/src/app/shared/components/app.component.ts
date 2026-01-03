@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { NavbarComponent } from './navbar/navbar.component';
+
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
     RouterOutlet,
     RouterLink,
     CommonModule,
-    NavbarComponent
+    NavbarComponent,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']

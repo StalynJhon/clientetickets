@@ -1,0 +1,93 @@
+<div class="page">
+
+  <div class="page-box">
+
+    <h2>Promociones disponibles</h2>
+
+    <div class="grid">
+
+      <div class="card-outer" 
+           *ngFor="let promo of promocionesActivas"
+           [ngClass]="{'card-used': promo.used}">
+
+        <div class="card-inner">
+
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCGZlr4gLcP_lnP-wXWHiXholmsGihWJOqfA&s"
+            alt="Promoción"
+            class="promo-img"
+          />
+
+          <div class="info">
+
+            <!-- 🔹 Badge normal o “Usada” -->
+            <span class="badge" *ngIf="!promo.used">
+              -{{ promo.discountValue }}%
+            </span>
+            <span class="badge used" *ngIf="promo.used">
+              Usada
+            </span>
+
+            <h3>{{ promo.namePromotion }}</h3>
+
+            <!-- 💲 PRECIOS VISUALES DE EJEMPLO -->
+            <div class="precio-box">
+              <span class="precio-original">
+                $10.00
+              </span>
+
+              <span class="precio-final">
+                ${{ calcularPrecioFinal(10, promo.discountValue) | number:'1.2-2' }}
+              </span>
+            </div>
+
+            <p class="fecha">
+              Válido hasta {{ promo.endDate | date:'dd/MM/yyyy' }}
+            </p>
+
+            <!-- BOTÓN SIEMPRE -->
+            <button
+              class="btn-select"
+              (click)="seleccionarPromocion(promo)">
+              Seleccionar promoción
+            </button>
+
+            <!-- INPUT SOLO SI ES PROMO CON CÓDIGO -->
+            <div
+              class="codigo-box"
+              *ngIf="
+                promo.promoCode &&
+                promoSeleccionada?.id === promo.id
+              ">
+
+              <input
+                type="text"
+                placeholder="Ingresa el código"
+                [(ngModel)]="codigoIngresado"
+              />
+
+              <button (click)="aplicarCodigo()">
+                Aplicar
+              </button>
+            </div>
+
+            <!-- TEXTO INFORMATIVO -->
+            <p class="auto" *ngIf="!promo.promoCode && !promo.used">
+              ✔ Promoción automática
+            </p>
+
+            <p class="codigo" *ngIf="promo.promoCode && !promo.used">
+              🔐 Promoción con código
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
