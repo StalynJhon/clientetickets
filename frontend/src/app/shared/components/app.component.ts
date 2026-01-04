@@ -17,4 +17,20 @@ import { NavbarComponent } from './navbar/navbar.component';
 })
 export class AppComponent {
   title = 'frontend-ticket';
+  isAccordionOpen = false;
+
+  toggleAccordion(): void {
+    this.isAccordionOpen = !this.isAccordionOpen;
+  }
+
+  closeAccordion(): void {
+    this.isAccordionOpen = false;
+  }
+
+  onSubItemClick(): void {
+    // Close the accordion after a short delay to allow navigation to occur
+    setTimeout(() => {
+      this.isAccordionOpen = false;
+    }, 150);
+  }
 }

@@ -8,11 +8,19 @@
         <li><a routerLink="/eventos">Eventos</a></li>
 
         <!-- Promociones e información -->
+                <li>
+          <a class="accordion-toggle" (click)="toggleAccordion()" [class.active]="isAccordionOpen">
+            <span>Acerca de nosotros</span>
+            <span class="arrow" [class.rotated]="isAccordionOpen"></span>
+          </a>
+          <ul class="accordion-content" [class.open]="isAccordionOpen">
+            <li><a routerLink="/empresa" (click)="onSubItemClick()">Sobre la Empresa</a></li>
+            <li><a routerLink="/terminos" (click)="onSubItemClick()">Términos y Condiciones</a></li>
+            <li><a routerLink="/privacidad" (click)="onSubItemClick()">Política de Privacidad</a></li>
+            <li><a routerLink="/ayuda" (click)="onSubItemClick()">Ayuda / FAQ</a></li>
+          </ul>
+        </li>
         <li><a routerLink="/promociones">Promociones</a></li>
-        <li><a routerLink="/empresa">Sobre la Empresa</a></li>
-        <li><a routerLink="/terminos">Términos y Condiciones</a></li>
-        <li><a routerLink="/privacidad">Política de Privacidad</a></li>
-        <li><a routerLink="/ayuda">Ayuda / FAQ</a></li>
 
         <!-- conciertos y transporte -->
         <li><a routerLink="/conciertos">Conciertos</a></li>

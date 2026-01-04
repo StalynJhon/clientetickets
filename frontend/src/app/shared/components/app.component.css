@@ -71,3 +71,42 @@ body {
   background-color: #007bff !important;
   color: white !important;
 }
+
+.accordion-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.arrow {
+  transition: transform 0.3s ease;
+  font-size: 0.8rem;
+}
+
+.arrow.rotated {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.accordion-content.open {
+  max-height: 300px; /* Adjust based on content */
+}
+
+.accordion-content li {
+  margin-bottom: 0.5rem;
+  margin-left: 1rem;
+}
+
+.accordion-content a {
+  font-weight: normal;
+  padding-left: 1rem;
+}
