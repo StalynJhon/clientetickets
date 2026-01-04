@@ -93,7 +93,7 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/app/styles/styles.css"
             ],
             "scripts": []
           }

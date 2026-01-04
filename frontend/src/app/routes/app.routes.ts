@@ -5,16 +5,25 @@ import { EventosComponent } from '../features/eventos/pages/eventos.component';
 import { ProfileComponent } from '../features/profile/pages/profile.component';
 import { HistorialComponent } from '../features/historial/pages/historial.component';
 
+// Configuración / informativas
 import { InfoEmpresaComponent } from '../features/configuracion/info-empresa/info-empresa.component';
 import { TerminosCondicionesComponent } from '../features/configuracion/terminos-condiciones/terminos-condiciones.component';
 import { PoliticaPrivacidadComponent } from '../features/configuracion/politica-privacidad/politica-privacidad.component';
 import { AyudaFaqComponent } from '../features/configuracion/ayuda-faq/ayuda-faq.component';
+
+// Promociones
 import { PromocionesPublicasComponent } from '../features/promociones-publicas/pages/promociones-publicas.component';
 
+// Productos / checkout / notas
+import { ProductListComponent } from '../features/products/pages/product-list.component';
+import { CheckoutComponent } from '../features/checkout/pages/checkout.component';
+import { NotasComponent } from '../features/notas/notas.component';
+
 export const routes: Routes = [
-  // Ruta principal → Dashboard
+  // Ruta principal
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 
+  // Dashboard y eventos
   { path: 'dashboard', component: DashboardComponent },
   { path: 'eventos', component: EventosComponent },
 
@@ -28,12 +37,19 @@ export const routes: Routes = [
   // Promociones
   { path: 'promociones', component: PromocionesPublicasComponent },
 
+  // Productos y ventas
+  { path: 'productos', component: ProductListComponent },
+  { path: 'checkout', component: CheckoutComponent },
+
+  // Notas
+  { path: 'notas', component: NotasComponent },
+
   // Configuración informativa
   { path: 'empresa', component: InfoEmpresaComponent },
   { path: 'terminos', component: TerminosCondicionesComponent },
   { path: 'privacidad', component: PoliticaPrivacidadComponent },
   { path: 'ayuda', component: AyudaFaqComponent },
 
-  // Cualquier ruta inválida → Dashboard
+  // Ruta comodín
   { path: '**', redirectTo: 'dashboard' }
 ];

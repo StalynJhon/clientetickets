@@ -1,0 +1,30 @@
+<div class="crud-container" style="padding: 20px; max-width: 500px;">
+  <h2>Arquitectura Limpia: CRUD Notas</h2>
+
+  <div style="background: #eee; padding: 15px; margin-bottom: 20px; border-radius: 8px;">
+    <h3>{{ idNotaEnEdicion ? 'Editar Nota' : 'Nueva Nota' }}</h3>
+
+    <input type="text" [(ngModel)]="textoInput" placeholder="Escribe algo..." style="padding: 8px;">
+
+    <button (click)="guardar()" style="margin-left: 5px; padding: 8px;">
+      {{ idNotaEnEdicion ? 'Actualizar (PUT)' : 'Crear (POST)' }}
+    </button>
+
+    <button *ngIf="idNotaEnEdicion" (click)="cancelarEdicion()" style="margin-left: 5px;">
+      Cancelar
+    </button>
+  </div>
+
+  <ul>
+    <li *ngFor="let nota of listaNotas" style="margin-bottom: 10px; border-bottom: 1px solid #ccc; padding: 5px;">
+
+      <strong>ID: {{ nota.id }}</strong> - {{ nota.text }}
+
+      <div style="margin-top: 5px;">
+        <button (click)="editar(nota)" style="background: orange; border: none; padding: 5px;">Editar</button>
+        <button (click)="borrar(nota.id)" style="background: red; color: white; border: none; padding: 5px; margin-left: 5px;">Borrar</button>
+      </div>
+
+    </li>
+  </ul>
+</div>
