@@ -1,0 +1,79 @@
+<div class="transporte-layout">
+  <!-- HEADER -->
+  <div class="detail-header">
+    <button class="btn-back" (click)="volver()">
+      <i class="bi bi-arrow-left"></i> Volver
+    </button>
+  </div>
+
+  <!-- INFO VEHÍCULO -->
+  <div class="transporte-header">
+    <h1>{{transporte.nombre}}</h1>
+    <div class="transporte-tipo">{{transporte.tipo}}</div>
+    <div class="ruta-info">
+      <div class="origen">
+        <i class="bi bi-geo-alt-fill"></i>
+        {{transporte.origen}}
+      </div>
+      <div class="arrow">→</div>
+      <div class="destino">
+        <i class="bi bi-geo-alt-fill"></i>
+        {{transporte.destino}}
+      </div>
+    </div>
+    <div class="fecha-hora">
+      <i class="bi bi-calendar-event"></i>
+      {{transporte.fecha}} • {{transporte.horaSalida}}
+    </div>
+    <div class="asientos-total">
+      <i class="bi bi-people"></i> {{transporte.asientosMax}} asientos totales
+    </div>
+  </div>
+
+  <!-- DESCRIPCIÓN -->
+  <div class="descripcion-section">
+    <h3>Sobre el servicio</h3>
+    <p>{{transporte.descripcion}}</p>
+  </div>
+
+  <!-- ASIENTOS -->
+  <div class="asientos-section">
+    <div class="asientos-header">
+      <h3>Selecciona tus asientos ({{asientos.length}} disponibles)</h3>
+      <div class="seleccionados">{{seleccionados.length}} seleccionados</div>
+    </div>
+    
+    <div class="plano-asientos">
+      <div class="fila" *ngFor="let fila of [1,2]; let i = index">
+        <div class="numero-fila">Fila {{fila}}</div>
+        <div class="asientos-fila">
+          <div *ngFor="let asiento of asientos | slice:i*8:(i+1)*8" 
+               class="asiento" 
+               [class]="getClaseAsiento(asiento)"
+               (click)="toggleAsiento(asiento)">
+            {{asiento.asiento}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORMULARIO COMPRA -->
+  <div *ngIf="seleccionados.length > 0" class="compra-section">
+    <div class="total-display">
+      <h3>Total: ${{total}}</h3>
+      <p>{{transporte.precio}} por asiento • {{seleccionados.length}} asientos</p>
+    </div>
+    <div class="form-group">
+      <input [(ngModel)]="nombre" placeholder="Nombre completo *" class="form-input">
+      <input [(ngModel)]="email" type="email" placeholder="Email *" class="form-input">
+      <input [(ngModel)]="telefono" placeholder="Teléfono *" class="form-input">
+      <input [(ngModel)]="dni" placeholder="Cédula *" class="form-input">
+    </div>
+    <button class="btn-comprar" 
+            [disabled]="!puedeComprar()"
+            (click)="comprar()">
+      💳 COMPRAR BOLETOS - ${{total}}
+    </button>
+  </div>
+</div>
