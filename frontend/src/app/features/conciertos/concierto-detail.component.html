@@ -1,0 +1,89 @@
+<div class="detail-layout">
+  <!-- HEADER -->
+  <div class="detail-header">
+    <button class="btn-back" (click)="volver()">
+      <i class="bi bi-arrow-left"></i> Volver
+    </button>
+  </div>
+
+  <!-- INFO CONCIERTO -->
+  <div class="concierto-header">
+    <h1>{{concierto.nameConcert}}</h1>
+    <h2>{{concierto.nameArtist}}</h2>
+    <div class="event-info">
+      <div class="info-item">
+        <i class="bi bi-calendar-event"></i>
+        {{concierto.fecha}}
+      </div>
+      <div class="info-item">
+        <i class="bi bi-geo-alt"></i>
+        {{concierto.lugar}}
+      </div>
+    </div>
+  </div>
+
+  <!-- DESCRIPCIÓN -->
+  <div class="descripcion-section">
+    <p>{{concierto.descripcion}}</p>
+  </div>
+
+  <!-- MAPA PLACEHOLDER -->
+  <div class="mapa-section">
+    <div class="mapa-placeholder">
+      <i class="bi bi-geo-alt-fill"></i>
+      <p>{{concierto.lugar}}</p>
+    </div>
+  </div>
+
+  <!-- BOTONES ZONAS -->
+  <div class="zonas-section">
+    <h3>Selecciona tu zona</h3>
+    <div class="zonas-grid">
+      <button *ngFor="let zona of zonas" 
+              class="zona-btn"
+              [style.background]="zona.color"
+              [class.active]="zonaSeleccionada === zona.nombre"
+              (click)="seleccionarZona(zona.nombre)">
+        <div class="zona-nombre">{{zona.nombre}}</div>
+        <div class="zona-precio">${{zona.precio}}</div>
+        <div class="zona-asientos">{{zona.asientos}} asientos</div>
+      </button>
+    </div>
+    <button class="btn-ver-asientos" (click)="mostrarAsientos = true">
+      🎫 Ver asientos {{zonaSeleccionada}}
+    </button>
+  </div>
+
+  <!-- ASIENTOS -->
+  <div *ngIf="mostrarAsientos" class="asientos-section">
+    <div class="asientos-header">
+      <h3>{{zonaSeleccionada}} - {{seleccionados.length}} seleccionados</h3>
+    </div>
+    <div class="asientos-grid">
+      <div *ngFor="let asiento of asientos" class="asiento-wrapper">
+        <div class="asiento" 
+             [class]="getClaseAsiento(asiento)"
+             (click)="toggleAsiento(asiento)">
+          {{asiento.id}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORMULARIO COMPRA -->
+  <div *ngIf="mostrarAsientos && seleccionados.length > 0" class="compra-section">
+    <div class="total-display">
+      <h3>Total: ${{total}}</h3>
+    </div>
+    <div class="form-group">
+      <input [(ngModel)]="nombre" placeholder="Nombre completo *" class="form-input">
+      <input [(ngModel)]="email" type="email" placeholder="Email *" class="form-input">
+      <input [(ngModel)]="telefono" placeholder="Teléfono *" class="form-input">
+    </div>
+    <button class="btn-comprar" 
+            [disabled]="!puedeComprar()"
+            (click)="comprar()">
+      💳 COMPRAR BOLETOS - ${{total}}
+    </button>
+  </div>
+</div>

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UsuarioService } from '../profile.service';
 import { FormsModule } from '@angular/forms';
+import { UsuarioService } from '../profile.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile',
@@ -20,35 +21,62 @@ export class ProfileComponent implements OnInit {
   mostrarModal: boolean = false;
   usuarioEdit: any = {};
 
-  constructor(private usuarioService: UsuarioService) { }
+  constructor(private usuarioService: UsuarioService) {}
 
   ngOnInit(): void {
-  const usuarioId = 1;
+    const usuarioId = 1;
 
-  this.usuarioService.obtenerUsuario(usuarioId).subscribe({
-    next: (resp: any) => {
-      this.cargando = false;
+    this.usuarioService.obtenerUsuario(usuarioId).subscribe({
+      next: (resp: any) => {
+        this.cargando = false;
 
-      if (resp) {
-        this.usuario = {
-          ...resp,
-          // 🔥 normalizamos el nombre
-          nameUser: resp.nameUser ?? resp.nameUsers ?? ''
-        };
-      } else {
-        this.error = 'No se encontraron datos del usuario';
+        if (resp) {
+          this.usuario = {
+            ...resp,
+            nameUsers: resp.nameUsers ?? ''
+          };
+        } else {
+          this.error = 'No se encontraron datos del usuario';
+
+          Swal.fire({
+            icon: 'warning',
+            title: 'Sin datos',
+            text: 'No se encontraron datos del usuario',
+            buttonsStyling: false,
+            customClass: {
+              popup: 'swal-cyber-popup',
+              title: 'swal-cyber-title',
+              htmlContainer: 'swal-cyber-text',
+              icon: 'swal-cyber-icon',
+              confirmButton: 'swal-cyber-confirm'
+            }
+          });
+        }
+      },
+      error: () => {
+        this.cargando = false;
+        this.error = 'Error al conectar con el servidor';
+
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'No se pudo conectar con el servidor',
+          buttonsStyling: false,
+          customClass: {
+            popup: 'swal-cyber-popup',
+            title: 'swal-cyber-title',
+            htmlContainer: 'swal-cyber-text',
+            icon: 'swal-cyber-icon',
+            confirmButton: 'swal-cyber-confirm'
+          }
+        });
       }
-    },
-    error: () => {
-      this.cargando = false;
-      this.error = 'Error al conectar con el servidor';
-    }
-  });
-}
+    });
+  }
 
   // 🔹 Abrir modal
   abrirModal() {
-    this.usuarioEdit = { ...this.usuario }; // clonamos datos
+    this.usuarioEdit = { ...this.usuario };
     this.mostrarModal = true;
   }
 
@@ -57,20 +85,75 @@ export class ProfileComponent implements OnInit {
     this.mostrarModal = false;
   }
 
+  // 🔹 Guardar cambios con confirmación
   guardarCambios() {
-    this.usuarioService.actualizarUsuario(this.usuario.idUser, this.usuarioEdit)
-      .subscribe({
-        next: () => {
-          this.usuario = {
-            ...this.usuario,
-            ...this.usuarioEdit,
-            nameUser: this.usuarioEdit.nameUser || this.usuario.nameUser
-          };
-          this.mostrarModal = false;
-        },
-        error: () => {
-          alert('Error al actualizar datos');
-        }
-      });
+    Swal.fire({
+      title: '¿Guardar cambios?',
+      text: 'Se actualizará tu información personal',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, guardar',
+      cancelButtonText: 'Cancelar',
+      buttonsStyling: false,
+      customClass: {
+        popup: 'swal-cyber-popup',
+        title: 'swal-cyber-title',
+        htmlContainer: 'swal-cyber-text',
+        icon: 'swal-cyber-icon',
+        confirmButton: 'swal-cyber-confirm',
+        cancelButton: 'swal-cyber-cancel'
+      }
+    }).then(result => {
+      if (result.isConfirmed) {
+        this.usuarioService
+          .actualizarUsuario(this.usuario.idUser, {
+            nameUsers: this.usuarioEdit.nameUsers,
+            phoneUser: this.usuarioEdit.phoneUser,
+            emailUser: this.usuarioEdit.emailUser,
+            userName: this.usuarioEdit.userName
+          })
+          .subscribe({
+            next: () => {
+              // Actualizamos vista
+              this.usuario = {
+                ...this.usuario,
+                ...this.usuarioEdit
+              };
+
+              this.mostrarModal = false;
+
+              Swal.fire({
+                icon: 'success',
+                title: 'Actualizado',
+                text: 'Perfil actualizado correctamente',
+                timer: 1800,
+                showConfirmButton: false,
+                buttonsStyling: false,
+                customClass: {
+                  popup: 'swal-cyber-popup',
+                  title: 'swal-cyber-title',
+                  htmlContainer: 'swal-cyber-text',
+                  icon: 'swal-cyber-icon'
+                }
+              });
+            },
+            error: () => {
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No se pudo actualizar la información',
+                buttonsStyling: false,
+                customClass: {
+                  popup: 'swal-cyber-popup',
+                  title: 'swal-cyber-title',
+                  htmlContainer: 'swal-cyber-text',
+                  icon: 'swal-cyber-icon',
+                  confirmButton: 'swal-cyber-confirm'
+                }
+              });
+            }
+          });
+      }
+    });
   }
 }

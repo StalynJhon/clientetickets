@@ -20,7 +20,7 @@ body {
 
 .sidebar {
   width: 220px;
-  background-color: #1f2937; /* gris oscuro */
+  background-color: #1f2937;
   color: white;
   padding: 1rem;
   margin: 0;
@@ -48,15 +48,26 @@ body {
 }
 
 .sidebar a:hover {
-  background-color: #374151; /* hover más oscuro */
+  background-color: #374151;
 }
 
 .main-content {
   flex: 1;
   padding: 0;
   margin: 0;
-  background-color: #f3f4f6; /* fondo claro */
+  background-color: #f3f4f6;
   width: calc(100% - 220px);
   height: 100vh;
   overflow-y: auto;
+}
+
+/* ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← */
+.sidebar a {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+.sidebar a:hover {
+  background-color: #007bff !important;
+  color: white !important;
 }

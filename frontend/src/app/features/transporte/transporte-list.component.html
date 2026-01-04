@@ -1,0 +1,79 @@
+<div class="transporte-layout">
+  <!-- HEADER -->
+  <div class="header-section">
+    <h1>🚗 Vehículos Terrestres 2026</h1>
+    <p>Bus, Auto, Camioneta, Furgoneta entre ciudades</p>
+  </div>
+
+  <!-- FILTROS -->
+  <div class="filtros-section">
+    <div class="filtro-search">
+      <input [(ngModel)]="filtro" (input)="filtrar()" 
+             placeholder="Busca ruta o vehículo...">
+      <i class="bi bi-search"></i>
+    </div>
+    <select [(ngModel)]="filtroOrigen" (change)="filtrar()">
+      <option value="">Desde cualquier ciudad</option>
+      <option value="quito">Quito</option>
+      <option value="guayaquil">Guayaquil</option>
+      <option value="cuenca">Cuenca</option>
+    </select>
+    <select [(ngModel)]="filtroDestino" (change)="filtrar()">
+      <option value="">Hacia cualquier ciudad</option>
+      <option value="quito">Quito</option>
+      <option value="guayaquil">Guayaquil</option>
+      <option value="cuenca">Cuenca</option>
+    </select>
+    <select [(ngModel)]="filtroTipo" (change)="filtrar()">
+      <option value="">Todos los vehículos</option>
+      <option value="🚌 Bus">🚌 Bus</option>
+      <option value="🚗 Auto">🚗 Auto</option>
+      <option value="🚛 Camioneta">🚛 Camioneta</option>
+      <option value="🚐 Furgoneta">🚐 Furgoneta</option>
+    </select>
+    <button class="btn-clear" (click)="limpiarFiltros()">
+      <i class="bi bi-arrow-clockwise"></i> Limpiar
+    </button>
+  </div>
+
+  <!-- RESULTADOS -->
+  <div class="resultados-section">
+    <div class="resultados-count">
+      {{filtered.length}} vehículos encontrados
+    </div>
+    
+    <div class="events-grid">
+      <div *ngFor="let t of filtered" 
+           class="transporte-card" 
+           (click)="verDetalle(t.id)">
+        <div class="card-image">
+          <img [src]="getImagen(t)" [alt]="t.tipo">
+          <div class="date-badge">
+            {{formatFecha(t.fecha)}}
+          </div>
+        </div>
+        <div class="card-content">
+          <h3>{{t.nombre}}</h3>
+          <p class="tipo">{{t.tipo}}</p>
+          <div class="transporte-meta">
+            <div class="ruta">
+              <i class="bi bi-geo-alt"></i>
+              {{t.origen}} → {{t.destino}}
+            </div>
+            <div class="price-tag">${{t.precio}}</div>
+          </div>
+          <div class="asientos-info">
+            {{t.asientosMax}} asientos disponibles
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="filtered.length === 0" class="empty-state">
+      <div class="empty-icon">🚗</div>
+      <h3>No encontramos vehículos</h3>
+      <p>Prueba con diferentes filtros</p>
+      <button class="btn-clear" (click)="limpiarFiltros()">Limpiar filtros</button>
+    </div>
+  </div>
+</div>

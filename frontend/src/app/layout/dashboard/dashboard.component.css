@@ -1,0 +1,84 @@
+.dashboard-container {
+  padding: 1rem;
+  font-family: sans-serif;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.dashboard-header h1 {
+  font-size: 1.8rem;
+}
+
+.user-info {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.dashboard-section {
+  margin-bottom: 2rem;
+}
+
+.dashboard-section h2 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.card img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 0.7rem;
+}
+
+.card-content h4 {
+  margin: 0.3rem 0;
+  font-size: 1.1rem;
+}
+
+.card-content p {
+  margin: 0.2rem 0;
+  font-size: 0.9rem;
+}
+
+.badge {
+  display: inline-block;
+  background: #007bff;
+  color: #fff;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  margin-top: 0.3rem;
+}
+
+.badge-oferta {
+  display: inline-block;
+  background: #28a745;
+  color: #fff;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  margin-top: 0.3rem;
+}

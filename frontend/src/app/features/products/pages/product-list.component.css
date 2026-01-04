@@ -1,25 +1,26 @@
 /* Contenedor general */
 .container {
   padding: 2rem;
-  color: #333333; /* Texto oscuro */
+  color: #C5C6C7;
   max-width: 1200px;
   margin: 0 auto;
+  background: #0B0C10;
 }
 
-/* Encabezado - Estilo Barra Azul */
+/* Encabezado */
 .header-section {
-  background-color: #2980b9; /* Azul de la captura */
+  background: #1F2833;
   padding: 1.5rem;
   border-radius: 10px;
   margin-bottom: 2rem;
-  text-align: left; /* Alineado a la izquierda como la captura */
-  color: white;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  text-align: left;
+  color: #66FCF1;
+  box-shadow: 0 0 20px rgba(102, 252, 241, 0.25);
 }
 
 .header-section h2 {
   font-size: 2rem;
-  color: white; /* Texto blanco sobre fondo azul */
+  color: #66FCF1;
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -34,21 +35,25 @@
 
 .search-input {
   width: 100%;
-  max-width: 600px; /* Un poco más ancho */
+  max-width: 600px;
   padding: 12px 20px;
-  border-radius: 8px; /* Bordes menos redondeados */
-  border: 1px solid #ccc; /* Borde gris suave */
-  background: #ffffff; /* Fondo blanco */
-  color: #333; /* Texto oscuro */
+  border-radius: 8px;
+  border: 1px solid rgba(102, 252, 241, 0.3);
+  background: #1F2833;
+  color: #FFFFFF;
   font-size: 1rem;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 0 0 12px rgba(102, 252, 241, 0.15);
   transition: all 0.3s ease;
+}
+
+.search-input::placeholder {
+  color: #C5C6C7;
 }
 
 .search-input:focus {
   outline: none;
-  border-color: #2980b9; /* Azul al enfocar */
-  box-shadow: 0 0 8px rgba(41, 128, 185, 0.3);
+  border-color: #66FCF1;
+  box-shadow: 0 0 16px rgba(102, 252, 241, 0.6);
 }
 
 /* GRID DE PRODUCTOS */
@@ -60,29 +65,32 @@
 
 /* Tarjeta de Producto */
 .product-card {
-  background: #ffffff; /* Tarjeta blanca */
+  background: #1F2833;
   border-radius: 10px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid #e0e0e0; /* Borde muy sutil */
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border: 1px solid rgba(102, 252, 241, 0.25);
+  box-shadow: 0 0 15px rgba(102, 252, 241, 0.15);
 }
 
 .product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-  border-color: #2980b9;
+  transform: translateY(-6px);
+  box-shadow:
+    0 0 20px rgba(102, 252, 241, 0.6),
+    0 0 40px rgba(102, 252, 241, 0.25);
+  border-color: #66FCF1;
 }
 
+/* Imagen */
 .card-image {
   height: 200px;
-  background: #f8f9fa; /* Fondo gris muy claro para la imagen */
+  background: #0B0C10;
   padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(102, 252, 241, 0.15);
 }
 
 .card-image img {
@@ -91,18 +99,21 @@
   object-fit: contain;
 }
 
+/* Badge */
 .badge {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: #2980b9; /* Azul etiqueta */
-  color: white;
+  background: #FF0080;
+  color: #FFFFFF;
   padding: 4px 10px;
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: bold;
+  box-shadow: 0 0 12px rgba(255, 0, 128, 0.7);
 }
 
+/* Contenido */
 .card-content {
   padding: 1.5rem;
   text-align: center;
@@ -111,14 +122,15 @@
 .card-content h3 {
   margin: 0 0 10px 0;
   font-size: 1.2rem;
-  color: #2c3e50; /* Gris oscuro azulado */
+  color: #FFFFFF;
 }
 
 .price {
   font-size: 1.5rem;
-  color: #27ae60; /* Verde dinero */
+  color: #66FCF1;
   font-weight: bold;
   margin-bottom: 1rem;
+  text-shadow: 0 0 8px rgba(102, 252, 241, 0.6);
 }
 
 /* Botones */
@@ -130,47 +142,52 @@
 
 .btn-primary, .btn-outline {
   padding: 8px 16px;
-  border-radius: 5px; /* Menos redondeado para verse más pro */
+  border-radius: 5px;
   cursor: pointer;
   font-weight: 600;
   border: none;
-  transition: all 0.2s;
+  transition: all 0.25s;
 }
 
+/* Botón principal */
 .btn-primary {
-  background: #2ecc71; /* Verde "Agregar película" */
-  color: white;
+  background: #66FCF1;
+  color: #0B0C10;
+  box-shadow: 0 0 16px rgba(102, 252, 241, 0.7);
 }
 
 .btn-primary:hover {
-  background: #27ae60;
+  box-shadow:
+    0 0 20px rgba(102, 252, 241, 0.9),
+    0 0 40px rgba(102, 252, 241, 0.6);
+  transform: translateY(-1px);
 }
 
+/* Botón secundario */
 .btn-outline {
-  background: white;
-  border: 1px solid #2980b9;
-  color: #2980b9;
+  background: transparent;
+  border: 1px solid #66FCF1;
+  color: #66FCF1;
 }
 
 .btn-outline:hover {
-  background: #2980b9;
-  color: white;
+  background: #66FCF1;
+  color: #0B0C10;
 }
 
 /* MODAL */
 .modal-backdrop {
   position: fixed;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(11, 12, 16, 0.9);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  animation: fadeIn 0.3s;
 }
 
 .modal-content {
-  background: #ffffff;
+  background: #1F2833;
   border-radius: 10px;
   width: 90%;
   max-width: 800px;
@@ -178,6 +195,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  animation: slideIn 0.3s;
+  color: #FFFFFF;
+  box-shadow:
+    0 0 25px rgba(102, 252, 241, 0.4),
+    0 0 50px rgba(102, 252, 241, 0.2);
 }

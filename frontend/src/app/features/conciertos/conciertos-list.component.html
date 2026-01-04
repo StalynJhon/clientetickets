@@ -1,0 +1,64 @@
+<div class="conciertos-layout">
+  <!-- HEADER -->
+  <div class="header-section">
+    <h1>🎵 Conciertos 2026</h1>
+    <p>Encuentra tu evento perfecto en Guayaquil y Quito</p>
+  </div>
+
+  <!-- FILTROS -->
+  <div class="filtros-section">
+    <div class="filtro-search">
+      <input [(ngModel)]="filtro" (input)="filtrar()" 
+             placeholder="Buscar artista o evento...">
+      <i class="bi bi-search"></i>
+    </div>
+    <select [(ngModel)]="filtroCiudad" (change)="filtrar()">
+      <option value="">Todas las ciudades</option>
+      <option value="guayaquil">Guayaquil</option>
+      <option value="quito">Quito</option>
+    </select>
+    <input [(ngModel)]="filtroFecha" (input)="filtrar()" 
+           placeholder="2026-02">
+    <button class="btn-clear" (click)="limpiarFiltros()">
+      <i class="bi bi-arrow-clockwise"></i> Limpiar
+    </button>
+  </div>
+
+  <!-- RESULTADOS -->
+  <div class="resultados-section">
+    <div class="resultados-count">
+      {{filtered.length}} eventos encontrados
+    </div>
+    
+    <div class="events-grid">
+      <div *ngFor="let c of filtered" 
+           class="event-card" 
+           (click)="verDetalle(c.id)">
+        <div class="card-image">
+          <img [src]="getImagen(c)" [alt]="c.nameArtist">
+          <div class="date-badge">
+            {{formatFecha(c.fecha)}}
+          </div>
+        </div>
+        <div class="card-content">
+          <h3>{{c.nameConcert}}</h3>
+          <p class="artist">{{c.nameArtist}}</p>
+          <div class="event-meta">
+            <div class="location">
+              <i class="bi bi-geo-alt"></i>
+              {{c.lugar}}, {{c.ciudad}}
+            </div>
+            <div class="price-tag">${{c.ticketPrice}}+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="filtered.length === 0" class="empty-state">
+      <div class="empty-icon">🎫</div>
+      <h3>No encontramos eventos</h3>
+      <p>Prueba con diferentes filtros</p>
+      <button class="btn-clear" (click)="limpiarFiltros()">Limpiar filtros</button>
+    </div>
+  </div>
+</div>

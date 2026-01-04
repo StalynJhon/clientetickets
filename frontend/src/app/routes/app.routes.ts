@@ -1,9 +1,14 @@
 import { Routes } from '@angular/router';
 import { DashboardComponent } from '../layout/dashboard/dashboard.component';
-import { ClienteListComponent } from '../features/clientes/pages/cliente-list.component';
 import { EventosComponent } from '../features/eventos/pages/eventos.component';
 import { ProfileComponent } from '../features/profile/pages/profile.component';
 import { HistorialComponent } from '../features/historial/pages/historial.component';
+
+// conciertos y transporte
+import { ConciertosListComponent } from '../features/conciertos/conciertos-list.component';
+import { ConciertoDetailComponent } from '../features/conciertos/concierto-detail.component';
+import { TransporteListComponent } from '../features/transporte/transporte-list.component';
+import { TransporteDetailComponent } from '../features/transporte/transporte-detail.component';
 
 // Configuración / informativas
 import { InfoEmpresaComponent } from '../features/configuracion/info-empresa/info-empresa.component';
@@ -27,9 +32,6 @@ export const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'eventos', component: EventosComponent },
 
-  // Clientes
-  { path: 'clientes', component: ClienteListComponent },
-
   // Usuario
   { path: 'perfil', component: ProfileComponent },
   { path: 'historial', component: HistorialComponent },
@@ -43,6 +45,14 @@ export const routes: Routes = [
 
   // Notas
   { path: 'notas', component: NotasComponent },
+
+  // conciertos
+  { path: 'conciertos', component: ConciertosListComponent },
+  { path: 'conciertos/:id', component: ConciertoDetailComponent },
+
+  // transporte
+  { path: 'transporte', component: TransporteListComponent },
+  { path: 'transporte/:id', component: TransporteDetailComponent },
 
   // Configuración informativa
   { path: 'empresa', component: InfoEmpresaComponent },

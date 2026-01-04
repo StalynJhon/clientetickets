@@ -1,3 +1,52 @@
-<p>dashboard works!</p>
-<h2>Dashboard</h2>
-<a routerLink="/clientes">Clientes</a>
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <h1>Bienvenido al mejor lugar para comprar tus tickets</h1>
+  </header>
+
+  <!-- Próximos eventos -->
+  <section class="dashboard-section">
+    <h2>Próximos eventos</h2>
+    <div class="cards-grid">
+      <div class="card" *ngFor="let evento of proximosEventos">
+        <img [src]="evento.imageUrl" alt="{{evento.nameEvent}}">
+        <div class="card-content">
+          <h4>{{ evento.nameEvent }}</h4>
+          <p><strong>Fecha:</strong> {{ evento.dateTimeEvent | date:'short' }}</p>
+          <p><strong>Lugar:</strong> {{ evento.venue }}</p>
+          <span class="badge">{{ evento.eventType }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recomendaciones -->
+  <section class="dashboard-section">
+    <h2>Recomendaciones</h2>
+    <div class="cards-grid">
+      <div class="card" *ngFor="let evento of recomendaciones">
+        <img [src]="evento.imageUrl" alt="{{evento.nameEvent}}">
+        <div class="card-content">
+          <h4>{{ evento.nameEvent }}</h4>
+          <p><strong>Fecha:</strong> {{ evento.dateTimeEvent | date:'short' }}</p>
+          <p><strong>Lugar:</strong> {{ evento.venue }}</p>
+          <span class="badge">{{ evento.eventType }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ofertas -->
+  <section class="dashboard-section">
+    <h2>Ofertas destacadas</h2>
+    <div class="cards-grid">
+      <div class="card" *ngFor="let oferta of ofertas">
+        <img [src]="oferta.imageUrl" alt="{{oferta.name}}">
+        <div class="card-content">
+          <h4>{{ oferta.name }}</h4>
+          <p>{{ oferta.description }}</p>
+          <span class="badge-oferta">Oferta</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
