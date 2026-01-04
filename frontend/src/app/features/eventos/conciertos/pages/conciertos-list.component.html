@@ -1,0 +1,182 @@
+<div class="conciertos-container">
+  <!-- Header Hero -->
+  <div class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">🎵 Próximos Conciertos</h1>
+      <p class="hero-subtitle">Encuentra los mejores eventos musicales en tu ciudad</p>
+      <div class="search-bar">
+        <i class="search-icon">🔍</i>
+        <input 
+          type="text" 
+          [(ngModel)]="filtro" 
+          (input)="filtrar()"
+          placeholder="Buscar concierto o artista..."
+          class="search-input"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Filtros Avanzados -->
+  <div class="filtros-section">
+    <div class="filtros-grid">
+      <div class="filtro-group">
+        <label><i class="filter-icon">📍</i> Ciudad</label>
+        <select [(ngModel)]="filtroCiudad" (change)="filtrar()" class="filtro-select">
+          <option value="">Todas las ciudades</option>
+          <option *ngFor="let ciudad of ciudadesUnicas" [value]="ciudad">{{ ciudad }}</option>
+        </select>
+      </div>
+      
+      <div class="filtro-group">
+        <label><i class="filter-icon">🎵</i> Género</label>
+        <select [(ngModel)]="filtroGenero" (change)="filtrar()" class="filtro-select">
+          <option value="">Todos los géneros</option>
+          <option *ngFor="let genero of generosUnicos" [value]="genero">{{ genero }}</option>
+        </select>
+      </div>
+      
+      <div class="filtro-group">
+        <label><i class="filter-icon">📅</i> Fecha</label>
+        <input 
+          type="date" 
+          [(ngModel)]="filtroFecha" 
+          (change)="filtrar()"
+          class="filtro-date"
+        />
+      </div>
+      
+      <div class="filtro-actions">
+        <button class="btn-limpiar" (click)="limpiarFiltros()">
+          <i class="clear-icon">🗑️</i> Limpiar filtros
+        </button>
+        <div class="resultados-count">
+          {{ filtered.length }} conciertos encontrados
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Cargando conciertos...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="error-state">
+    <div class="error-icon">⚠️</div>
+    <p>{{ error }}</p>
+  </div>
+
+  <!-- Conciertos Destacados -->
+  <div *ngIf="!loading && getConciertosDestacados().length > 0" class="destacados-section">
+    <h2 class="section-title">
+      <i class="star-icon">⭐</i> Conciertos Destacados
+    </h2>
+    <div class="destacados-grid">
+      <div *ngFor="let concierto of getConciertosDestacados()" 
+           class="concierto-card destacado"
+           [style.background]="getBadgeColor(concierto.genero)"
+           (click)="verDetalle(concierto.id)">
+        <div class="destacado-badge">POPULAR</div>
+        <div class="card-image">
+          <img [src]="getImagen(concierto)" [alt]="concierto.nameArtist" />
+          <div class="image-overlay"></div>
+        </div>
+        <div class="card-content">
+          <span class="genero-badge" [style.background]="getBadgeColor(concierto.genero)">
+            {{ concierto.genero }}
+          </span>
+          <h3 class="card-title">{{ concierto.nameConcert }}</h3>
+          <p class="card-artist">{{ concierto.nameArtist }}</p>
+          
+          <div class="card-details">
+            <div class="detail-item">
+              <i class="detail-icon">📍</i>
+              <span>{{ concierto.lugar }}, {{ concierto.ciudad }}</span>
+            </div>
+            <div class="detail-item">
+              <i class="detail-icon">📅</i>
+              <span>{{ formatFecha(concierto.fecha) }}</span>
+            </div>
+            <div class="detail-item">
+              <i class="detail-icon">🎫</i>
+              <span>{{ concierto.entradasDisponibles }} entradas disponibles</span>
+            </div>
+          </div>
+          
+          <div class="card-footer">
+            <div class="price">Desde ${{ concierto.ticketPrice }}</div>
+            <button class="btn-ver" (click)="verDetalle(concierto.id); $event.stopPropagation()">
+              Ver detalles →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Todos los Conciertos -->
+  <div *ngIf="!loading" class="todos-section">
+    <h2 class="section-title">
+      <i class="ticket-icon">🎫</i> Todos los Conciertos
+      <span class="counter">({{ filtered.length }})</span>
+    </h2>
+    
+    <!-- Sin resultados -->
+    <div *ngIf="filtered.length === 0" class="no-results">
+      <i class="no-results-icon">😞</i>
+      <h3>No se encontraron conciertos</h3>
+      <p>Intenta con otros filtros de búsqueda</p>
+      <button class="btn-reset" (click)="limpiarFiltros()">
+        Mostrar todos los conciertos
+      </button>
+    </div>
+
+    <!-- Grid de conciertos -->
+    <div class="conciertos-grid" *ngIf="filtered.length > 0">
+      <div *ngFor="let concierto of filtered" 
+           class="concierto-card"
+           (click)="verDetalle(concierto.id)">
+        <div class="card-image">
+          <img [src]="getImagen(concierto)" [alt]="concierto.nameArtist" />
+          <div class="image-overlay"></div>
+          <span class="genero-badge" [style.background]="getBadgeColor(concierto.genero)">
+            {{ concierto.genero }}
+          </span>
+          <div *ngIf="concierto.entradasDisponibles && concierto.entradasDisponibles < 20" 
+               class="soldout-badge">
+            ¡Últimas {{ concierto.entradasDisponibles }}!
+          </div>
+        </div>
+        
+        <div class="card-content">
+          <h3 class="card-title">{{ concierto.nameConcert }}</h3>
+          <p class="card-artist">{{ concierto.nameArtist }}</p>
+          
+          <div class="card-details">
+            <div class="detail-item">
+              <i class="detail-icon">📍</i>
+              <span>{{ concierto.ciudad }}</span>
+            </div>
+            <div class="detail-item">
+              <i class="detail-icon">📅</i>
+              <span>{{ formatFecha(concierto.fecha) }}</span>
+            </div>
+          </div>
+          
+          <div class="card-footer">
+            <div class="price-section">
+              <div class="price-label">Desde</div>
+              <div class="price">${{ concierto.ticketPrice }}</div>
+            </div>
+            <button class="btn-ver" (click)="verDetalle(concierto.id); $event.stopPropagation()">
+              <i class="btn-icon">→</i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

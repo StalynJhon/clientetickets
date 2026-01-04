@@ -1,0 +1,107 @@
+<div class="transporte-layout">
+  <!-- LOADING -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Cargando vehículos terrestres...</p>
+  </div>
+
+  <!-- CONTENIDO -->
+  <div *ngIf="!loading">
+    <!-- HEADER -->
+    <div class="header-section">
+      <h1>🚗 Vehículos Terrestres 2026</h1>
+      <p>Busca el mejor transporte entre ciudades de Ecuador</p>
+    </div>
+
+    <!-- FILTROS -->
+    <div class="filtros-section">
+      <div class="filtro-search">
+        <i class="bi bi-search"></i>
+        <input [(ngModel)]="filtro" 
+               (input)="filtrar()" 
+               placeholder="🔍 Busca ruta, vehículo o ciudad...">
+      </div>
+      
+      <select [(ngModel)]="filtroOrigen" (change)="filtrar()">
+        <option value="">📍 Desde cualquier ciudad</option>
+        <option *ngFor="let origen of origenesUnicos" [value]="origen">{{origen}}</option>
+      </select>
+      
+      <select [(ngModel)]="filtroDestino" (change)="filtrar()">
+        <option value="">📍 Hacia cualquier ciudad</option>
+        <option *ngFor="let destino of destinosUnicos" [value]="destino">{{destino}}</option>
+      </select>
+      
+      <select [(ngModel)]="filtroTipo" (change)="filtrar()">
+        <option value="">🚗 Todos los vehículos</option>
+        <option *ngFor="let tipo of tiposUnicos" [value]="tipo">{{tipo}}</option>
+      </select>
+      
+      <button class="btn-clear" (click)="limpiarFiltros()">
+        <i class="bi bi-arrow-clockwise"></i> Limpiar
+      </button>
+    </div>
+
+    <!-- RESULTADOS -->
+    <div class="resultados-section">
+      <div class="resultados-count">
+        {{filtered.length}} vehículos encontrados 
+        <span *ngIf="filtered.length > 0" class="count-highlight">({{transportes.length}} total)</span>
+      </div>
+      
+      <div class="events-grid">
+        <div *ngFor="let t of filtered" 
+             class="transporte-card"
+             [class.destacado]="t.destacado"
+             (click)="verDetalle(t.id)">
+          
+          <!-- BADGE DESTACADO -->
+          <div *ngIf="t.destacado" class="destacado-badge">
+            ⭐ DESTACADO
+          </div>
+          
+          <div class="card-image">
+            <img [src]="getImagen(t)" [alt]="t.nombre">
+            <div class="date-badge">
+              {{formatFecha(t.fecha)}}
+            </div>
+          </div>
+          
+          <div class="card-content">
+            <h3>{{t.nombre}}</h3>
+            <div class="tipo-badge">{{t.tipo}}</div>
+            
+            <div class="transporte-meta">
+              <div class="ruta">
+                <i class="bi bi-geo-alt-fill"></i>
+                <strong>{{t.origen}}</strong> → {{t.destino}}
+              </div>
+              <div class="asientos-info">
+                <i class="bi bi-people-fill"></i>
+                {{t.asientosDisponibles}}/{{t.asientosMax}} disponibles
+              </div>
+            </div>
+            
+            <div class="precio-section">
+              <div class="precio-tag">
+                ${{t.precio}}
+                <span class="precio-label">por pasajero</span>
+              </div>
+              <button class="btn-ver-detalle" (click)="verDetalle(t.id); $event.stopPropagation()">
+                Ver asientos
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EMPTY STATE -->
+      <div *ngIf="filtered.length === 0" class="empty-state">
+        <div class="empty-icon">🚗</div>
+        <h3>No encontramos vehículos</h3>
+        <p>Intenta con otros filtros o ciudades</p>
+        <button class="btn-clear" (click)="limpiarFiltros()">🔄 Limpiar todos los filtros</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,11 +5,10 @@ import { ProfileComponent } from '../features/profile/pages/profile.component';
 import { HistorialComponent } from '../features/historial/pages/historial.component';
 
 // conciertos y transporte
-import { ConciertosListComponent } from '../features/conciertos/conciertos-list.component';
-import { ConciertoDetailComponent } from '../features/conciertos/concierto-detail.component';
-import { TransporteListComponent } from '../features/transporte/transporte-list.component';
-import { TransporteDetailComponent } from '../features/transporte/transporte-detail.component';
-
+import { ConciertosListComponent } from '../features/eventos/conciertos/pages/conciertos-list.component';
+import { ConciertoDetailComponent } from '../features/eventos/conciertos/pages/concierto-detail.component';
+import { TransporteListComponent } from '../features/eventos/transporte/pages/transporte-list.component';
+import { TransporteDetailComponent } from '../features/eventos/transporte/pages/transporte-detail.component';
 // Configuración / informativas
 import { InfoEmpresaComponent } from '../features/configuracion/info-empresa/info-empresa.component';
 import { TerminosCondicionesComponent } from '../features/configuracion/terminos-condiciones/terminos-condiciones.component';

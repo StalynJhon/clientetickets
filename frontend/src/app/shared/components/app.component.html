@@ -4,24 +4,31 @@
   <aside class="sidebar">
     <nav>
       <ul>
-        <li><a routerLink="/dashboard">Inicio</a></li>
-        <li><a routerLink="/eventos">Eventos</a></li>
+        <!-- INICIO -->
+        <li><a routerLink="/dashboard" routerLinkActive="active" class="nav-item">Inicio</a></li>
 
-        <!-- Promociones e información -->
-        <li><a routerLink="/promociones">Promociones</a></li>
-        <li><a routerLink="/empresa">Sobre la Empresa</a></li>
-        <li><a routerLink="/terminos">Términos y Condiciones</a></li>
-        <li><a routerLink="/privacidad">Política de Privacidad</a></li>
-        <li><a routerLink="/ayuda">Ayuda / FAQ</a></li>
+        <!-- EVENTOS DROPDOWN -->
+        <li class="dropdown-group">
+          <div class="dropdown-toggle" (click)="toggleEventos()">
+            <a class="nav-item">Eventos
+              <i class="dropdown-icon" [class.rotate]="eventosAbierto">▶</i>
+            </a>
+          </div>
+          <div class="dropdown-menu" [class.open]="eventosAbierto">
+            <a routerLink="/conciertos" routerLinkActive="active" class="nav-item subitem">Conciertos</a>
+            <a routerLink="/transporte" routerLinkActive="active" class="nav-item subitem">Transporte</a>
+          </div>
+        </li>
 
-        <!-- conciertos y transporte -->
-        <li><a routerLink="/conciertos">Conciertos</a></li>
-        <li><a routerLink="/transporte">Transporte</a></li>
-
-        <!-- Productos y compras -->
-        <li><a routerLink="/productos">Productos / Extras</a></li>
+        <!-- RESTO ORIGINAL -->
+        <li><a routerLink="/promociones" routerLinkActive="active" class="nav-item">Promociones</a></li>
+        <li><a routerLink="/empresa" routerLinkActive="active" class="nav-item">Sobre la Empresa</a></li>
+        <li><a routerLink="/terminos" routerLinkActive="active" class="nav-item">Términos y Condiciones</a></li>
+        <li><a routerLink="/privacidad" routerLinkActive="active" class="nav-item">Política de Privacidad</a></li>
+        <li><a routerLink="/ayuda" routerLinkActive="active" class="nav-item">Ayuda / FAQ</a></li>
+        <li><a routerLink="/productos" routerLinkActive="active" class="nav-item">Productos / Extras</a></li>
         <li class="cart-link">
-          <a routerLink="/checkout">Carrito / Pagar</a>
+          <a routerLink="/checkout" routerLinkActive="active" class="nav-item primary">Carrito / Pagar <span class="badge">3</span></a>
         </li>
       </ul>
     </nav>

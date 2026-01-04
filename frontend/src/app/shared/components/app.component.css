@@ -8,6 +8,7 @@ body {
   width: 100%;
   height: 100%;
   overflow-x: hidden;
+  font-family: 'Inter', -apple-system, sans-serif;
 }
 
 .layout {
@@ -18,6 +19,7 @@ body {
   padding: 0;
 }
 
+/* SIDEBAR ORIGINAL */
 .sidebar {
   width: 220px;
   background-color: #1f2937;
@@ -25,6 +27,7 @@ body {
   padding: 1rem;
   margin: 0;
   flex-shrink: 0;
+  overflow-y: auto;
 }
 
 .sidebar ul {
@@ -34,23 +37,97 @@ body {
 }
 
 .sidebar li {
-  margin-bottom: 1rem;
+  margin-bottom: 0.3rem;
 }
 
+/* ENLACES ORIGINALES - TEXTO PEQUEÑO */
 .sidebar a {
   color: white;
   text-decoration: none;
   font-weight: bold;
+  font-size: 0.9rem;           /* ← PEQUEÑO */
   display: block;
-  padding: 0.5rem 0;
+  padding: 0.5rem 0;           /* ← ORIGINAL */
   border-radius: 4px;
   transition: background 0.2s;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  margin: 0.1rem 0;
 }
 
 .sidebar a:hover {
-  background-color: #374151;
+  background-color: #374151;    /* ← ORIGINAL */
 }
 
+.sidebar a.active {
+  background-color: #007bff !important;
+  color: white !important;
+}
+
+/* DROPDOWN EVENTOS */
+.dropdown-group {
+  position: relative;
+}
+
+.dropdown-toggle {
+  cursor: pointer !important;
+}
+
+.dropdown-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  margin: 0.1rem 0;
+  padding-left: 0.5rem;
+  list-style: none;
+}
+
+.dropdown-menu.open {
+  max-height: 100px;
+}
+
+.subitem {
+  font-size: 0.85rem !important;
+  padding: 0.4rem 0 !important;
+  padding-left: 1.5rem !important;
+  font-weight: 500;
+  background: rgba(255,255,255,0.05);
+  margin: 0.1rem 0;
+}
+
+.dropdown-icon {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+
+.dropdown-icon.rotate {
+  transform: translateY(-50%) rotate(90deg);
+}
+
+/* CARRITO */
+.primary {
+  background: linear-gradient(135deg, #10b981, #059669) !important;
+  font-weight: 800 !important;
+  margin-top: 1rem;
+}
+
+.badge {
+  background: #ef4444;
+  color: white;
+  border-radius: 10px;
+  padding: 0.15rem 0.4rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
+/* MAIN CONTENT */
 .main-content {
   flex: 1;
   padding: 0;
@@ -59,15 +136,4 @@ body {
   width: calc(100% - 220px);
   height: 100vh;
   overflow-y: auto;
-}
-
-/* ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← ← */
-.sidebar a {
-  pointer-events: auto !important;
-  cursor: pointer !important;
-}
-
-.sidebar a:hover {
-  background-color: #007bff !important;
-  color: white !important;
 }

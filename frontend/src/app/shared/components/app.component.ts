@@ -17,4 +17,10 @@ import { NavbarComponent } from './navbar/navbar.component';
 })
 export class AppComponent {
   title = 'frontend-ticket';
+  
+  eventosAbierto = false;
+  
+  toggleEventos() {
+    this.eventosAbierto = !this.eventosAbierto;
+  }
 }
