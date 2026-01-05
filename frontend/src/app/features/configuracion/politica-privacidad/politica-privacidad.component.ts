@@ -12,6 +12,7 @@ import { ConfiguracionService } from '../configuracion.service';
 export class PoliticaPrivacidadComponent implements OnInit {
 
   politica: any = null;
+  textosLegales: any = null;
   cargando = true;
   error = false;
   readingProgress = 0;
@@ -19,10 +20,29 @@ export class PoliticaPrivacidadComponent implements OnInit {
   constructor(private configuracionService: ConfiguracionService) {}
 
   ngOnInit(): void {
-    this.cargarPolitica();
+    this.cargarTextosLegales();
   }
 
-  cargarPolitica() {
+  cargarTextosLegales() {
+    this.configuracionService.getTextosLegales().subscribe({
+      next: (data) => {
+        this.textosLegales = data;
+        this.politica = data; // Mantener compatibilidad con el HTML existente
+        this.cargando = false;
+        // Set up scroll event listener after content is loaded
+        setTimeout(() => {
+          this.setupScrollListener();
+        }, 100);
+      },
+      error: (err) => {
+        console.error('Error al cargar textos legales:', err);
+        // Si falla la nueva API, intentar con la antigua
+        this.cargarPoliticaAntigua();
+      }
+    });
+  }
+  
+  cargarPoliticaAntigua() {
     this.configuracionService.getPoliticaPrivacidad().subscribe({
       next: (data) => {
         this.politica = data;

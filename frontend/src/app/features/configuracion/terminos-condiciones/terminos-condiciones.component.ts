@@ -12,6 +12,7 @@ import { ConfiguracionService } from '../configuracion.service';
 export class TerminosCondicionesComponent implements OnInit {
 
   terminos: any = null;
+  textosLegales: any = null;
   cargando = true;
   error = false;
   usuarioAcepto = false;
@@ -19,10 +20,25 @@ export class TerminosCondicionesComponent implements OnInit {
   constructor(private configuracionService: ConfiguracionService) {}
 
   ngOnInit(): void {
-    this.cargarTerminos();
+    this.cargarTextosLegales();
   }
 
-  cargarTerminos() {
+  cargarTextosLegales() {
+    this.configuracionService.getTextosLegales().subscribe({
+      next: (data) => {
+        this.textosLegales = data;
+        this.terminos = data; // Mantener compatibilidad con el HTML existente
+        this.cargando = false;
+      },
+      error: (err) => {
+        console.error('Error al cargar textos legales:', err);
+        // Si falla la nueva API, intentar con la antigua
+        this.cargarTerminosAntiguo();
+      }
+    });
+  }
+  
+  cargarTerminosAntiguo() {
     this.configuracionService.getTerminosCondiciones().subscribe({
       next: (data) => {
         this.terminos = data;

@@ -11,9 +11,19 @@ export class ConfiguracionService {
 
   constructor(private http: HttpClient) {}
 
+  // 🔹 Obtener configuración general
+  getConfiguracionGeneral() {
+    return this.http.get<any>(`${this.apiUrl}/general`);
+  }
+
   // 🔹 Obtener información de la empresa
   getInfoEmpresa() {
     return this.http.get<any>(`${this.apiUrl}/empresa`);
+  }
+
+  // 🔹 Obtener textos legales
+  getTextosLegales() {
+    return this.http.get<any>(`${this.apiUrl}/legal`);
   }
 
   // 🔹 Obtener términos y condiciones
@@ -29,5 +39,10 @@ export class ConfiguracionService {
   // 🔹 Obtener ayuda / FAQ
   getAyudaFAQ() {
     return this.http.get<any>(`${this.apiUrl}/ayuda`);
+  }
+
+  // 🔹 Obtener configuración de negocio
+  getConfiguracionNegocio() {
+    return this.http.get<any>(`${this.apiUrl}/negocio`);
   }
 }
