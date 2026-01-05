@@ -1,39 +1,95 @@
+/* =========================================
+   NAVBAR COMPLETA (Estilo Cyberpunk)
+   ========================================= */
+
 .navbar {
   width: 100%;
-  height: 60px;
-  background-color: #1f2937; /* gris oscuro */
+  height: 70px; /* Un poco más alto para mejor presencia */
+  background-color: #0B0C10; /* Fondo Negro Profundo (match con el resto) */
   color: white;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Logo a la izq, Botones a la der */
   align-items: center;
-  padding: 0 20px;
+  padding: 0 30px;
+  box-sizing: border-box; /* Asegura que el padding no rompa el ancho */
+  border-bottom: 1px solid rgba(102, 252, 241, 0.3); /* Línea neón sutil */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
 }
 
-/* Logo */
+/* --- LOGO --- */
 .logo {
   font-weight: bold;
-  font-size: 18px;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  color: #FFFFFF;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
 }
 
-/* Botón que ES el ícono */
-.user-icon-btn {
-  background: none;
-  border: none;
-  padding: 0;
+/* --- CONTENEDOR DERECHO (CLAVE PARA ALINEAR) --- */
+/* Esto agrupa el carrito y el perfil uno al lado del otro */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Espacio entre el botón del carrito y el ícono de perfil */
+}
+
+/* --- BOTÓN DEL CARRITO --- */
+.cart-btn {
+  background: transparent;
+  border: 1px solid #66FCF1; /* Borde Cian */
+  color: #66FCF1;
+  padding: 8px 16px;
+  border-radius: 6px;
   cursor: pointer;
   display: flex;
   align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.cart-btn:hover {
+  background: #66FCF1;
+  color: #0B0C10; /* Texto negro al hacer hover */
+  box-shadow: 0 0 15px rgba(102, 252, 241, 0.5); /* Resplandor */
+}
+
+.cart-count {
+  background: #FF0080; /* Badge Rosa Neón */
+  color: white;
+  font-size: 0.8rem;
+  padding: 2px 7px;
+  border-radius: 50%;
+  box-shadow: 0 0 5px #FF0080;
+}
+
+/* --- BOTÓN DE PERFIL (ICONO) --- */
+.user-icon-btn {
+  background: none;
+  border: none;
+  padding: 5px; /* Un poco de área de click */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .user-icon-btn i {
-  font-size: 30px;
-  color: white;
-  transition: opacity 0.2s, transform 0.2s;
+  font-size: 28px;
+  color: #C5C6C7; /* Gris claro por defecto */
+  transition: all 0.3s ease;
 }
 
+/* Efecto Hover para el Perfil */
 .user-icon-btn:hover i {
-  opacity: 0.8;
+  color: #66FCF1; /* Cambia a Cian */
+  opacity: 1;
   transform: scale(1.1);
+  text-shadow: 0 0 10px rgba(102, 252, 241, 0.8); /* Brillo neón */
 }
 
 .user-icon-btn:focus {

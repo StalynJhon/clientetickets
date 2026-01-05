@@ -1,21 +1,24 @@
-/* Contenedor general */
+/* Contenedor general - AHORA FULL WIDTH */
 .container {
   padding: 2rem;
   color: #C5C6C7;
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
   background: #0B0C10;
+  min-height: 100vh;
+  box-sizing: border-box; 
 }
 
 /* Encabezado */
 .header-section {
-  background: #1F2833;
+  background: #1F2833; /* Gris oscuro azulado */
   padding: 1.5rem;
   border-radius: 10px;
   margin-bottom: 2rem;
   text-align: left;
-  color: #66FCF1;
-  box-shadow: 0 0 20px rgba(102, 252, 241, 0.25);
+  color: #66FCF1; /* Azul Neón */
+  box-shadow: 0 0 20px rgba(102, 252, 241, 0.25); /* Resplandor */
 }
 
 .header-section h2 {
@@ -24,6 +27,10 @@
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+
+.header-section p {
+  color: #C5C6C7;
 }
 
 /* Buscador */
@@ -38,7 +45,7 @@
   max-width: 600px;
   padding: 12px 20px;
   border-radius: 8px;
-  border: 1px solid rgba(102, 252, 241, 0.3);
+  border: 1px solid rgba(102, 252, 241, 0.3); /* Borde neón sutil */
   background: #1F2833;
   color: #FFFFFF;
   font-size: 1rem;
@@ -47,13 +54,13 @@
 }
 
 .search-input::placeholder {
-  color: #C5C6C7;
+  color: #6b7c85;
 }
 
 .search-input:focus {
   outline: none;
   border-color: #66FCF1;
-  box-shadow: 0 0 16px rgba(102, 252, 241, 0.6);
+  box-shadow: 0 0 16px rgba(102, 252, 241, 0.6); /* Resplandor fuerte al escribir */
 }
 
 /* GRID DE PRODUCTOS */
@@ -61,6 +68,14 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 2rem;
+}
+
+.no-data {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #C5C6C7;
+  padding: 2rem;
 }
 
 /* Tarjeta de Producto */
@@ -77,14 +92,13 @@
   transform: translateY(-6px);
   box-shadow:
     0 0 20px rgba(102, 252, 241, 0.6),
-    0 0 40px rgba(102, 252, 241, 0.25);
+    0 0 40px rgba(102, 252, 241, 0.25); /* Doble sombra neón */
   border-color: #66FCF1;
 }
 
-/* Imagen */
 .card-image {
   height: 200px;
-  background: #0B0C10;
+  background: #0B0C10; /* Fondo negro para la imagen */
   padding: 20px;
   display: flex;
   justify-content: center;
@@ -99,12 +113,11 @@
   object-fit: contain;
 }
 
-/* Badge */
+/* Badge (Etiqueta) */
 .badge {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  background: #FF0080;
+  top: 10px; right: 10px;
+  background: #FF0080; /* ROSA NEÓN */
   color: #FFFFFF;
   padding: 4px 10px;
   border-radius: 20px;
@@ -113,7 +126,6 @@
   box-shadow: 0 0 12px rgba(255, 0, 128, 0.7);
 }
 
-/* Contenido */
 .card-content {
   padding: 1.5rem;
   text-align: center;
@@ -122,12 +134,12 @@
 .card-content h3 {
   margin: 0 0 10px 0;
   font-size: 1.2rem;
-  color: #FFFFFF;
+  color: #FFFFFF; /* Título blanco */
 }
 
 .price {
   font-size: 1.5rem;
-  color: #66FCF1;
+  color: #66FCF1; /* Precio Neón */
   font-weight: bold;
   margin-bottom: 1rem;
   text-shadow: 0 0 8px rgba(102, 252, 241, 0.6);
@@ -149,21 +161,22 @@
   transition: all 0.25s;
 }
 
-/* Botón principal */
+/* Botón Principal (Agregar) */
 .btn-primary {
   background: #66FCF1;
-  color: #0B0C10;
-  box-shadow: 0 0 16px rgba(102, 252, 241, 0.7);
+  color: #0B0C10; /* Texto oscuro para contraste */
+  box-shadow: 0 0 16px rgba(102, 252, 241, 0.5);
 }
 
 .btn-primary:hover {
+  background: #45a29e;
   box-shadow:
     0 0 20px rgba(102, 252, 241, 0.9),
     0 0 40px rgba(102, 252, 241, 0.6);
   transform: translateY(-1px);
 }
 
-/* Botón secundario */
+/* Botón Secundario (Ver Detalle) */
 .btn-outline {
   background: transparent;
   border: 1px solid #66FCF1;
@@ -173,30 +186,146 @@
 .btn-outline:hover {
   background: #66FCF1;
   color: #0B0C10;
+  box-shadow: 0 0 15px rgba(102, 252, 241, 0.6);
 }
 
-/* MODAL */
+.full-width {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1rem;
+}
+
+/* =========================================
+   ESTILOS DEL MODAL (DARK MODE + ESTRUCTURA FIJA)
+   ========================================= */
+
 .modal-backdrop {
   position: fixed;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(11, 12, 16, 0.9);
+  background: rgba(11, 12, 16, 0.9); /* Fondo casi negro muy oscuro */
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 2000;
+  backdrop-filter: blur(4px);
 }
 
 .modal-content {
-  background: #1F2833;
-  border-radius: 10px;
+  background: #1F2833; /* Fondo de tarjeta oscuro */
   width: 90%;
   max-width: 800px;
-  padding: 2rem;
+  height: 450px; /* Altura Fija */
+
+  display: flex;
+  flex-direction: row !important; /* Lado a lado OBLIGATORIO */
+
+  border-radius: 12px;
+  overflow: hidden;
   position: relative;
+  border: 1px solid rgba(102, 252, 241, 0.3);
+  box-shadow:
+    0 0 25px rgba(102, 252, 241, 0.2),
+    0 0 50px rgba(102, 252, 241, 0.1);
+}
+
+/* --- COLUMNA IMAGEN (IZQUIERDA) --- */
+.modal-image-col {
+  width: 50%;
+  min-width: 50%;
+  max-width: 50%;
+  background: #0B0C10; /* Fondo NEGRO en la zona de la foto */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow: hidden;
+  border-right: 1px solid rgba(102, 252, 241, 0.1);
+}
+
+.modal-image-col img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(102, 252, 241, 0.2)); /* Sombra neón a la imagen */
+}
+
+/* --- COLUMNA TEXTO (DERECHA) --- */
+.modal-info-col {
+  width: 50%;
+  min-width: 50%;
+  padding: 40px 30px;
+  color: #C5C6C7; /* Texto claro */
+
   display: flex;
   flex-direction: column;
-  color: #FFFFFF;
-  box-shadow:
-    0 0 25px rgba(102, 252, 241, 0.4),
-    0 0 50px rgba(102, 252, 241, 0.2);
+  justify-content: center;
+  text-align: left;
+  overflow-y: auto;
+}
+
+.modal-info-col h3 {
+  margin-top: 0;
+  font-size: 1.8rem;
+  color: #FFFFFF; /* Título blanco */
+  line-height: 1.2;
+  margin-bottom: 15px;
+}
+
+.modal-desc {
+  font-size: 1rem;
+  color: #C5C6C7;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.big-price {
+  font-size: 2.2rem;
+  color: #66FCF1; /* Precio neón */
+  font-weight: 800;
+  margin-bottom: 25px;
+  display: block;
+  text-shadow: 0 0 10px rgba(102, 252, 241, 0.5);
+}
+
+/* Botón Cerrar */
+.close-btn {
+  position: absolute;
+  top: 15px; right: 15px;
+  width: 35px; height: 35px;
+  background: #0B0C10; /* Fondo negro */
+  border: 1px solid rgba(102, 252, 241, 0.3);
+  border-radius: 50%;
+  font-weight: bold; font-size: 1.2rem;
+  color: #66FCF1;
+  cursor: pointer; z-index: 50;
+  display: flex; align-items: center; justify-content: center;
+  transition: 0.2s;
+}
+.close-btn:hover {
+  background: #FF0080; /* Rosa al pasar el mouse */
+  color: white;
+  border-color: #FF0080;
+  box-shadow: 0 0 10px #FF0080;
+}
+
+/* --- RESPONSIVE (Móvil) --- */
+@media (max-width: 768px) {
+  .modal-content {
+    flex-direction: column !important;
+    height: auto;
+    max-height: 90vh;
+  }
+  .modal-image-col {
+    width: 100%; min-width: 100%; max-width: 100%;
+    height: 200px;
+    border-right: none;
+    border-bottom: 1px solid rgba(102, 252, 241, 0.1);
+  }
+  .modal-info-col {
+    width: 100%; min-width: 100%;
+    padding: 20px;
+  }
 }

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 
-// Definimos la estructura del ítem del carrito
 export interface CartItem {
   id: string;
   nombre: string;
@@ -15,51 +14,59 @@ export interface CartItem {
   providedIn: 'root'
 })
 export class CartService {
-  // BehaviorSubject guarda el estado actual del carrito
   private _items = new BehaviorSubject<CartItem[]>([]);
   public items$ = this._items.asObservable();
 
+  // Observable para el contador del Navbar
+  public cartCount$ = this.items$.pipe(
+    map(items => items.reduce((acc, item) => acc + item.cantidad, 0))
+  );
+
+  // Observable para el Total en Dinero ($)
+  public cartTotal$ = this.items$.pipe(
+    map(items => items.reduce((acc, item) => acc + (item.precio * item.cantidad), 0))
+  );
+
   constructor() {}
 
-  // Función para agregar ítems
   addToCart(newItem: CartItem) {
     const currentItems = this._items.getValue();
-
-    // Verificamos si ya existe el ítem (por ID y Tipo) para no duplicarlo, solo sumar cantidad
     const existingIndex = currentItems.findIndex(i => i.id === newItem.id && i.tipo === newItem.tipo);
 
     if (existingIndex > -1) {
-      // Si existe, creamos una copia y actualizamos la cantidad
       const updatedItems = [...currentItems];
       updatedItems[existingIndex].cantidad += newItem.cantidad;
       this._items.next(updatedItems);
     } else {
-      // Si no existe, lo agregamos al array
       this._items.next([...currentItems, newItem]);
     }
-
-    // CONSOLA: Esto te confirmará que el dato llegó bien
-    console.log('✅ Carrito actualizado:', this._items.getValue());
   }
 
-  // Quitar un ítem
+  // NUEVO: Función para actualizar cantidad (+ o -)
+  updateQuantity(id: string, change: number) {
+    const currentItems = this._items.getValue();
+    const index = currentItems.findIndex(i => i.id === id);
+
+    if (index > -1) {
+      const updatedItems = [...currentItems];
+      const newQuantity = updatedItems[index].cantidad + change;
+
+      if (newQuantity > 0) {
+        updatedItems[index].cantidad = newQuantity;
+        this._items.next(updatedItems);
+      } else {
+        // Si baja a 0, preguntamos si quiere borrar o lo borramos directo
+        this.removeItem(id);
+      }
+    }
+  }
+
   removeItem(id: string) {
     const currentItems = this._items.getValue().filter(item => item.id !== id);
     this._items.next(currentItems);
   }
 
-  // Limpiar todo (al comprar)
   clearCart() {
     this._items.next([]);
-  }
-
-  // Calcular Total ($)
-  getTotal(): number {
-    return this._items.getValue().reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
-  }
-
-  // Contar cuántos ítems hay
-  getItemsCount(): number {
-    return this._items.getValue().reduce((acc, item) => acc + item.cantidad, 0);
   }
 }
