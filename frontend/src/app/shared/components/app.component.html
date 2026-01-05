@@ -5,30 +5,117 @@
     <nav>
       <ul>
         <!-- INICIO -->
-        <li><a routerLink="/dashboard" routerLinkActive="active" class="nav-item">Inicio</a></li>
+        <li>
+          <a routerLink="/dashboard" routerLinkActive="active" class="nav-item">
+            Inicio
+          </a>
+        </li>
 
         <!-- EVENTOS DROPDOWN -->
         <li class="dropdown-group">
           <div class="dropdown-toggle" (click)="toggleEventos()">
-            <a class="nav-item">Eventos
+            <a class="nav-item">
+              Eventos
               <i class="dropdown-icon" [class.rotate]="eventosAbierto">▶</i>
             </a>
           </div>
           <div class="dropdown-menu" [class.open]="eventosAbierto">
-            <a routerLink="/conciertos" routerLinkActive="active" class="nav-item subitem">Conciertos</a>
-            <a routerLink="/transporte" routerLinkActive="active" class="nav-item subitem">Transporte</a>
+            <a
+              routerLink="/conciertos"
+              routerLinkActive="active"
+              class="nav-item subitem"
+            >
+              Conciertos
+            </a>
+            <a
+              routerLink="/transporte"
+              routerLinkActive="active"
+              class="nav-item subitem"
+            >
+              Transporte
+            </a>
           </div>
         </li>
 
+        <!-- ACERCA DE / ACCORDION -->
+        <li>
+          <a
+            class="accordion-toggle"
+            (click)="toggleAccordion()"
+            [class.active]="isAccordionOpen"
+          >
+            <span>Acerca de nosotros</span>
+            <span class="arrow" [class.rotated]="isAccordionOpen"></span>
+          </a>
+
+          <ul class="accordion-content" [class.open]="isAccordionOpen">
+            <li>
+              <a routerLink="/empresa" (click)="onSubItemClick()">
+                Sobre la Empresa
+              </a>
+            </li>
+            <li>
+              <a routerLink="/terminos" (click)="onSubItemClick()">
+                Términos y Condiciones
+              </a>
+            </li>
+            <li>
+              <a routerLink="/privacidad" (click)="onSubItemClick()">
+                Política de Privacidad
+              </a>
+            </li>
+            <li>
+              <a routerLink="/ayuda" (click)="onSubItemClick()">
+                Ayuda / FAQ
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- LINK ADICIONAL DE PROMOCIONES (rama origin/andres) -->
+        <li>
+          <a routerLink="/promociones">Promociones</a>
+        </li>
+
         <!-- RESTO ORIGINAL -->
-        <li><a routerLink="/promociones" routerLinkActive="active" class="nav-item">Promociones</a></li>
-        <li><a routerLink="/empresa" routerLinkActive="active" class="nav-item">Sobre la Empresa</a></li>
-        <li><a routerLink="/terminos" routerLinkActive="active" class="nav-item">Términos y Condiciones</a></li>
-        <li><a routerLink="/privacidad" routerLinkActive="active" class="nav-item">Política de Privacidad</a></li>
-        <li><a routerLink="/ayuda" routerLinkActive="active" class="nav-item">Ayuda / FAQ</a></li>
-        <li><a routerLink="/productos" routerLinkActive="active" class="nav-item">Productos / Extras</a></li>
+        <li>
+          <a routerLink="/promociones" routerLinkActive="active" class="nav-item">
+            Promociones
+          </a>
+        </li>
+        <li>
+          <a routerLink="/empresa" routerLinkActive="active" class="nav-item">
+            Sobre la Empresa
+          </a>
+        </li>
+        <li>
+          <a routerLink="/terminos" routerLinkActive="active" class="nav-item">
+            Términos y Condiciones
+          </a>
+        </li>
+        <li>
+          <a routerLink="/privacidad" routerLinkActive="active" class="nav-item">
+            Política de Privacidad
+          </a>
+        </li>
+        <li>
+          <a routerLink="/ayuda" routerLinkActive="active" class="nav-item">
+            Ayuda / FAQ
+          </a>
+        </li>
+        <li>
+          <a routerLink="/productos" routerLinkActive="active" class="nav-item">
+            Productos / Extras
+          </a>
+        </li>
         <li class="cart-link">
-          <a routerLink="/checkout" routerLinkActive="active" class="nav-item primary">Carrito / Pagar <span class="badge">3</span></a>
+          <a
+            routerLink="/checkout"
+            routerLinkActive="active"
+            class="nav-item primary"
+          >
+            Carrito / Pagar <span class="badge">3</span>
+          </a>
         </li>
       </ul>
     </nav>

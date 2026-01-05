@@ -14,6 +14,7 @@ export class TerminosCondicionesComponent implements OnInit {
   terminos: any = null;
   cargando = true;
   error = false;
+  usuarioAcepto = false;
 
   constructor(private configuracionService: ConfiguracionService) {}
 
@@ -43,5 +44,14 @@ export class TerminosCondicionesComponent implements OnInit {
     });
   }
 
+  aceptarTerminos(): void {
+    this.usuarioAcepto = true;
+    // In a real application, you would save this to a service or backend
+    console.log('Usuario ha aceptado los términos y condiciones');
+  }
+
+  imprimirTerminos(): void {
+    window.print();
+  }
 
 }

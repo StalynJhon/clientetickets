@@ -30,6 +30,20 @@
         <div class="terminos-body" [innerHTML]="terminos.texto">
         </div>
         
+        <!-- Interactive Elements -->
+        <div class="terminos-actions">
+          <button class="btn-accept" (click)="aceptarTerminos()" *ngIf="!usuarioAcepto">
+            Aceptar Términos
+          </button>
+          <div class="acceptance-status" *ngIf="usuarioAcepto">
+            <i class="icon-check"></i>
+            <span>Has aceptado los términos y condiciones</span>
+          </div>
+          <button class="btn-print" (click)="imprimirTerminos()">
+            <i class="icon-print"></i>
+            Imprimir
+          </button>
+        </div>
 
       </div>
       

@@ -14,6 +14,11 @@ export class InfoEmpresaComponent implements OnInit {
   infoEmpresa: any = null;
   cargando = true;
   error = false;
+  
+  sections = {
+    about: { expanded: true },
+    contact: { expanded: true }
+  };
 
   constructor(private configuracionService: ConfiguracionService) {}
 
@@ -33,5 +38,13 @@ export class InfoEmpresaComponent implements OnInit {
         this.cargando = false;
       }
     });
+  }
+
+  toggleSection(section: string): void {
+    if (section === 'about') {
+      this.sections.about.expanded = !this.sections.about.expanded;
+    } else if (section === 'contact') {
+      this.sections.contact.expanded = !this.sections.contact.expanded;
+    }
   }
 }

@@ -29,39 +29,49 @@
       </div>
 
       <div class="empresa-content">
-        <div class="empresa-description">
-          <h4><i class="icon-info"></i> Acerca de Nosotros</h4>
-          <p>
-            Somos una plataforma líder en la venta de tickets para eventos culturales, 
-            deportivos y de entretenimiento. Nos dedicamos a facilitar la experiencia 
-            de compra de entradas para nuestros clientes y proporcionar herramientas 
-            efectivas para la gestión de eventos a nuestros socios.
-          </p>
+        <div class="empresa-section">
+          <div class="section-header" (click)="toggleSection('about')">
+            <h4><i class="icon-info"></i> Acerca de Nosotros</h4>
+            <span class="section-toggle" [class.expanded]="sections.about.expanded">▼</span>
+          </div>
+          <div class="section-content" [class.expanded]="sections.about.expanded">
+            <p>
+              Somos una plataforma líder en la venta de tickets para eventos culturales, 
+              deportivos y de entretenimiento. Nos dedicamos a facilitar la experiencia 
+              de compra de entradas para nuestros clientes y proporcionar herramientas 
+              efectivas para la gestión de eventos a nuestros socios.
+            </p>
+          </div>
         </div>
 
-        <div class="contact-info">
-          <h4><i class="icon-contact"></i> Información de Contacto</h4>
-          <div class="contact-item" *ngIf="infoEmpresa.contacto?.email">
-            <i class="icon-email"></i>
-            <div class="contact-details">
-              <span class="contact-label">Email</span>
-              <a [href]="'mailto:' + infoEmpresa.contacto.email" class="contact-value">{{ infoEmpresa.contacto.email }}</a>
-            </div>
+        <div class="empresa-section">
+          <div class="section-header" (click)="toggleSection('contact')">
+            <h4><i class="icon-contact"></i> Información de Contacto</h4>
+            <span class="section-toggle" [class.expanded]="sections.contact.expanded">▼</span>
           </div>
-          
-          <div class="contact-item" *ngIf="infoEmpresa.contacto?.telefono">
-            <i class="icon-phone"></i>
-            <div class="contact-details">
-              <span class="contact-label">Teléfono</span>
-              <a [href]="'tel:' + infoEmpresa.contacto.telefono" class="contact-value">{{ infoEmpresa.contacto.telefono }}</a>
+          <div class="section-content" [class.expanded]="sections.contact.expanded">
+            <div class="contact-item" *ngIf="infoEmpresa.contacto?.email">
+              <i class="icon-email"></i>
+              <div class="contact-details">
+                <span class="contact-label">Email</span>
+                <a [href]="'mailto:' + infoEmpresa.contacto.email" class="contact-value">{{ infoEmpresa.contacto.email }}</a>
+              </div>
             </div>
-          </div>
-          
-          <div class="contact-item" *ngIf="infoEmpresa.contacto?.direccion">
-            <i class="icon-location"></i>
-            <div class="contact-details">
-              <span class="contact-label">Dirección</span>
-              <span class="contact-value">{{ infoEmpresa.contacto.direccion }}</span>
+            
+            <div class="contact-item" *ngIf="infoEmpresa.contacto?.telefono">
+              <i class="icon-phone"></i>
+              <div class="contact-details">
+                <span class="contact-label">Teléfono</span>
+                <a [href]="'tel:' + infoEmpresa.contacto.telefono" class="contact-value">{{ infoEmpresa.contacto.telefono }}</a>
+              </div>
+            </div>
+            
+            <div class="contact-item" *ngIf="infoEmpresa.contacto?.direccion">
+              <i class="icon-location"></i>
+              <div class="contact-details">
+                <span class="contact-label">Dirección</span>
+                <span class="contact-value">{{ infoEmpresa.contacto.direccion }}</span>
+              </div>
             </div>
           </div>
         </div>

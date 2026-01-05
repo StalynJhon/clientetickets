@@ -30,6 +30,23 @@
       <div *ngIf="politica.texto; else noContent" class="privacidad-body" [innerHTML]="politica.texto">
       </div>
       
+      <!-- Interactive Elements -->
+      <div class="privacidad-actions">
+        <button class="btn-download" (click)="descargarPolitica()">
+          <i class="icon-download"></i>
+          Descargar PDF
+        </button>
+        <button class="btn-share" (click)="compartirPolitica()">
+          <i class="icon-share"></i>
+          Compartir
+        </button>
+        <div class="reading-progress">
+          <div class="progress-bar">
+            <div class="progress" [style.width.%]="readingProgress"></div>
+          </div>
+          <span>Leyendo: {{ readingProgress | number:'1.0-0' }}%</span>
+        </div>
+      </div>
 
     </div>
   </div>

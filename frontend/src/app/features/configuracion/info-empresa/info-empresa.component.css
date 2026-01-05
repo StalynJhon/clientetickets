@@ -126,10 +126,10 @@
 }
 
 .empresa-content {
-  padding: 30px;
+  padding: 0;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 30px;
+  gap: 0;
 }
 
 @media (min-width: 768px) {
@@ -219,6 +219,69 @@
 .contact-value:hover {
   color: #3498db;
   text-decoration: underline;
+}
+
+/* Section Accordion */
+.empresa-section {
+  border-bottom: 1px solid #eaeaea;
+  transition: all 0.3s ease;
+}
+
+.empresa-section:last-child {
+  border-bottom: none;
+}
+
+.section-header {
+  background: #f8f9fa;
+  padding: 20px 30px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.section-header:hover {
+  background: #edf2f7;
+}
+
+.section-header h4 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #2c3e50;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.section-toggle {
+  transition: transform 0.3s ease;
+  font-size: 0.8rem;
+  color: #7f8c8d;
+}
+
+.section-toggle.expanded {
+  transform: rotate(180deg);
+}
+
+.section-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, padding 0.5s ease;
+  background: white;
+}
+
+.section-content.expanded {
+  max-height: 500px;
+  padding: 0 30px 30px 30px;
+}
+
+.section-content p {
+  line-height: 1.8;
+  color: #34495e;
+  margin: 20px 0 0 0;
+  font-size: 1.05rem;
 }
 
 /* Iconos */
