@@ -41,8 +41,10 @@ body {
   color: white;
   text-decoration: none;
   font-weight: bold;
-  display: block;
-  padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.75rem 0.5rem;
   border-radius: 4px;
   transition: background 0.2s;
 }
@@ -72,41 +74,84 @@ body {
   color: white !important;
 }
 
-.accordion-toggle {
+.menu-item {
+  margin-bottom: 0.5rem;
+}
+
+.accordion-header {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: transparent;
+  border: none;
+  color: white;
+  font-weight: bold;
   cursor: pointer;
+  padding: 0.75rem 0.5rem;
+  border-radius: 4px;
+  transition: background 0.2s;
+  text-align: left;
+}
+
+.accordion-header:hover {
+  background-color: #374151;
+}
+
+.accordion-header.active {
+  background-color: #374151;
+}
+
+.title {
+  font-weight: bold;
 }
 
 .arrow {
   transition: transform 0.3s ease;
-  font-size: 0.8rem;
+  font-size: 1.2rem;
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
 }
 
-.arrow.rotated {
+.arrow.rotate {
   transform: rotate(180deg);
 }
 
-.accordion-content {
+.accordion-body {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease;
+  transition: max-height 0.3s ease, opacity 0.2s ease;
   list-style: none;
   padding-left: 0;
   margin: 0;
+  opacity: 0;
 }
 
-.accordion-content.open {
-  max-height: 300px; /* Adjust based on content */
+.accordion-body.show {
+  max-height: 300px;
+  opacity: 1;
 }
 
-.accordion-content li {
+.accordion-body li {
   margin-bottom: 0.5rem;
   margin-left: 1rem;
 }
 
-.accordion-content a {
+.accordion-body a {
   font-weight: normal;
-  padding-left: 1rem;
+  padding: 0.5rem 0.75rem;
+  display: block;
+  border-radius: 4px;
+  transition: background 0.2s;
+  color: #d1d5db;
+  text-decoration: none;
+}
+
+.accordion-body a:hover {
+  background-color: #374151;
+  color: white;
 }
