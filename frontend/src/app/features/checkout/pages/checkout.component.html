@@ -1,37 +1,101 @@
 <div class="checkout-container">
-  <h2>🛍️ Resumen de Compra</h2>
 
-  <div class="cart-summary">
-    <div class="cart-item" *ngFor="let item of cartItems">
-      <span>{{ item.cantidad }}x {{ item.nombre }} ({{ item.tipo }})</span>
-      <span class="item-price">${{ item.precio * item.cantidad }}</span>
+  <div *ngIf="!purchaseSuccess" class="checkout-content">
+
+    <h2>🛍️ Resumen de Compra</h2>
+
+    <div class="cart-summary">
+      <div *ngIf="cartItems.length === 0" class="empty-msg">Tu carrito está vacío.</div>
+
+      <div class="cart-item" *ngFor="let item of cartItems">
+        <div class="item-info">
+          <span class="item-name">{{ item.nombre }}</span>
+          <span class="item-unit-price">${{ item.precio }} c/u</span>
+        </div>
+        <div class="item-controls">
+          <button class="btn-small" (click)="disminuir(item)">-</button>
+          <span class="qty">{{ item.cantidad }}</span>
+          <button class="btn-small" (click)="aumentar(item)">+</button>
+        </div>
+        <div class="item-total-actions">
+          <span class="item-price">${{ (item.precio * item.cantidad).toFixed(2) }}</span>
+          <button class="btn-delete" (click)="eliminar(item)">🗑️</button>
+        </div>
+      </div>
+
+      <div class="total-row">
+        <h3>Total a Pagar:</h3>
+        <h3>${{ total.toFixed(2) }}</h3>
+      </div>
     </div>
 
-    <div class="total-row">
-      <h3>Total a Pagar:</h3>
-      <h3>${{ total }}</h3>
+    <form (ngSubmit)="procesarCompra()" class="checkout-form">
+      <h3>Datos del Cliente</h3>
+      <div class="form-group">
+        <label>Nombre Completo</label>
+        <input type="text" [(ngModel)]="customerData.name" name="name" required placeholder="Ej. Juan Pérez">
+      </div>
+
+      <div class="form-group">
+        <label>Correo Electrónico</label>
+        <input type="email" [(ngModel)]="customerData.email" name="email" required placeholder="juan@email.com">
+      </div>
+
+      <h3>Método de Pago</h3>
+      <div class="select-wrapper">
+        <select [(ngModel)]="customerData.paymentMethod" name="payment">
+          <option value="tarjeta">💳 Tarjeta de Crédito/Débito</option>
+          <option value="paypal">🅿️ PayPal</option>
+          <option value="efectivo">💵 Pago en Taquilla</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-confirm" [disabled]="cartItems.length === 0">
+        Confirmar Compra
+      </button>
+    </form>
+  </div>
+
+  <div *ngIf="purchaseSuccess" class="ticket-view">
+    <div class="ticket-card">
+      <div class="ticket-header">
+        <div class="success-icon">✅</div>
+        <h2>¡Compra Exitosa!</h2>
+        <p>Gracias por tu preferencia, {{ customerData.name }}</p>
+      </div>
+
+      <div class="ticket-body">
+        <div class="ticket-row">
+          <span>Orden:</span> <strong>{{ orderNumber }}</strong>
+        </div>
+        <div class="ticket-row">
+          <span>Fecha:</span> <span>{{ purchaseDate | date:'short' }}</span>
+        </div>
+        <div class="ticket-row">
+          <span>Email:</span> <span>{{ customerData.email }}</span>
+        </div>
+
+        <hr class="dashed-line">
+
+        <ul class="ticket-items">
+          <li *ngFor="let item of cartItems">
+            <span>{{ item.cantidad }} x {{ item.nombre }}</span>
+            <span>${{ (item.precio * item.cantidad).toFixed(2) }}</span>
+          </li>
+        </ul>
+
+        <hr class="dashed-line">
+
+        <div class="ticket-total">
+          <span>TOTAL PAGADO</span>
+          <span>${{ total.toFixed(2) }}</span>
+        </div>
+      </div>
+
+      <div class="ticket-actions">
+        <button class="btn-outline" (click)="finalizarYSalir()">Volver a la Tienda</button>
+      </div>
     </div>
   </div>
 
-  <form (ngSubmit)="procesarCompra()" class="checkout-form">
-    <h3>Datos del Cliente</h3>
-    <div class="form-group">
-      <label>Nombre Completo</label>
-      <input type="text" [(ngModel)]="customerData.name" name="name" required placeholder="Ej. Juan Pérez">
-    </div>
-
-    <div class="form-group">
-      <label>Correo Electrónico (para enviar ticket)</label>
-      <input type="email" [(ngModel)]="customerData.email" name="email" required placeholder="juan@email.com">
-    </div>
-
-    <h3>Método de Pago</h3>
-    <select [(ngModel)]="customerData.paymentMethod" name="payment">
-      <option value="tarjeta">💳 Tarjeta de Crédito/Débito</option>
-      <option value="paypal">🅿️ PayPal</option>
-      <option value="efectivo">💵 Pago en Taquilla</option>
-    </select>
-
-    <button type="submit" class="btn-confirm">Confirmar Compra</button>
-  </form>
 </div>

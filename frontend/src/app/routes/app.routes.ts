@@ -19,10 +19,9 @@ import { AyudaFaqComponent } from '../features/configuracion/ayuda-faq/ayuda-faq
 // Promociones
 import { PromocionesPublicasComponent } from '../features/promociones-publicas/pages/promociones-publicas.component';
 
-// Productos / checkout / notas
+// Productos / checkout / 
 import { ProductListComponent } from '../features/products/pages/product-list.component';
 import { CheckoutComponent } from '../features/checkout/pages/checkout.component';
-import { NotasComponent } from '../features/notas/notas.component';
 
 export const routes: Routes = [
   // Ruta principal
@@ -42,9 +41,6 @@ export const routes: Routes = [
   // Productos y ventas
   { path: 'productos', component: ProductListComponent },
   { path: 'checkout', component: CheckoutComponent },
-
-  // Notas
-  { path: 'notas', component: NotasComponent },
 
   // conciertos
   { path: 'conciertos', component: ConciertosListComponent },
