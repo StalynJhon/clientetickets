@@ -37,18 +37,32 @@
           </div>
         </li>
 
-        <!-- ACERCA DE / ACCORDION -->
+        <!-- PRODUCTOS -->
         <li>
-          <a
-            class="accordion-toggle"
+          <a routerLink="/productos" routerLinkActive="active" class="nav-item">
+            Productos / Extras
+          </a>
+        </li>
+
+        <!-- PROMOCIONES -->
+        <li>
+          <a routerLink="/promociones" routerLinkActive="active" class="nav-item">
+            Promociones
+          </a>
+        </li>
+
+        <!-- ACERCA DE NOSOTROS (ACCORDION) -->
+        <li class="menu-item">
+          <button
+            class="accordion-header"
             (click)="toggleAccordion()"
             [class.active]="isAccordionOpen"
           >
-            <span>Acerca de nosotros</span>
-            <span class="arrow" [class.rotated]="isAccordionOpen"></span>
-          </a>
+            <span class="title">Acerca de nosotros</span>
+            <i class="arrow" [class.rotate]="isAccordionOpen">⌄</i>
+          </button>
 
-          <ul class="accordion-content" [class.open]="isAccordionOpen">
+          <ul class="accordion-body" [class.show]="isAccordionOpen">
             <li>
               <a routerLink="/empresa" (click)="onSubItemClick()">
                 Sobre la Empresa
@@ -70,31 +84,6 @@
               </a>
             </li>
           </ul>
-        </li>
-
-        <!-- PROMOCIONES -->
-        <li>
-          <a routerLink="/promociones" routerLinkActive="active" class="nav-item">
-            Promociones
-          </a>
-        </li>
-
-        <!-- PRODUCTOS -->
-        <li>
-          <a routerLink="/productos" routerLinkActive="active" class="nav-item">
-            Productos / Extras
-          </a>
-        </li>
-
-        <!-- CARRITO -->
-        <li class="cart-link">
-          <a
-            routerLink="/checkout"
-            routerLinkActive="active"
-            class="nav-item primary"
-          >
-            Carrito / Pagar <span class="badge">3</span>
-          </a>
         </li>
       </ul>
     </nav>
