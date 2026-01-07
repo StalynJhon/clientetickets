@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AlertService } from '../../../../shared/services/alert.service';
 
 interface Transporte {
   id: number;
@@ -36,10 +37,11 @@ interface Asiento {
 export class TransporteDetailComponent implements OnInit {
   route = inject(ActivatedRoute);
   router = inject(Router);
+  alertService = inject(AlertService); // ← INYECTAR SERVICIO
   
   transporte: Transporte = {} as Transporte;
   asientos: Asiento[] = [];
-  seleccionados: Asiento[] = []; // ✅ CAMBIADO a objetos completos
+  seleccionados: Asiento[] = [];
   loading = false;
 
   ngOnInit() {
@@ -48,12 +50,18 @@ export class TransporteDetailComponent implements OnInit {
   }
 
   private cargarTransporte(id: number) {
+    // Mostrar loading de SweetAlert2
+    this.alertService.loading('Cargando detalles del vehículo...');
     this.loading = true;
+    
     setTimeout(() => {
       const datos = this.getDatosDemo();
       this.transporte = datos[id - 1] || datos[0];
       this.generarAsientos();
       this.loading = false;
+      
+      // Cerrar loading
+      this.alertService.close();
     }, 800);
   }
 
@@ -68,8 +76,8 @@ export class TransporteDetailComponent implements OnInit {
         destino: 'Guayaquil - Terminal Terrestre', 
         horaSalida: '22:00', 
         descripcion: 'Bus ejecutivo con aire acondicionado, WiFi gratis, baños modernos, asientos reclinables 160° y servicio directo sin paradas intermedias. Máximo confort.',
-        asientosMax: 16, 
-        asientosDisponibles: 12, 
+        asientosMax: 40, // ← CAMBIADO A 40
+        asientosDisponibles: 28, // ← CAMBIADO
         precio: 35 
       },
       { 
@@ -81,36 +89,38 @@ export class TransporteDetailComponent implements OnInit {
         destino: 'Quito - Norte', 
         horaSalida: '08:00', 
         descripcion: 'Toyota 4x4 con tracción total, aire acondicionado, 5 asientos de cuero. Ideal para viajes rápidos y cómodos.',
-        asientosMax: 5, 
-        asientosDisponibles: 3, 
+        asientosMax: 40,
+        asientosDisponibles: 32, 
         precio: 65 
       }
     ];
   }
 
-  // 🚌 4 FILAS x 4 ASIENTOS (A,B,C,D) - SIN PASILLO FAKE
+  // 🚌 10 FILAS x 4 ASIENTOS (A,B,C,D) = 40 ASIENTOS TOTALES
   generarAsientos() {
     this.asientos = [];
     
-    for (let fila = 1; fila <= 4; fila++) {
-      const letras = ['A', 'B', 'C', 'D'];
+    for (let fila = 1; fila <= 10; fila++) { // ← CAMBIADO A 10 FILAS
+      const letras = ['A', 'C', 'B', 'D']; // A,C = ventana | B,D = corredor
       
       for (let col = 0; col < 4; col++) {
+        const estaOcupado = Math.random() < 0.3; // 30% ocupados
+        
         this.asientos.push({
           id: (fila - 1) * 4 + col + 1,
-          disponible: Math.random() > 0.2,
+          disponible: !estaOcupado,
           seleccionado: false,
           fila: fila,
-          asiento: (fila - 1) * 4 + col + 1,
+          asiento: fila,
           letra: letras[col]
         });
       }
     }
   }
 
-  // ✅ NUEVO: VISTA PASAJERO (FILAS DE ATRÁS A DELANTERA)
+  // ✅ VISTA PASAJERO (10 FILAS DE ATRÁS A DELANTERA)
   getFilasReversas(): number[] {
-    return [4, 3, 2, 1];
+    return [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]; // ← CAMBIADO A 10 FILAS
   }
 
   trackByFila(index: number, fila: number): number {
@@ -121,19 +131,26 @@ export class TransporteDetailComponent implements OnInit {
   getAsientosVentanaFila(fila: number): Asiento[] {
     return this.asientos.filter(a => 
       a.fila === fila && (a.letra === 'A' || a.letra === 'C')
-    );
+    ).sort((a, b) => a.letra.localeCompare(b.letra));
   }
 
   // ✅ ASIENTOS CORREDOR (B,D) por fila
   getAsientosCorredorFila(fila: number): Asiento[] {
     return this.asientos.filter(a => 
       a.fila === fila && (a.letra === 'B' || a.letra === 'D')
-    );
+    ).sort((a, b) => a.letra.localeCompare(b.letra));
   }
 
-  // ✅ SELECCIÓN DESDE VISTA PASAJERO
+  // ✅ SELECCIÓN CON ALERTAS
   seleccionarAsiento(asiento: Asiento) {
-    if (!asiento.disponible) return;
+    // Si está ocupado, mostrar alerta
+    if (!asiento.disponible) {
+      this.alertService.warning(
+        'Asiento Ocupado', 
+        'Este asiento ya está reservado. Por favor selecciona otro disponible.'
+      );
+      return;
+    }
     
     const index = this.seleccionados.findIndex(s => s.id === asiento.id);
     
@@ -141,28 +158,28 @@ export class TransporteDetailComponent implements OnInit {
       // Deseleccionar
       this.seleccionados.splice(index, 1);
       asiento.seleccionado = false;
+      
+      // Toast de deselección
+      this.alertService.toast('info', `Asiento ${asiento.asiento}${asiento.letra} deseleccionado`);
     } else {
-      // Seleccionar (máximo 4)
-      if (this.seleccionados.length < 4) {
-        this.seleccionados.push(asiento);
-        asiento.seleccionado = true;
-      }
+      // Seleccionar
+      this.seleccionados.push(asiento);
+      asiento.seleccionado = true;
+      
+      // Toast de selección
+      this.alertService.toast('success', `Asiento ${asiento.asiento}${asiento.letra} seleccionado`);
     }
   }
 
   // ✅ CLASE CSS PARA VISTA CLIENTE
   getClaseAsientoCliente(asiento: Asiento): string {
-    let clases = ['asiento-pasajero'];
-    
-    if (!asiento.disponible) {
-      clases.push('ocupado');
-    } else if (asiento.seleccionado) {
-      clases.push('seleccionado');
-    } else {
-      clases.push('disponible');
+    if (asiento.seleccionado) {
+      return 'seleccionado-cliente';
     }
-    
-    return clases.join(' ');
+    if (!asiento.disponible) {
+      return 'ocupado-cliente';
+    }
+    return 'disponible';
   }
 
   get total(): number {
@@ -177,11 +194,20 @@ export class TransporteDetailComponent implements OnInit {
     return this.asientos.filter(a => a.disponible).length;
   }
 
-  agregarCarrito() {
+  // ✅ AGREGAR AL CARRITO CON SWEETALERT2
+  async agregarCarrito() {
     if (this.seleccionados.length === 0) {
-      alert('⚠️ Selecciona al menos 1 asiento');
+      this.alertService.warning(
+        'Sin Selección', 
+        'Debes seleccionar al menos un asiento antes de continuar.'
+      );
       return;
     }
+
+    const asientosTexto = this.seleccionados
+      .map(a => `${a.asiento}${a.letra}`)
+      .sort()
+      .join(', ');
 
     const itemCarrito = {
       tipo: 'transporte',
@@ -199,18 +225,50 @@ export class TransporteDetailComponent implements OnInit {
       ruta: `${this.transporte.origen} → ${this.transporte.destino}`
     };
     
+    // Guardar en localStorage
     let carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
     carrito.push(itemCarrito);
     localStorage.setItem('carrito', JSON.stringify(carrito));
     
-    alert(`✅ ${this.seleccionados.length} asiento(s) agregados al carrito!\n💰 Total: $${this.total}`);
+    // Mostrar alerta de éxito con opciones
+    const result = await this.alertService.carritoAgregado(
+      `${this.transporte.nombre}\nAsientos: ${asientosTexto}`,
+      this.seleccionados.length,
+      this.total
+    );
     
-    // Reset
-    this.seleccionados = [];
-    this.asientos.forEach(a => a.seleccionado = false);
+    if (result.isConfirmed) {
+      // Usuario clickeó "Ver Carrito"
+      this.router.navigate(['/carrito']);
+    } else {
+      // Usuario clickeó "Seguir Comprando" - Reset
+      this.seleccionados = [];
+      this.asientos.forEach(a => a.seleccionado = false);
+      
+      // Toast de confirmación
+      this.alertService.toast('success', 'Puedes seguir seleccionando asientos');
+    }
   }
 
   volver() {
-    this.router.navigate(['/transporte']);
+    this.router.navigate(['/eventos/transporte']);
+  }
+
+  // ✅ MÉTODO DE PRUEBA (OPCIONAL - PUEDES BORRAR DESPUÉS)
+  probarAlertas() {
+    console.log('🧪 Probando alertas...');
+    
+    // Success
+    this.alertService.success('¡Funciona!', 'SweetAlert2 está correctamente instalado');
+    
+    // Toast después de 2 segundos
+    setTimeout(() => {
+      this.alertService.toast('success', 'Toast notification funcionando');
+    }, 2000);
+    
+    // Confirmación después de 4 segundos
+    setTimeout(() => {
+      this.alertService.confirm('¿Confirmas?', 'Esta es una alerta de confirmación');
+    }, 4000);
   }
 }

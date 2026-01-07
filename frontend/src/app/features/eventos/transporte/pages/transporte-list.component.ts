@@ -2,6 +2,8 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { TransportService } from '../transport.service';
+import { AlertService } from '../../../../shared/services/alert.service'; // ← AGREGADO
 
 interface Transporte {
   id: number;
@@ -11,9 +13,10 @@ interface Transporte {
   origen: string;
   destino: string;
   precio: number;
-  asientosMax: number;
+  asientosMax?: number;
   asientosDisponibles?: number;
   destacado?: boolean;
+  empresa?: string;
 }
 
 @Component({
@@ -38,104 +41,77 @@ export class TransporteListComponent implements OnInit {
   tiposUnicos: string[] = [];
 
   router = inject(Router);
+  transportService = inject(TransportService);
+  alertService = inject(AlertService); // ← AGREGADO
 
   ngOnInit() {
     this.cargarTransportes();
   }
 
   private cargarTransportes() {
+    console.log('📱 Componente: Cargando transportes...');
     this.loading = true;
-    setTimeout(() => {
-      this.transportes = this.getDatosDemo();
-      this.extraerFiltrosUnicos();
-      this.ordenarPorFecha();
-      this.filtered = [...this.transportes];
-      this.loading = false;
-      console.log('✅ Transportes DEMO cargados:', this.transportes.length);
-    }, 800);
-  }
-
-  private getDatosDemo(): Transporte[] {
-    return [
-      { 
-        id: 1, 
-        nombre: 'Bus Ejecutivo QUITO-GUAYAQUIL', 
-        tipo: '🚌 Bus', 
-        fecha: '2026-01-30', 
-        origen: 'Quito', 
-        destino: 'Guayaquil', 
-        precio: 35, 
-        asientosMax: 40, 
-        asientosDisponibles: 28, 
-        destacado: true 
+    
+    // ← AGREGADO: Mostrar loading
+    this.alertService.loading('Cargando transportes...');
+    
+    this.transportService.getTransportes().subscribe({
+      next: (transportes) => {
+        console.log('✅ Componente: Transportes recibidos:', transportes);
+        
+        // ← AGREGADO: Cerrar loading
+        this.alertService.close();
+        
+        if (transportes.length === 0) {
+          console.log('⚠️ No hay transportes en BD. Usando datos demo.');
+          this.transportes = this.transportService.getDatosDemo();
+          this.error = 'No hay transportes en la base de datos. Mostrando datos de ejemplo.';
+          
+          // ← AGREGADO: Info toast
+          this.alertService.info(
+            'Datos de Demostración',
+            'No hay transportes en la base de datos. Mostrando vehículos de ejemplo.'
+          );
+        } else {
+          this.transportes = transportes;
+          this.error = '';
+          
+          // ← AGREGADO: Success toast
+          this.alertService.toast('success', `${transportes.length} transportes cargados`);
+        }
+        
+        this.extraerFiltrosUnicos();
+        this.ordenarPorFecha();
+        this.filtered = [...this.transportes];
+        this.loading = false;
       },
-      { 
-        id: 2, 
-        nombre: 'Camioneta 4x4 GYE-QUITO', 
-        tipo: '🚛 Camioneta', 
-        fecha: '2026-01-31', 
-        origen: 'Guayaquil', 
-        destino: 'Quito', 
-        precio: 65, 
-        asientosMax: 5, 
-        asientosDisponibles: 3, 
-        destacado: true 
-      },
-      { 
-        id: 3, 
-        nombre: 'Furgoneta Nocturna GYE-QUITO', 
-        tipo: '🚐 Furgoneta', 
-        fecha: '2026-01-29', 
-        origen: 'Guayaquil', 
-        destino: 'Quito', 
-        precio: 28, 
-        asientosMax: 12, 
-        asientosDisponibles: 8, 
-        destacado: true 
-      },
-      { 
-        id: 4, 
-        nombre: 'Auto Premium QUITO-GYE', 
-        tipo: '🚗 Auto', 
-        fecha: '2026-02-01', 
-        origen: 'Quito', 
-        destino: 'Guayaquil', 
-        precio: 95, 
-        asientosMax: 4, 
-        asientosDisponibles: 2, 
-        destacado: false 
-      },
-      { 
-        id: 5, 
-        nombre: 'Bus Turístico QUITO-GUAYAQUIL', 
-        tipo: '🚌 Bus', 
-        fecha: '2026-02-02', 
-        origen: 'Quito', 
-        destino: 'Guayaquil', 
-        precio: 42, 
-        asientosMax: 45, 
-        asientosDisponibles: 33, 
-        destacado: false 
-      },
-      { 
-        id: 6, 
-        nombre: 'Camioneta Familiar GYE-CUENCA', 
-        tipo: '🚛 Camioneta', 
-        fecha: '2026-01-30', 
-        origen: 'Guayaquil', 
-        destino: 'Cuenca', 
-        precio: 55, 
-        asientosMax: 7, 
-        asientosDisponibles: 5, 
-        destacado: false 
+      error: (err) => {
+        console.error('❌ Componente: Error al cargar transportes:', err);
+        
+        // ← AGREGADO: Cerrar loading
+        this.alertService.close();
+        
+        // ← AGREGADO: Warning
+        this.alertService.warning(
+          'Modo Sin Conexión',
+          'No se pudo conectar con el servidor. Mostrando datos de ejemplo.'
+        );
+        
+        this.error = 'No se pudo conectar con el servidor. Mostrando datos de ejemplo.';
+        this.transportes = this.transportService.getDatosDemo();
+        this.extraerFiltrosUnicos();
+        this.ordenarPorFecha();
+        this.filtered = [...this.transportes];
+        this.loading = false;
       }
-    ];
+    });
   }
 
   private extraerFiltrosUnicos() {
-    this.origenesUnicos = [...new Set(this.transportes.map(t => t.origen))].sort();
-    this.destinosUnicos = [...new Set(this.transportes.map(t => t.destino))].sort();
-    this.tiposUnicos = [...new Set(this.transportes.map(t => t.tipo))].sort();
+    // ← OPCIONAL: Usar métodos del service
+    this.origenesUnicos = this.transportService.getOrigenesUnicos(this.transportes);
+    this.destinosUnicos = this.transportService.getDestinosUnicos(this.transportes);
+    this.tiposUnicos = this.transportService.getTiposUnicos(this.transportes);
   }
 
   filtrar() {
@@ -150,6 +126,11 @@ export class TransporteListComponent implements OnInit {
       const fechaMatch = !this.filtroFecha || t.fecha.includes(this.filtroFecha);
       return nombreMatch && origenMatch && destinoMatch && tipoMatch && fechaMatch;
     });
+
+    // ← AGREGADO: Toast cuando no hay resultados
+    if (this.filtered.length === 0 && (this.filtro || this.filtroOrigen || this.filtroDestino || this.filtroTipo || this.filtroFecha)) {
+      this.alertService.toast('info', 'No se encontraron transportes con esos filtros');
+    }
   }
 
   ordenarPorFecha() {
@@ -161,18 +142,45 @@ export class TransporteListComponent implements OnInit {
   }
 
   getImagen(transporte: Transporte): string {
-    switch(transporte.tipo) {
-      case '🚌 Bus': 
-        return 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&auto=format&fit=crop&q=80';
-      case '🚗 Auto': 
-        return 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&auto=format&fit=crop&q=80';
-      case '🚛 Camioneta': 
-        return 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&auto=format&fit=crop&q=80';
-      case '🚐 Furgoneta': 
-        return 'https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&auto=format&fit=crop&q=80';
-      default: 
-        return 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&auto=format&fit=crop&q=80';
+    const tipo = transporte.tipo?.toLowerCase() || '';
+    
+    if (tipo.includes('bus') || tipo.includes('🚌')) {
+      const imagenesBus = [
+        'https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=800&auto=format&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&auto=format&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?w=800&auto=format&fit=crop&q=80'
+      ];
+      return imagenesBus[transporte.id % imagenesBus.length];
     }
+    
+    if (tipo.includes('auto') || tipo.includes('🚗')) {
+      const imagenesAuto = [
+        'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&auto=format&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&auto=format&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&auto=format&fit=crop&q=80'
+      ];
+      return imagenesAuto[transporte.id % imagenesAuto.length];
+    }
+    
+    if (tipo.includes('camioneta') || tipo.includes('🚛')) {
+      const imagenesCamioneta = [
+        'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800&auto=format&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=800&auto=format&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1581540222194-0def2dda95b8?w=800&auto=format&fit=crop&q=80'
+      ];
+      return imagenesCamioneta[transporte.id % imagenesCamioneta.length];
+    }
+    
+    if (tipo.includes('furgoneta') || tipo.includes('🚐') || tipo.includes('van')) {
+      const imagenesFurgoneta = [
+        'https://images.unsplash.com/photo-1527786356703-4b100091cd2c?w=800&auto=format&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=800&auto=format&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1464219789935-c2d9d9aba644?w=800&auto=format&fit=crop&q=80'
+      ];
+      return imagenesFurgoneta[transporte.id % imagenesFurgoneta.length];
+    }
+    
+    return 'https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=800&auto=format&fit=crop&q=80';
   }
 
   formatFecha(fecha: string): string {
@@ -201,6 +209,9 @@ export class TransporteListComponent implements OnInit {
     this.filtroTipo = '';
     this.filtroFecha = '';
     this.filtrar();
+    
+    // ← AGREGADO: Toast de confirmación
+    this.alertService.toast('success', 'Filtros limpiados');
   }
 
   getTransportesDestacados(): Transporte[] {

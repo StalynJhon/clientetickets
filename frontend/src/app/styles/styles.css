@@ -11,3 +11,276 @@ html, body {
   height: 100%;
   overflow: hidden;
 }
+
+/* ==================== SWEETALERT2 CUSTOM STYLES ==================== */
+.sweet-popup {
+  border-radius: 20px !important;
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5) !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+}
+
+.sweet-popup .swal2-title {
+  color: #fff !important;
+  font-size: 1.8rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 1rem !important;
+}
+
+.sweet-popup .swal2-html-container {
+  color: #cbd5e1 !important;
+  font-size: 1rem !important;
+  line-height: 1.6 !important;
+}
+
+.sweet-popup .swal2-content {
+  color: #cbd5e1 !important;
+}
+
+.sweet-button {
+  border-radius: 10px !important;
+  padding: 0.75rem 2rem !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  transition: all 0.3s ease !important;
+  border: none !important;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3) !important;
+  text-transform: none !important;
+}
+
+.sweet-button:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4) !important;
+}
+
+.sweet-button:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3) !important;
+}
+
+.sweet-button-cancel {
+  border-radius: 10px !important;
+  padding: 0.75rem 2rem !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  transition: all 0.3s ease !important;
+  border: 1px solid rgba(100, 116, 139, 0.5) !important;
+  background: rgba(100, 116, 139, 0.2) !important;
+  color: #cbd5e1 !important;
+}
+
+.sweet-button-cancel:hover {
+  background: rgba(100, 116, 139, 0.3) !important;
+  transform: translateY(-2px) !important;
+  border-color: rgba(100, 116, 139, 0.7) !important;
+}
+
+.sweet-button-cancel:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(100, 116, 139, 0.3) !important;
+}
+
+/* Icons */
+.swal2-icon {
+  border-width: 3px !important;
+  margin: 2rem auto 1.5rem !important;
+}
+
+.swal2-icon.swal2-success {
+  border-color: #10b981 !important;
+}
+
+.swal2-icon.swal2-success [class^='swal2-success-line'] {
+  background-color: #10b981 !important;
+}
+
+.swal2-icon.swal2-success .swal2-success-ring {
+  border-color: rgba(16, 185, 129, 0.3) !important;
+}
+
+.swal2-icon.swal2-error {
+  border-color: #ef4444 !important;
+}
+
+.swal2-icon.swal2-error [class^='swal2-x-mark-line'] {
+  background-color: #ef4444 !important;
+}
+
+.swal2-icon.swal2-warning {
+  border-color: #f59e0b !important;
+  color: #f59e0b !important;
+}
+
+.swal2-icon.swal2-info {
+  border-color: #3b82f6 !important;
+  color: #3b82f6 !important;
+}
+
+.swal2-icon.swal2-question {
+  border-color: #8b5cf6 !important;
+  color: #8b5cf6 !important;
+}
+
+/* Loading Spinner */
+.swal2-loader {
+  border-color: #10b981 transparent #10b981 transparent !important;
+}
+
+/* Progress Bar */
+.swal2-timer-progress-bar {
+  background: #10b981 !important;
+}
+
+/* Toast Notifications */
+.swal2-toast {
+  border-radius: 12px !important;
+  padding: 1rem !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4) !important;
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+}
+
+.swal2-toast .swal2-title {
+  font-size: 1rem !important;
+  margin: 0 !important;
+  color: #fff !important;
+}
+
+.swal2-toast .swal2-icon {
+  margin: 0 0.5rem 0 0 !important;
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+  font-size: 1rem !important;
+}
+
+/* Close Button */
+.swal2-close {
+  color: #94a3b8 !important;
+  font-size: 2rem !important;
+  transition: all 0.3s ease !important;
+}
+
+.swal2-close:hover {
+  color: #fff !important;
+  transform: scale(1.1) !important;
+}
+
+/* Input Fields */
+.swal2-input,
+.swal2-textarea {
+  background: rgba(30, 41, 59, 0.8) !important;
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+  border-radius: 10px !important;
+  color: #fff !important;
+  padding: 0.75rem 1rem !important;
+  font-size: 1rem !important;
+}
+
+.swal2-input:focus,
+.swal2-textarea:focus {
+  outline: none !important;
+  border-color: #10b981 !important;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2) !important;
+}
+
+.swal2-input::placeholder,
+.swal2-textarea::placeholder {
+  color: #64748b !important;
+}
+
+/* Validation Messages */
+.swal2-validation-message {
+  background: rgba(239, 68, 68, 0.1) !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+  color: #fca5a5 !important;
+  border-radius: 8px !important;
+}
+
+/* Footer */
+.swal2-footer {
+  border-top: 1px solid rgba(100, 116, 139, 0.3) !important;
+  color: #94a3b8 !important;
+  padding-top: 1rem !important;
+  margin-top: 1rem !important;
+}
+
+/* Actions */
+.swal2-actions {
+  margin-top: 1.5rem !important;
+  gap: 1rem !important;
+}
+
+
+
+/* Animations */
+.swal2-show {
+  animation: swal2-show 0.3s !important;
+}
+
+.swal2-hide {
+  animation: swal2-hide 0.2s !important;
+}
+
+@keyframes swal2-show {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  45% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes swal2-hide {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sweet-popup {
+    width: 90% !important;
+    padding: 1.5rem !important;
+  }
+
+  .sweet-popup .swal2-title {
+    font-size: 1.5rem !important;
+  }
+
+  .sweet-button,
+  .sweet-button-cancel {
+    padding: 0.65rem 1.5rem !important;
+    font-size: 0.9rem !important;
+  }
+
+  .swal2-actions {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  .swal2-actions button {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .sweet-popup .swal2-title {
+    font-size: 1.3rem !important;
+  }
+
+  .sweet-popup .swal2-html-container {
+    font-size: 0.9rem !important;
+  }
+}
