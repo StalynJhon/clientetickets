@@ -45,4 +45,19 @@ export class ConfiguracionService {
   getConfiguracionNegocio() {
     return this.http.get<any>(`${this.apiUrl}/negocio`);
   }
+
+  // 🔹 Guardar configuración general
+  guardarConfiguracionGeneral(data: any) {
+    return this.http.post(`${this.apiUrl}/general`, data);
+  }
+
+  // 🔹 Guardar textos legales
+  guardarTextosLegales(data: any) {
+    return this.http.post(`${this.apiUrl}/legal`, data);
+  }
+
+  // 🔹 Guardar configuración de negocio
+  guardarConfiguracionNegocio(data: any) {
+    return this.http.post(`${this.apiUrl}/negocio`, data);
+  }
 }

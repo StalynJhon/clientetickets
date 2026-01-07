@@ -27,7 +27,11 @@ export class TerminosCondicionesComponent implements OnInit {
     this.configuracionService.getTextosLegales().subscribe({
       next: (data) => {
         this.textosLegales = data;
-        this.terminos = data; // Mantener compatibilidad con el HTML existente
+        // Adaptar la estructura para que coincida con lo que espera el HTML
+        this.terminos = {
+          texto: data.terminos || 'No hay términos y condiciones disponibles actualmente.',
+          fechaActualizacion: new Date().toISOString()
+        };
         this.cargando = false;
       },
       error: (err) => {

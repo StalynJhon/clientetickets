@@ -27,12 +27,18 @@ export class PoliticaPrivacidadComponent implements OnInit {
     this.configuracionService.getTextosLegales().subscribe({
       next: (data) => {
         this.textosLegales = data;
-        this.politica = data; // Mantener compatibilidad con el HTML existente
+        // Adaptar la estructura para que coincida con lo que espera el HTML
+        this.politica = {
+          texto: data.politica || 'No hay política de privacidad disponible actualmente.',
+          fechaActualizacion: new Date().toISOString()
+        };
         this.cargando = false;
-        // Set up scroll event listener after content is loaded
-        setTimeout(() => {
-          this.setupScrollListener();
-        }, 100);
+        // Set up scroll event listener after content is loaded (solo en el navegador)
+        if (typeof window !== 'undefined') {
+          setTimeout(() => {
+            this.setupScrollListener();
+          }, 100);
+        }
       },
       error: (err) => {
         console.error('Error al cargar textos legales:', err);
@@ -47,10 +53,12 @@ export class PoliticaPrivacidadComponent implements OnInit {
       next: (data) => {
         this.politica = data;
         this.cargando = false;
-        // Set up scroll event listener after content is loaded
-        setTimeout(() => {
-          this.setupScrollListener();
-        }, 100);
+        // Set up scroll event listener after content is loaded (solo en el navegador)
+        if (typeof window !== 'undefined') {
+          setTimeout(() => {
+            this.setupScrollListener();
+          }, 100);
+        }
       },
       error: (err) => {
         console.error('Error al cargar política de privacidad:', err);
@@ -80,6 +88,11 @@ export class PoliticaPrivacidadComponent implements OnInit {
   }
 
   setupScrollListener(): void {
+    // Solo ejecutar en el navegador
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return;
+    }
+    
     const contentElement = document.querySelector('.privacidad-body');
     if (contentElement) {
       window.addEventListener('scroll', () => {
@@ -91,6 +104,11 @@ export class PoliticaPrivacidadComponent implements OnInit {
   }
 
   updateReadingProgress(): void {
+    // Solo ejecutar en el navegador
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return;
+    }
+    
     const contentElement = document.querySelector('.privacidad-body');
     if (contentElement) {
       const scrollTop = window.pageYOffset;
