@@ -2,17 +2,7 @@ const transportCtl = {};
 const orm = require('../../../infrastructure/database/connection/dataBase.orm');
 const sql = require('../../../infrastructure/database/connection/dataBase.sql');
 const mongo = require('../../../infrastructure/database/connection/dataBaseMongose');
-const { cifrarDatos, descifrarDatos } = require('../../../application/encrypDates');
-
-// Función para descifrar de forma segura
-const descifrarSeguro = (dato) => {
-    try {
-        return dato ? descifrarDatos(dato) : '';
-    } catch (error) {
-        console.error('Error al descifrar:', error);
-        return '';
-    }
-};
+const { cifrarDatos, descifrarSeguro } = require('../../../application/encrypDates');
 
 // ================ GESTIÓN DE EMPRESAS DE TRANSPORTE ================
 

@@ -75,10 +75,12 @@
       <i class="star-icon">⭐</i> Conciertos Destacados
     </h2>
     <div class="destacados-grid">
+      <!-- ✅ CORREGIDO: /conciertos en lugar de /eventos/conciertos -->
       <div *ngFor="let concierto of getConciertosDestacados()" 
            class="concierto-card destacado"
            [style.background]="getBadgeColor(concierto.genero)"
-           (click)="verDetalle(concierto.id)">
+           [routerLink]="['/conciertos', concierto.id]"
+           style="cursor: pointer;">
         <div class="destacado-badge">POPULAR</div>
         <div class="card-image">
           <img [src]="getImagen(concierto)" [alt]="concierto.nameArtist" />
@@ -108,7 +110,8 @@
           
           <div class="card-footer">
             <div class="price">Desde ${{ concierto.ticketPrice }}</div>
-            <button class="btn-ver" (click)="verDetalle(concierto.id); $event.stopPropagation()">
+            <!-- ✅ CORREGIDO -->
+            <button class="btn-ver" [routerLink]="['/conciertos', concierto.id]">
               Ver detalles →
             </button>
           </div>
@@ -136,9 +139,11 @@
 
     <!-- Grid de conciertos -->
     <div class="conciertos-grid" *ngIf="filtered.length > 0">
+      <!-- ✅ CORREGIDO: /conciertos en lugar de /eventos/conciertos -->
       <div *ngFor="let concierto of filtered" 
            class="concierto-card"
-           (click)="verDetalle(concierto.id)">
+           [routerLink]="['/conciertos', concierto.id]"
+           style="cursor: pointer;">
         <div class="card-image">
           <img [src]="getImagen(concierto)" [alt]="concierto.nameArtist" />
           <div class="image-overlay"></div>
@@ -171,7 +176,8 @@
               <div class="price-label">Desde</div>
               <div class="price">${{ concierto.ticketPrice }}</div>
             </div>
-            <button class="btn-ver" (click)="verDetalle(concierto.id); $event.stopPropagation()">
+            <!-- ✅ CORREGIDO -->
+            <button class="btn-ver" [routerLink]="['/conciertos', concierto.id]">
               <i class="btn-icon">→</i>
             </button>
           </div>

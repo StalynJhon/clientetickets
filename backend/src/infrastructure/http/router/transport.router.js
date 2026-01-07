@@ -9,7 +9,7 @@ const {
     obtenerReservasHorario, crearReservaTransporte, buscarRutas,
     obtenerEstadisticas, actualizarEstadoVehiculo, actualizarEstadoHorario,
     checkInPasajero
-} = require('../../http/controllers/trasport.controller');
+} = require('../../http/controllers/transport.controller'); // ✅ CORREGIDO
 
 // Validaciones
 const validacionEmpresa = [

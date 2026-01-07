@@ -51,28 +51,43 @@
       <p>{{transporte.descripcion}}</p>
     </div>
 
-    <!-- 🚌 PLANO DE ASIENTOS - VISTA PASAJERO -->
+    <!-- 🚌 PLANO DE ASIENTOS HORIZONTAL -->
     <div class="asientos-section">
       <div class="asientos-header">
         <h3>🎫 Elige tus asientos</h3>
         <div class="seleccionados">
-          {{seleccionados.length}} / {{asientosDisponibles}} seleccionados
+          {{seleccionados.length}} seleccionados
+        </div>
+      </div>
+
+      <!-- LEYENDA (OPCIONAL) -->
+      <div class="leyenda-asientos">
+        <div class="leyenda-item">
+          <div class="cuadro-leyenda disponible"></div>
+          <span>Disponible</span>
+        </div>
+        <div class="leyenda-item">
+          <div class="cuadro-leyenda seleccionado"></div>
+          <span>Seleccionado</span>
+        </div>
+        <div class="leyenda-item">
+          <div class="cuadro-leyenda ocupado"></div>
+          <span>Ocupado</span>
         </div>
       </div>
       
       <div class="plano-asientos">
-        <!-- 🚪 ENTRADA PASAJERO (TRASERA) -->
-        <div class="entrada-pasajero">
-          <div class="puerta-icon">🚪</div>
-          <span>Tú estás aquí</span>
+        <!-- 🚗 CONDUCTOR (IZQUIERDA) -->
+        <div class="conductor-lejos">
+          <div class="conductor-icon">👨‍✈️</div>
         </div>
 
-        <!-- 🚌 FILAS DESDE TRASERA A FRONTAL (VISTA PASAJERO) -->
+        <!-- 🚌 FILAS DE ASIENTOS (10 COLUMNAS) -->
         <div class="autobus-filas-pasajero">
           <div class="fila-autobus" *ngFor="let fila of getFilasReversas(); trackBy: trackByFila">
             <div class="fila-numero-pasajero">{{fila}}</div>
             <div class="asientos-autobus">
-              <!-- ASIENTOS IZQUIERDO - VENTANA (A,C) -->
+              <!-- ASIENTOS VENTANA (A,C) -->
               <div class="lado-ventana">
                 <div *ngFor="let asiento of getAsientosVentanaFila(fila)" 
                      class="asiento-pasajero ventana" 
@@ -88,9 +103,9 @@
               </div>
 
               <!-- PASILLO -->
-              <div class="pasillo-pasajero">👣</div>
+              <div class="pasillo-pasajero"></div>
 
-              <!-- ASIENTOS DERECHO - CORREDOR (B,D) -->
+              <!-- ASIENTOS CORREDOR (B,D) -->
               <div class="lado-corredor">
                 <div *ngFor="let asiento of getAsientosCorredorFila(fila)" 
                      class="asiento-pasajero corredor" 
@@ -106,47 +121,38 @@
             </div>
           </div>
         </div>
-
-        <!-- 🚗 CONDUCTOR (LEJOS PARA PASAJERO) -->
-        <div class="conductor-lejos">
-          <div class="conductor-icon">👨‍✈️</div>
-        </div>
       </div>
     </div>
 
-    <!-- RESUMEN COMPRA -->
+    <!-- RESUMEN COMPRA (APARECE AL SELECCIONAR) -->
     <div *ngIf="seleccionados.length > 0" class="compra-section">
       <div class="resumen-compra">
-        <div class="resumen-header">
-          <h3>🛒 Resumen de Compra</h3>
-        </div>
-        
-        <div class="resumen-item">
-          <span>{{transporte.nombre}}</span>
-          <span>${{transporte.precio}}</span>
-        </div>
-        
-        <div class="resumen-separador"></div>
-        
-        <div class="resumen-cantidad">
-          <span>Cantidad:</span>
-          <span>{{seleccionados.length}} asientos</span>
-        </div>
-        
-        <div class="resumen-total">
-          <span>Total:</span>
-          <span class="total-precio">${{total}}</span>
+        <div class="resumen-info">
+          <div class="resumen-header">
+            <h3>🛒 Resumen de Compra</h3>
+          </div>
+          
+          <div class="resumen-item">
+            <span>{{transporte.nombre}}</span>
+            <span>${{transporte.precio}} c/u</span>
+          </div>
+          
+          <div class="resumen-cantidad">
+            <span>Cantidad:</span>
+            <span>{{seleccionados.length}} asiento(s)</span>
+          </div>
+          
+          <div class="resumen-total">
+            <span>Total:</span>
+            <span class="total-precio">${{total}}</span>
+          </div>
         </div>
         
         <button class="btn-agregar-carrito" 
                 [disabled]="!puedeComprar"
                 (click)="agregarCarrito()">
-          🛒 AGREGAR AL CARRITO
+          AGREGAR AL CARRITO
         </button>
-        
-        <div class="btn-volver-bottom" (click)="volver()">
-          ← Volver a vehículos
-        </div>
       </div>
     </div>
 
@@ -154,7 +160,7 @@
     <div *ngIf="seleccionados.length === 0" class="estado-vacio">
       <div class="vacio-icon">🎫</div>
       <h3>Selecciona tus asientos</h3>
-      <p>Elige los asientos disponibles desde tu posición como pasajero</p>
+      <p>Elige los asientos disponibles en verde</p>
     </div>
   </div>
 </div>

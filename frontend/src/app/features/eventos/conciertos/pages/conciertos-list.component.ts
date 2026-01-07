@@ -2,16 +2,20 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { EventosService } from '../../eventos.service';
+import { ConcertRepository } from '../../../../data/repositories/concert.repository.impl';
+import { AlertService } from '../../../../shared/services/alert.service';
 
 interface Concierto {
   id: number;
-  nameConcert: string;
-  nameArtist: string;
+  nombre?: string;
+  nameConcert?: string;
+  nameArtist?: string;
+  artista?: string;
   fecha: string;
   ciudad: string;
-  lugar: string;
-  ticketPrice: number;
+  lugar?: string;
+  precio?: number;
+  ticketPrice?: number;
   genero?: string;
   entradasDisponibles?: number;
   destacado?: boolean;
@@ -36,8 +40,9 @@ export class ConciertosListComponent implements OnInit {
   ciudadesUnicas: string[] = [];
   generosUnicos: string[] = [];
 
-  eventosService = inject(EventosService);
+  concertRepository = inject(ConcertRepository);
   router = inject(Router);
+  alertService = inject(AlertService);
 
   ngOnInit() {
     this.cargarConciertos();
@@ -45,16 +50,41 @@ export class ConciertosListComponent implements OnInit {
 
   private cargarConciertos() {
     this.loading = true;
-    this.eventosService.getEventos().subscribe({
-      next: (data: Concierto[]) => {
-        this.conciertos = this.añadirDatosDemo(data);
+    this.alertService.loading('Cargando conciertos...');
+    
+    console.log('📱 Componente: Cargando conciertos...');
+    
+    this.concertRepository.getConciertos().subscribe({
+      next: (data: any[]) => {
+        console.log('📱 Componente: Datos recibidos', data);
+        this.alertService.close();
+        
+        if (data && data.length > 0) {
+          this.conciertos = this.normalizarConciertos(data);
+          this.error = '';
+          this.alertService.toast('success', `${data.length} conciertos cargados`);
+        } else {
+          console.log('⚠️ No hay datos en BD, usando demo');
+          this.conciertos = this.getDatosDemo();
+          this.alertService.info(
+            'Datos de Demostración', 
+            'No hay conciertos en la base de datos. Mostrando eventos de ejemplo.'
+          );
+        }
+        
         this.extraerFiltrosUnicos();
         this.ordenarPorFecha();
         this.filtered = [...this.conciertos];
         this.loading = false;
       },
       error: (err: any) => {
-        this.error = 'Backend no responde. Usando datos demo.';
+        console.error('❌ Componente: Error al cargar', err);
+        this.alertService.close();
+        this.alertService.warning(
+          'Modo Offline',
+          'No se pudo conectar con el servidor. Mostrando datos de ejemplo.'
+        );
+        
         this.loading = false;
         this.conciertos = this.getDatosDemo();
         this.extraerFiltrosUnicos();
@@ -63,10 +93,17 @@ export class ConciertosListComponent implements OnInit {
     });
   }
 
-  private añadirDatosDemo(conciertos: Concierto[]): Concierto[] {
+  private normalizarConciertos(data: any[]): Concierto[] {
     const generos = ['Pop', 'Rock', 'Reggaetón', 'Electrónica', 'Hip Hop', 'Indie'];
-    return conciertos.map((c, i) => ({
-      ...c,
+    
+    return data.map((c, i) => ({
+      id: c.id || i,
+      nameConcert: c.nombre || c.nameConcert || 'Sin nombre',
+      nameArtist: c.artista || c.nameArtist || 'Artista desconocido',
+      fecha: c.fecha || new Date().toISOString().split('T')[0],
+      ciudad: c.ciudad || 'Ciudad no especificada',
+      lugar: c.lugar || 'Lugar no especificado',
+      ticketPrice: c.precio || c.ticketPrice || 0,
       genero: generos[i % generos.length],
       entradasDisponibles: Math.floor(Math.random() * 100) + 20,
       destacado: i < 3
@@ -152,42 +189,76 @@ export class ConciertosListComponent implements OnInit {
     this.generosUnicos = [...new Set(this.conciertos.map(c => c.genero || 'Otro'))].sort();
   }
 
+  // ✅ FILTRADO IGUAL QUE TRANSPORTE
   filtrar() {
     this.filtered = this.conciertos.filter(c => {
+      const nombreConcierto = c.nameConcert || c.nombre || '';
+      const nombreArtista = c.nameArtist || c.artista || '';
+      
       const nombreMatch = !this.filtro || 
-        c.nameConcert.toLowerCase().includes(this.filtro.toLowerCase()) ||
-        c.nameArtist.toLowerCase().includes(this.filtro.toLowerCase());
+        nombreConcierto.toLowerCase().includes(this.filtro.toLowerCase()) ||
+        nombreArtista.toLowerCase().includes(this.filtro.toLowerCase());
+      
       const ciudadMatch = !this.filtroCiudad || 
         c.ciudad.toLowerCase().includes(this.filtroCiudad.toLowerCase());
+      
       const fechaMatch = !this.filtroFecha || 
         c.fecha.includes(this.filtroFecha);
+      
       const generoMatch = !this.filtroGenero || 
-        c.genero?.toLowerCase().includes(this.filtroGenero.toLowerCase());
+        (c.genero || '').toLowerCase().includes(this.filtroGenero.toLowerCase());
+      
       return nombreMatch && ciudadMatch && fechaMatch && generoMatch;
     });
+
+    // Toast cuando no hay resultados
+    if (this.filtered.length === 0 && (this.filtro || this.filtroCiudad || this.filtroFecha || this.filtroGenero)) {
+      this.alertService.toast('info', 'No se encontraron conciertos con esos filtros');
+    }
   }
 
   ordenarPorFecha() {
     this.conciertos.sort((a, b) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime());
   }
 
-  // ✅ SIN ALERTA - NAVEGACIÓN LIMPIA
-  verDetalle(id: number) {
-    this.router.navigate(['/conciertos', id]);
-  }
-
   getImagen(concierto: Concierto): string {
-    const artistas = ['Bad Bunny', 'Taylor Swift', 'Coldplay', 'Daddy Yankee', 'Shakira', 'Martin Garrix'];
-    const indice = artistas.indexOf(concierto.nameArtist);
+    const artistName = (concierto.nameArtist || concierto.artista || '').toLowerCase();
+    
+    if (artistName.includes('bad bunny')) {
+      return 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&auto=format&fit=crop&q=80';
+    }
+    if (artistName.includes('coldplay')) {
+      return 'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=800&auto=format&fit=crop&q=80';
+    }
+    if (artistName.includes('karol')) {
+      return 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&auto=format&fit=crop&q=80';
+    }
+    if (artistName.includes('taylor') || artistName.includes('swift')) {
+      return 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&auto=format&fit=crop&q=80';
+    }
+    if (artistName.includes('daddy') || artistName.includes('yankee')) {
+      return 'https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=800&auto=format&fit=crop&q=80';
+    }
+    if (artistName.includes('shakira')) {
+      return 'https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=800&auto=format&fit=crop&q=80';
+    }
+    if (artistName.includes('martin') || artistName.includes('garrix')) {
+      return 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&auto=format&fit=crop&q=80';
+    }
+    
     const imagenes = [
-      'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1516280440614-37939bbacd81?ixlib=rb-4.0.3&auto=format&fit=crop&w-800&q=80',
-      'https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1517230878791-4d28214057c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+      'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1501612780327-45045538702b?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&auto=format&fit=crop&q=80'
     ];
-    return indice >= 0 ? imagenes[indice] : `https://via.placeholder.com/800x500/667eea/ffffff?text=${encodeURIComponent(concierto.nameArtist)}`;
+    
+    const index = concierto.id ? (concierto.id - 1) % imagenes.length : 0;
+    return imagenes[index];
   }
 
   formatFecha(fecha: string): string {
@@ -217,13 +288,14 @@ export class ConciertosListComponent implements OnInit {
     this.filtroFecha = '';
     this.filtroGenero = '';
     this.filtrar();
+    this.alertService.toast('success', 'Filtros limpiados');
   }
 
   getConciertosDestacados(): Concierto[] {
-    return this.conciertos.filter(c => c.destacado);
+    return this.filtered.filter(c => c.destacado);
   }
 
   getConciertosNormales(): Concierto[] {
-    return this.conciertos.filter(c => !c.destacado);
+    return this.filtered.filter(c => !c.destacado);
   }
 }
