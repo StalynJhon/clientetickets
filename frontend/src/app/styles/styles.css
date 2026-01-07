@@ -209,10 +209,7 @@ html, body {
   gap: 1rem !important;
 }
 
-/* Backdrop */
-.swal2-container {
-  backdrop-filter: blur(5px) !important;
-}
+
 
 /* Animations */
 .swal2-show {
