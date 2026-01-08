@@ -5,9 +5,12 @@
       <div class="avatar">
         {{ usuario.nameUsers.charAt(0) | uppercase }}
       </div>
+
       <div>
         <h2>{{ usuario.nameUsers }}</h2>
-        <span class="username">{{ '@' + usuario.userName }}</span>
+        <span class="username">
+          {{ usuario.userName ? '@' + usuario.userName : '' }}
+        </span>
       </div>
     </div>
 
@@ -28,22 +31,34 @@
 
     <div class="form-group">
       <label>Nombre</label>
-      <input type="text" [(ngModel)]="usuarioEdit.nameUsers">
+      <input
+        type="text"
+        name="nameUsers"
+        [(ngModel)]="usuarioEdit.nameUsers">
     </div>
 
     <div class="form-group">
       <label>Usuario</label>
-      <input type="text" [(ngModel)]="usuarioEdit.userName">
+      <input
+        type="text"
+        name="userName"
+        [(ngModel)]="usuarioEdit.userName">
     </div>
 
     <div class="form-group">
       <label>Email</label>
-      <input type="email" [(ngModel)]="usuarioEdit.emailUser">
+      <input
+        type="email"
+        name="emailUser"
+        [(ngModel)]="usuarioEdit.emailUser">
     </div>
 
     <div class="form-group">
       <label>Teléfono</label>
-      <input type="text" [(ngModel)]="usuarioEdit.phoneUser">
+      <input
+        type="text"
+        name="phoneUser"
+        [(ngModel)]="usuarioEdit.phoneUser">
     </div>
 
     <div class="modal-actions">

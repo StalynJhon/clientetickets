@@ -19,22 +19,28 @@ export class ProfileComponent implements OnInit {
 
   // 🔹 Modal
   mostrarModal: boolean = false;
-  usuarioEdit: any = {};
+
+  // 🔹 IMPORTANTE: inicializado para que ngModel NO falle
+  usuarioEdit: any = {
+    nameUsers: '',
+    userName: '',
+    emailUser: '',
+    phoneUser: ''
+  };
 
   constructor(private usuarioService: UsuarioService) {}
 
   ngOnInit(): void {
     const usuarioId = 1;
 
+    this.cargando = true;
+
     this.usuarioService.obtenerUsuario(usuarioId).subscribe({
       next: (resp: any) => {
         this.cargando = false;
 
         if (resp) {
-          this.usuario = {
-            ...resp,
-            nameUsers: resp.nameUsers ?? ''
-          };
+          this.usuario = resp;
         } else {
           this.error = 'No se encontraron datos del usuario';
 
@@ -75,18 +81,18 @@ export class ProfileComponent implements OnInit {
   }
 
   // 🔹 Abrir modal
-  abrirModal() {
+  abrirModal(): void {
     this.usuarioEdit = { ...this.usuario };
     this.mostrarModal = true;
   }
 
   // 🔹 Cerrar modal
-  cerrarModal() {
+  cerrarModal(): void {
     this.mostrarModal = false;
   }
 
-  // 🔹 Guardar cambios con confirmación
-  guardarCambios() {
+  // 🔹 Guardar cambios
+  guardarCambios(): void {
     Swal.fire({
       title: '¿Guardar cambios?',
       text: 'Se actualizará tu información personal',
@@ -108,18 +114,13 @@ export class ProfileComponent implements OnInit {
         this.usuarioService
           .actualizarUsuario(this.usuario.idUser, {
             nameUsers: this.usuarioEdit.nameUsers,
-            phoneUser: this.usuarioEdit.phoneUser,
+            userName: this.usuarioEdit.userName,
             emailUser: this.usuarioEdit.emailUser,
-            userName: this.usuarioEdit.userName
+            phoneUser: this.usuarioEdit.phoneUser
           })
           .subscribe({
             next: () => {
-              // Actualizamos vista
-              this.usuario = {
-                ...this.usuario,
-                ...this.usuarioEdit
-              };
-
+              this.usuario = { ...this.usuarioEdit };
               this.mostrarModal = false;
 
               Swal.fire({
