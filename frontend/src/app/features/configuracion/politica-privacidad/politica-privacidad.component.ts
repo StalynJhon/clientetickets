@@ -20,35 +20,10 @@ export class PoliticaPrivacidadComponent implements OnInit {
   constructor(private configuracionService: ConfiguracionService) {}
 
   ngOnInit(): void {
-    this.cargarTextosLegales();
+    this.cargarPolitica();
   }
 
-  cargarTextosLegales() {
-    this.configuracionService.getTextosLegales().subscribe({
-      next: (data) => {
-        this.textosLegales = data;
-        // Adaptar la estructura para que coincida con lo que espera el HTML
-        this.politica = {
-          texto: data.politica || 'No hay política de privacidad disponible actualmente.',
-          fechaActualizacion: new Date().toISOString()
-        };
-        this.cargando = false;
-        // Set up scroll event listener after content is loaded (solo en el navegador)
-        if (typeof window !== 'undefined') {
-          setTimeout(() => {
-            this.setupScrollListener();
-          }, 100);
-        }
-      },
-      error: (err) => {
-        console.error('Error al cargar textos legales:', err);
-        // Si falla la nueva API, intentar con la antigua
-        this.cargarPoliticaAntigua();
-      }
-    });
-  }
-  
-  cargarPoliticaAntigua() {
+  cargarPolitica() {
     this.configuracionService.getPoliticaPrivacidad().subscribe({
       next: (data) => {
         this.politica = data;

@@ -20,29 +20,10 @@ export class TerminosCondicionesComponent implements OnInit {
   constructor(private configuracionService: ConfiguracionService) {}
 
   ngOnInit(): void {
-    this.cargarTextosLegales();
+    this.cargarTerminos();
   }
 
-  cargarTextosLegales() {
-    this.configuracionService.getTextosLegales().subscribe({
-      next: (data) => {
-        this.textosLegales = data;
-        // Adaptar la estructura para que coincida con lo que espera el HTML
-        this.terminos = {
-          texto: data.terminos || 'No hay términos y condiciones disponibles actualmente.',
-          fechaActualizacion: new Date().toISOString()
-        };
-        this.cargando = false;
-      },
-      error: (err) => {
-        console.error('Error al cargar textos legales:', err);
-        // Si falla la nueva API, intentar con la antigua
-        this.cargarTerminosAntiguo();
-      }
-    });
-  }
-  
-  cargarTerminosAntiguo() {
+  cargarTerminos() {
     this.configuracionService.getTerminosCondiciones().subscribe({
       next: (data) => {
         this.terminos = data;

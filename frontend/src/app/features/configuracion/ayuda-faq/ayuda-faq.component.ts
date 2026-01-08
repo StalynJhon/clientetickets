@@ -19,32 +19,10 @@ export class AyudaFaqComponent implements OnInit {
   constructor(private configuracionService: ConfiguracionService) {}
 
   ngOnInit(): void {
-    this.cargarTextosLegales();
+    this.cargarAyuda();
   }
 
-  cargarTextosLegales() {
-    this.configuracionService.getTextosLegales().subscribe({
-      next: (data) => {
-        this.textosLegales = data;
-        this.ayuda = data; // Mantener compatibilidad con el HTML existente
-        // Inicializar el estado expandido para cada FAQ
-        if (this.ayuda.faqs && Array.isArray(this.ayuda.faqs)) {
-          this.ayuda.faqs = this.ayuda.faqs.map((faq: any) => ({
-            ...faq,
-            expandido: false
-          }));
-        }
-        this.cargando = false;
-      },
-      error: (err) => {
-        console.error('Error al cargar textos legales:', err);
-        // Si falla la nueva API, intentar con la antigua
-        this.cargarAyudaAntigua();
-      }
-    });
-  }
-  
-  cargarAyudaAntigua() {
+  cargarAyuda() {
     this.configuracionService.getAyudaFAQ().subscribe({
       next: (data) => {
         this.ayuda = data;

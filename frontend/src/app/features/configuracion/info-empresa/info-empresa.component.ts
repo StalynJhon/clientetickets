@@ -24,25 +24,10 @@ export class InfoEmpresaComponent implements OnInit {
   constructor(private configuracionService: ConfiguracionService) {}
 
   ngOnInit(): void {
-    this.cargarConfiguracionGeneral();
+    this.cargarInfoEmpresa();
   }
 
-  cargarConfiguracionGeneral() {
-    this.configuracionService.getConfiguracionGeneral().subscribe({
-      next: (data) => {
-        this.configGeneral = data;
-        this.infoEmpresa = data; // Mantener compatibilidad con el HTML existente
-        this.cargando = false;
-      },
-      error: (err) => {
-        console.error('Error al cargar configuración general:', err);
-        // Si falla la nueva API, intentar con la antigua
-        this.cargarInfoEmpresaAntiguo();
-      }
-    });
-  }
-  
-  cargarInfoEmpresaAntiguo() {
+  cargarInfoEmpresa() {
     this.configuracionService.getInfoEmpresa().subscribe({
       next: (data) => {
         this.infoEmpresa = data;
