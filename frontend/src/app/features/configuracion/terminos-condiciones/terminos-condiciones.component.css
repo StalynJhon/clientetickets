@@ -1,10 +1,9 @@
 .terminos-container {
-  padding: 30px 20px;
-  max-width: 1000px;
-  margin: 0 auto;
+  padding: 30px;
+  background: #0B0C10;
+  min-height: 100vh;
+  color: #C5C6C7;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
-  min-height: calc(100vh - 120px);
 }
 
 .header-section {
@@ -13,14 +12,15 @@
 }
 
 .header-section h2 {
-  color: #2c3e50;
+  color: #66FCF1;
   font-size: 2.2rem;
   margin: 0 0 10px 0;
   font-weight: 600;
+  text-shadow: 0 0 8px rgba(102, 252, 241, 0.6);
 }
 
 .subtitle {
-  color: #7f8c8d;
+  color: #C5C6C7;
   font-size: 1.1rem;
   max-width: 600px;
   margin: 0 auto;
@@ -33,15 +33,15 @@
   justify-content: center;
   padding: 40px;
   text-align: center;
-  color: #3498db;
+  color: #66FCF1;
   font-size: 1.1rem;
 }
 
 .spinner {
   width: 40px;
   height: 40px;
-  border: 4px solid rgba(52, 152, 219, 0.2);
-  border-top: 4px solid #3498db;
+  border: 4px solid rgba(102, 252, 241, 0.2);
+  border-top: 4px solid #66FCF1;
   border-radius: 50%;
   animation: spin 1s linear infinite;
   margin-bottom: 15px;
@@ -59,30 +59,34 @@
   justify-content: center;
   padding: 40px;
   text-align: center;
-  color: #e74c3c;
+  color: #FF0080;
   font-size: 1.1rem;
-  background: #fdeded;
-  border: 1px solid #f5c6cb;
+  background: #1F2833;
+  border: 1px solid rgba(255, 0, 128, 0.3);
   border-radius: 8px;
   margin: 20px 0;
+  box-shadow: 0 0 15px rgba(255, 0, 128, 0.2);
 }
 
 .error i {
   font-size: 2rem;
   margin-bottom: 10px;
+  color: #FF0080;
 }
 
 .terminos-card {
-  background: white;
+  background: #1F2833;
   border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(102, 252, 241, 0.25);
+  box-shadow: 0 0 15px rgba(102, 252, 241, 0.15);
 }
 
 .terminos-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 0 20px rgba(102, 252, 241, 0.6), 0 0 40px rgba(102, 252, 241, 0.25);
+  border-color: #66FCF1;
 }
 
 .terminos-content {
@@ -95,7 +99,7 @@
   gap: 20px;
   margin-bottom: 25px;
   padding-bottom: 20px;
-  border-bottom: 2px solid #eaeaea;
+  border-bottom: 2px solid rgba(102, 252, 241, 0.3);
 }
 
 .terminos-icon {
@@ -104,28 +108,29 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+  background: linear-gradient(135deg, #66FCF1 0%, #45a29e 100%);
   border-radius: 50%;
-  color: white;
+  color: #0B0C10;
   font-size: 1.8rem;
+  box-shadow: 0 0 15px rgba(102, 252, 241, 0.5);
 }
 
 .terminos-title h3 {
   margin: 0 0 5px 0;
-  color: #2c3e50;
+  color: #FFFFFF;
   font-size: 1.5rem;
   font-weight: 600;
 }
 
 .terminos-date {
   margin: 0;
-  color: #7f8c8d;
+  color: #9ca3af;
   font-size: 0.9rem;
 }
 
 .terminos-body {
   line-height: 1.8;
-  color: #34495e;
+  color: #C5C6C7;
   font-size: 1.05rem;
 }
 
@@ -135,7 +140,8 @@
 
 .terminos-body h1, .terminos-body h2, .terminos-body h3 {
   margin: 25px 0 15px 0;
-  color: #2c3e50;
+  color: #66FCF1;
+  text-shadow: 0 0 8px rgba(102, 252, 241, 0.3);
 }
 
 .terminos-body ul, .terminos-body ol {
@@ -145,6 +151,7 @@
 
 .terminos-body li {
   margin-bottom: 8px;
+  color: #C5C6C7;
 }
 
 
@@ -173,48 +180,50 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-  color: white;
+  background: linear-gradient(135deg, #66FCF1 0%, #45a29e 100%);
+  color: #0B0C10;
+  box-shadow: 0 0 16px rgba(102, 252, 241, 0.5);
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #2980b9 0%, #3498db 100%);
+  background: linear-gradient(135deg, #45a29e 0%, #66FCF1 100%);
   transform: translateY(-2px);
-  box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0 20px rgba(102, 252, 241, 0.9), 0 0 40px rgba(102, 252, 241, 0.6);
 }
 
 .btn-secondary {
-  background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
-  color: white;
+  background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+  color: #0B0C10;
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #7f8c8d 0%, #95a5a6 100%);
+  background: linear-gradient(135deg, #6b7280 0%, #9ca3af 100%);
   transform: translateY(-2px);
-  box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
 }
 
 .no-content {
   text-align: center;
   padding: 60px 30px;
-  color: #7f8c8d;
+  color: #C5C6C7;
 }
 
 .no-content-icon {
   font-size: 4rem;
-  color: #bdc3c7;
+  color: #6b7c85;
   margin-bottom: 20px;
 }
 
 .no-content h3 {
-  color: #2c3e50;
+  color: #66FCF1;
   font-size: 1.5rem;
   margin: 0 0 15px 0;
+  text-shadow: 0 0 8px rgba(102, 252, 241, 0.3);
 }
 
 .no-content p {
   font-size: 1.1rem;
   margin: 0;
+  color: #C5C6C7;
 }
 
 /* Responsive */
@@ -261,8 +270,8 @@
 }
 
 .btn-accept {
-  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
-  color: white;
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  color: #0B0C10;
   border: none;
   padding: 12px 24px;
   border-radius: 8px;
@@ -276,14 +285,13 @@
 }
 
 .btn-accept:hover {
-  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+  background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
   transform: translateY(-2px);
-  box-shadow: 0 7px 14px rgba(46, 204, 113, 0.2);
 }
 
 .btn-print {
-  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-  color: white;
+  background: linear-gradient(135deg, #66FCF1 0%, #45a29e 100%);
+  color: #0B0C10;
   border: none;
   padding: 12px 24px;
   border-radius: 8px;
@@ -294,12 +302,13 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  box-shadow: 0 0 16px rgba(102, 252, 241, 0.5);
 }
 
 .btn-print:hover {
-  background: linear-gradient(135deg, #2980b9 0%, #3498db 100%);
+  background: linear-gradient(135deg, #45a29e 0%, #66FCF1 100%);
   transform: translateY(-2px);
-  box-shadow: 0 7px 14px rgba(52, 152, 219, 0.2);
+  box-shadow: 0 0 20px rgba(102, 252, 241, 0.9), 0 0 40px rgba(102, 252, 241, 0.6);
 }
 
 .acceptance-status {
@@ -307,15 +316,15 @@
   align-items: center;
   gap: 10px;
   padding: 12px 20px;
-  background: #d4edda;
-  border: 1px solid #c3e6cb;
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.3);
   border-radius: 8px;
-  color: #155724;
+  color: #22c55e;
   font-weight: 500;
 }
 
 .icon-check {
-  color: #27ae60;
+  color: #22c55e;
   font-weight: bold;
 }
 

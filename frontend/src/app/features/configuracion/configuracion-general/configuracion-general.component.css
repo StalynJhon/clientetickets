@@ -1,27 +1,27 @@
 /* Estilos generales */
 .configuracion-container {
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 30px;
+  background: #0B0C10;
+  min-height: 100vh;
+  color: #C5C6C7;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .header {
   text-align: center;
   margin-bottom: 30px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #eaeaea;
 }
 
 .header h2 {
-  color: #2c3e50;
+  color: #66FCF1;
   margin: 0 0 10px 0;
   font-size: 2.2rem;
   font-weight: 600;
+  text-shadow: 0 0 8px rgba(102, 252, 241, 0.6);
 }
 
 .subtitle {
-  color: #7f8c8d;
+  color: #C5C6C7;
   font-size: 1.1rem;
   max-width: 600px;
   margin: 0 auto;
@@ -35,31 +35,32 @@
 
 /* Cards */
 .card {
-  background: white;
+  background: #1F2833;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   transition: all 0.3s ease;
-  border: 1px solid #eaeaea;
+  border: 1px solid rgba(102, 252, 241, 0.25);
+  box-shadow: 0 0 15px rgba(102, 252, 241, 0.15);
 }
 
 .card:hover {
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.12);
-  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(102, 252, 241, 0.6), 0 0 40px rgba(102, 252, 241, 0.25);
+  transform: translateY(-3px);
+  border-color: #66FCF1;
 }
 
 .card-header {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background: linear-gradient(135deg, #66FCF1 0%, #45a29e 100%);
   padding: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid rgba(102, 252, 241, 0.3);
 }
 
 .card-header h3 {
   margin: 0;
-  color: #2c3e50;
+  color: #0B0C10;
   font-size: 1.4rem;
   font-weight: 600;
   display: flex;
@@ -68,7 +69,7 @@
 }
 
 .card-header h3 i {
-  color: #3498db;
+  color: #0B0C10;
   font-size: 1.2rem;
 }
 
@@ -76,15 +77,17 @@
   cursor: pointer;
   padding: 5px;
   border-radius: 4px;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
+  background: rgba(11, 12, 16, 0.2);
 }
 
 .card-toggle:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+  background: rgba(11, 12, 16, 0.3);
+  transform: scale(1.1);
 }
 
 .card-toggle i {
-  color: #7f8c8d;
+  color: #0B0C10;
   font-size: 1.2rem;
 }
 
@@ -93,11 +96,13 @@
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease, padding 0.3s ease;
+  background: #1F2833;
 }
 
 .card-content.expanded {
   padding: 25px;
   max-height: 2000px;
+  border-top: 1px solid rgba(102, 252, 241, 0.2);
 }
 
 /* Form grid */
@@ -119,35 +124,36 @@
 .form-group label {
   margin-bottom: 8px;
   font-weight: 600;
-  color: #2c3e50;
+  color: #C5C6C7;
   font-size: 0.95rem;
 }
 
 .form-control {
   width: 100%;
   padding: 12px 15px;
-  border: 2px solid #eaeaea;
+  border: 2px solid rgba(102, 252, 241, 0.3);
   border-radius: 8px;
   font-size: 1rem;
   transition: all 0.3s ease;
   box-sizing: border-box;
-  background-color: #fdfdfd;
+  background-color: #0B0C10;
+  color: #FFFFFF;
 }
 
 .form-control:focus {
   outline: none;
-  border-color: #3498db;
-  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
-  background-color: white;
+  border-color: #66FCF1;
+  box-shadow: 0 0 0 3px rgba(102, 252, 241, 0.2);
+  background-color: #1a1b1e;
 }
 
 .form-control::placeholder {
-  color: #bdc3c7;
+  color: #6b7c85;
 }
 
 .input-helper {
   font-size: 0.8rem;
-  color: #7f8c8d;
+  color: #9ca3af;
   margin-top: 5px;
   display: block;
 }
@@ -183,7 +189,7 @@
   display: block;
   margin-bottom: 8px;
   font-weight: 600;
-  color: #2c3e50;
+  color: #C5C6C7;
   font-size: 0.95rem;
 }
 
@@ -196,7 +202,7 @@
 .color-input {
   width: 50px;
   height: 40px;
-  border: 2px solid #eaeaea;
+  border: 2px solid rgba(102, 252, 241, 0.3);
   border-radius: 6px;
   cursor: pointer;
   background: none;
@@ -213,7 +219,7 @@
 
 .color-value {
   font-size: 0.85rem;
-  color: #7f8c8d;
+  color: #9ca3af;
   font-family: monospace;
 }
 
@@ -242,7 +248,7 @@
   -ms-user-select: none;
   user-select: none;
   font-weight: 500;
-  color: #2c3e50;
+  color: #C5C6C7;
 }
 
 .checkbox-container input {
@@ -259,19 +265,19 @@
   left: 0;
   height: 22px;
   width: 22px;
-  background-color: #fff;
-  border: 2px solid #eaeaea;
+  background-color: #1F2833;
+  border: 2px solid rgba(102, 252, 241, 0.3);
   border-radius: 4px;
   transition: all 0.3s ease;
 }
 
 .checkbox-container:hover input ~ .checkmark {
-  border-color: #3498db;
+  border-color: #66FCF1;
 }
 
 .checkbox-container input:checked ~ .checkmark {
-  background-color: #3498db;
-  border-color: #3498db;
+  background-color: #66FCF1;
+  border-color: #66FCF1;
 }
 
 .checkmark:after {
@@ -325,14 +331,15 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-  color: white;
+  background: linear-gradient(135deg, #66FCF1 0%, #45a29e 100%);
+  color: #0B0C10;
+  box-shadow: 0 0 16px rgba(102, 252, 241, 0.5);
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #2980b9 0%, #3498db 100%);
+  background: linear-gradient(135deg, #45a29e 0%, #66FCF1 100%);
   transform: translateY(-2px);
-  box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0 20px rgba(102, 252, 241, 0.9), 0 0 40px rgba(102, 252, 241, 0.6);
 }
 
 /* Responsive */
