@@ -1,0 +1,160 @@
+<div class="transporte-layout">
+  <!-- LOADING -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Cargando detalles del vehículo...</p>
+  </div>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div *ngIf="!loading">
+    <!-- HEADER NAVEGACIÓN -->
+    <div class="detail-header">
+      <button class="btn-back" (click)="volver()">
+        <i class="bi bi-arrow-left"></i> Volver a vehículos
+      </button>
+    </div>
+
+    <!-- HEADER PRINCIPAL -->
+    <div class="transporte-header">
+      <h1>{{transporte.nombre}}</h1>
+      <div class="transporte-tipo">{{transporte.tipo}}</div>
+      
+      <!-- RUTA -->
+      <div class="ruta-info">
+        <div class="origen">
+          <i class="bi bi-geo-alt-fill"></i>
+          <strong>{{transporte.origen}}</strong>
+        </div>
+        <div class="arrow">→</div>
+        <div class="destino">
+          <i class="bi bi-geo-alt-fill"></i>
+          <strong>{{transporte.destino}}</strong>
+        </div>
+      </div>
+      
+      <!-- FECHA Y HORA -->
+      <div class="fecha-hora">
+        <i class="bi bi-calendar-event"></i>
+        {{transporte.fecha}} • {{transporte.horaSalida}}
+      </div>
+      
+      <!-- ASIENTOS DISPONIBLES -->
+      <div class="asientos-total">
+        <i class="bi bi-people-fill"></i>
+        {{asientosDisponibles}}/{{transporte.asientosMax}} disponibles
+      </div>
+    </div>
+
+    <!-- DESCRIPCIÓN -->
+    <div class="descripcion-section">
+      <h3>📋 Sobre el servicio</h3>
+      <p>{{transporte.descripcion}}</p>
+    </div>
+
+    <!-- 🚌 PLANO DE ASIENTOS - VISTA PASAJERO -->
+    <div class="asientos-section">
+      <div class="asientos-header">
+        <h3>🎫 Elige tus asientos</h3>
+        <div class="seleccionados">
+          {{seleccionados.length}} / {{asientosDisponibles}} seleccionados
+        </div>
+      </div>
+      
+      <div class="plano-asientos">
+        <!-- 🚪 ENTRADA PASAJERO (TRASERA) -->
+        <div class="entrada-pasajero">
+          <div class="puerta-icon">🚪</div>
+          <span>Tú estás aquí</span>
+        </div>
+
+        <!-- 🚌 FILAS DESDE TRASERA A FRONTAL (VISTA PASAJERO) -->
+        <div class="autobus-filas-pasajero">
+          <div class="fila-autobus" *ngFor="let fila of getFilasReversas(); trackBy: trackByFila">
+            <div class="fila-numero-pasajero">{{fila}}</div>
+            <div class="asientos-autobus">
+              <!-- ASIENTOS IZQUIERDO - VENTANA (A,C) -->
+              <div class="lado-ventana">
+                <div *ngFor="let asiento of getAsientosVentanaFila(fila)" 
+                     class="asiento-pasajero ventana" 
+                     [class]="getClaseAsientoCliente(asiento)"
+                     (click)="seleccionarAsiento(asiento)"
+                     [attr.data-asiento]="asiento.asiento + asiento.letra">
+                  <div class="asiento-contenido">
+                    <span class="numero-asiento">{{asiento.asiento}}</span>
+                    <span class="letra-asiento">{{asiento.letra}}</span>
+                    <div class="ventana-icon">🪟</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PASILLO -->
+              <div class="pasillo-pasajero">👣</div>
+
+              <!-- ASIENTOS DERECHO - CORREDOR (B,D) -->
+              <div class="lado-corredor">
+                <div *ngFor="let asiento of getAsientosCorredorFila(fila)" 
+                     class="asiento-pasajero corredor" 
+                     [class]="getClaseAsientoCliente(asiento)"
+                     (click)="seleccionarAsiento(asiento)"
+                     [attr.data-asiento]="asiento.asiento + asiento.letra">
+                  <div class="asiento-contenido">
+                    <span class="numero-asiento">{{asiento.asiento}}</span>
+                    <span class="letra-asiento">{{asiento.letra}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 🚗 CONDUCTOR (LEJOS PARA PASAJERO) -->
+        <div class="conductor-lejos">
+          <div class="conductor-icon">👨‍✈️</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESUMEN COMPRA -->
+    <div *ngIf="seleccionados.length > 0" class="compra-section">
+      <div class="resumen-compra">
+        <div class="resumen-header">
+          <h3>🛒 Resumen de Compra</h3>
+        </div>
+        
+        <div class="resumen-item">
+          <span>{{transporte.nombre}}</span>
+          <span>${{transporte.precio}}</span>
+        </div>
+        
+        <div class="resumen-separador"></div>
+        
+        <div class="resumen-cantidad">
+          <span>Cantidad:</span>
+          <span>{{seleccionados.length}} asientos</span>
+        </div>
+        
+        <div class="resumen-total">
+          <span>Total:</span>
+          <span class="total-precio">${{total}}</span>
+        </div>
+        
+        <button class="btn-agregar-carrito" 
+                [disabled]="!puedeComprar"
+                (click)="agregarCarrito()">
+          🛒 AGREGAR AL CARRITO
+        </button>
+        
+        <div class="btn-volver-bottom" (click)="volver()">
+          ← Volver a vehículos
+        </div>
+      </div>
+    </div>
+
+    <!-- ESTADO VACÍO -->
+    <div *ngIf="seleccionados.length === 0" class="estado-vacio">
+      <div class="vacio-icon">🎫</div>
+      <h3>Selecciona tus asientos</h3>
+      <p>Elige los asientos disponibles desde tu posición como pasajero</p>
+    </div>
+  </div>
+</div>

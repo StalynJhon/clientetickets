@@ -1,0 +1,237 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  /* Fondo Dark Premium uniforme */
+  background: linear-gradient(135deg, 
+    #0f172a 0%, 
+    #1e293b 50%, 
+    #334155 100%);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #f1f5f9;
+  padding: 2rem 1rem;
+}
+
+.concierto-detail-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* 🖤 HEADER GLASSMORPHISM */
+.concierto-header {
+  text-align: center;
+  padding: 2.5rem 2rem;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(25px);
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 2.5rem;
+  box-shadow: 0 25px 80px rgba(0,0,0,0.4);
+}
+
+.concierto-header h1 {
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  margin: 0 0 1rem 0;
+  background: linear-gradient(135deg, #ffffff, #e2e8f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+}
+
+.artista {
+  font-size: 1.2rem;
+  color: #cbd5e1;
+  margin-top: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* 📋 ZONAS */
+.zona {
+  margin-bottom: 2.5rem;
+  background: rgba(30, 41, 59, 0.9);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 1.8rem;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.zona-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 0 1rem 1rem;
+}
+
+.asientos-disponibles {
+  font-size: 0.9rem;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.2);
+  padding: 0.6rem 1.2rem;
+  border-radius: 20px;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  font-weight: 700;
+}
+
+/* 🪑 ASIENTOS COMPACTOS */
+.asientos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+  gap: 1rem;
+  justify-content: center;
+  padding: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.asiento {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 800;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  border: 2px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.08);
+}
+
+/* ✅ DISPONIBLE */
+.asiento.disponible {
+  background: rgba(255,255,255,0.1);
+  color: #94a3b8;
+  border-color: rgba(255,255,255,0.2);
+}
+
+.asiento.disponible:hover {
+  background: linear-gradient(135deg, #10b981, #059669);
+  transform: translateY(-4px) scale(1.05);
+  border-color: #10b981;
+  box-shadow: 0 12px 30px rgba(16,185,129,0.4);
+  color: white;
+}
+
+/* ✅ SELECCIONADO */
+.asiento.seleccionado {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  border-color: #3b82f6;
+  box-shadow: 0 8px 25px rgba(59,130,246,0.4);
+  animation: pulse 0.6s ease;
+}
+
+.asiento.seleccionado::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+/* ❌ OCUPADO */
+.asiento.ocupado {
+  background: rgba(100, 116, 139, 0.3);
+  color: rgba(255,255,255,0.2);
+  cursor: not-allowed;
+  border-color: rgba(100,116,139,0.5);
+}
+
+.asiento.ocupado:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* 🛒 CARRITO FLOTANTE PREMIUM */
+.resumen-carrito {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 92%;
+  max-width: 550px;
+  background: rgba(15, 23, 42, 0.98);
+  backdrop-filter: blur(30px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 24px;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 35px 100px rgba(0,0,0,0.6);
+  animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1000;
+}
+
+.total {
+  font-size: 1.6rem;
+  background: linear-gradient(135deg, #10b981, #059669);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+}
+
+.btn-carrito {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 20px;
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(16,185,129,0.4);
+}
+
+.btn-carrito:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 15px 40px rgba(16,185,129,0.5);
+}
+
+/* ✨ ANIMACIONES */
+@keyframes slideUp {
+  from { 
+    opacity: 0; 
+    transform: translateX(-50%) translateY(30px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(-50%) translateY(0); 
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+/* 📱 RESPONSIVE */
+@media (max-width: 768px) {
+  :host {
+    padding: 1rem 0.5rem;
+  }
+  
+  .asientos-grid {
+    grid-template-columns: repeat(auto-fit, minmax(42px, 1fr));
+    gap: 0.8rem;
+  }
+  
+  .asiento {
+    width: 45px;
+    height: 45px;
+    font-size: 0.8rem;
+  }
+  
+  .resumen-carrito {
+    bottom: 1rem;
+    padding: 1rem 1.5rem;
+    width: 95%;
+  }
+}

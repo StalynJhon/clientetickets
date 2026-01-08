@@ -1,0 +1,40 @@
+<div class="concierto-detail-container">
+  <div class="concierto-header">
+    <h1>{{concierto?.nameConcert}}</h1>
+    <p class="artista">{{concierto?.nameArtist}}</p>
+    <p class="fecha-lugar">{{concierto?.fecha}} • {{concierto?.lugar}}</p>
+  </div>
+
+  <div class="zonas-container">
+    <div *ngFor="let zona of zonas" class="zona">
+      <div class="zona-header">
+        <h3>{{zona.nombre}}</h3>
+        <span class="asientos-disponibles">
+          {{getDisponibles(zona.asientos)}} disponibles
+        </span>
+      </div>
+      
+      <div class="asientos-grid">
+        <div *ngFor="let asiento of zona.asientos" 
+             class="asiento"
+             [class.seleccionado]="asiento.seleccionado"
+             [class.disponible]="asiento.disponible"
+             [class.ocupado]="!asiento.disponible"
+             (click)="toggleAsiento(asiento)">
+          <span>{{asiento.fila}}{{asiento.numero}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="resumen-carrito" *ngIf="selectedAsientos.length > 0">
+    <div class="resumen-info">
+      <h3>Resumen</h3>
+      <p><strong>{{selectedAsientos.length}} asientos</strong></p>
+      <p class="total"><strong>Total: ${{total}}</strong></p>
+    </div>
+    <button class="btn-carrito" (click)="agregarAlCarrito()">
+      🛒 Añadir al Carrito ({{selectedAsientos.length}})
+    </button>
+  </div>
+</div>

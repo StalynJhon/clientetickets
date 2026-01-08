@@ -4,12 +4,56 @@
   <aside class="sidebar">
     <nav>
       <ul>
-        <li><a routerLink="/dashboard">Inicio</a></li>
-        <li><a routerLink="/eventos">Eventos</a></li>
+        <!-- INICIO -->
+        <li>
+          <a routerLink="/dashboard" routerLinkActive="active" class="nav-item">
+            Inicio
+          </a>
+        </li>
 
-        <!-- Promociones e información -->
+        <!-- EVENTOS DROPDOWN -->
+        <li class="dropdown-group">
+          <div class="dropdown-toggle" (click)="toggleEventos()">
+            <a class="nav-item">
+              Eventos
+              <i class="dropdown-icon" [class.rotate]="eventosAbierto">▶</i>
+            </a>
+          </div>
+          <div class="dropdown-menu" [class.open]="eventosAbierto">
+            <a
+              routerLink="/conciertos"
+              routerLinkActive="active"
+              class="nav-item subitem"
+            >
+              Conciertos
+            </a>
+            <a
+              routerLink="/transporte"
+              routerLinkActive="active"
+              class="nav-item subitem"
+            >
+              Transporte
+            </a>
+          </div>
+        </li>
+
+        <!-- PRODUCTOS -->
+        <li>
+          <a routerLink="/productos" routerLinkActive="active" class="nav-item">
+            Productos / Extras
+          </a>
+        </li>
+
+        <!-- PROMOCIONES -->
+        <li>
+          <a routerLink="/promociones" routerLinkActive="active" class="nav-item">
+            Promociones
+          </a>
+        </li>
+
+        <!-- ACERCA DE NOSOTROS (ACCORDION) -->
         <li class="menu-item">
-          <button 
+          <button
             class="accordion-header"
             (click)="toggleAccordion()"
             [class.active]="isAccordionOpen"
@@ -19,22 +63,27 @@
           </button>
 
           <ul class="accordion-body" [class.show]="isAccordionOpen">
-            <li><a routerLink="/empresa" (click)="onSubItemClick()">Sobre la Empresa</a></li>
-            <li><a routerLink="/terminos" (click)="onSubItemClick()">Términos y Condiciones</a></li>
-            <li><a routerLink="/privacidad" (click)="onSubItemClick()">Política de Privacidad</a></li>
-            <li><a routerLink="/ayuda" (click)="onSubItemClick()">Ayuda / FAQ</a></li>
+            <li>
+              <a routerLink="/empresa" (click)="onSubItemClick()">
+                Sobre la Empresa
+              </a>
+            </li>
+            <li>
+              <a routerLink="/terminos" (click)="onSubItemClick()">
+                Términos y Condiciones
+              </a>
+            </li>
+            <li>
+              <a routerLink="/privacidad" (click)="onSubItemClick()">
+                Política de Privacidad
+              </a>
+            </li>
+            <li>
+              <a routerLink="/ayuda" (click)="onSubItemClick()">
+                Ayuda / FAQ
+              </a>
+            </li>
           </ul>
-        </li>
-        <li><a routerLink="/promociones">Promociones</a></li>
-
-        <!-- conciertos y transporte -->
-        <li><a routerLink="/conciertos">Conciertos</a></li>
-        <li><a routerLink="/transporte">Transporte</a></li>
-
-        <!-- Productos y compras -->
-        <li><a routerLink="/productos">Productos / Extras</a></li>
-        <li class="cart-link">
-          <a routerLink="/checkout">Carrito / Pagar</a>
         </li>
       </ul>
     </nav>

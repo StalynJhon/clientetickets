@@ -5,11 +5,10 @@ import { ProfileComponent } from '../features/profile/pages/profile.component';
 import { HistorialComponent } from '../features/historial/pages/historial.component';
 
 // conciertos y transporte
-import { ConciertosListComponent } from '../features/conciertos/conciertos-list.component';
-import { ConciertoDetailComponent } from '../features/conciertos/concierto-detail.component';
-import { TransporteListComponent } from '../features/transporte/transporte-list.component';
-import { TransporteDetailComponent } from '../features/transporte/transporte-detail.component';
-
+import { ConciertosListComponent } from '../features/eventos/conciertos/pages/conciertos-list.component';
+import { ConciertoDetailComponent } from '../features/eventos/conciertos/pages/concierto-detail.component';
+import { TransporteListComponent } from '../features/eventos/transporte/pages/transporte-list.component';
+import { TransporteDetailComponent } from '../features/eventos/transporte/pages/transporte-detail.component';
 // Configuración / informativas
 import { InfoEmpresaComponent } from '../features/configuracion/info-empresa/info-empresa.component';
 import { TerminosCondicionesComponent } from '../features/configuracion/terminos-condiciones/terminos-condiciones.component';
@@ -19,10 +18,9 @@ import { AyudaFaqComponent } from '../features/configuracion/ayuda-faq/ayuda-faq
 // Promociones
 import { PromocionesPublicasComponent } from '../features/promociones-publicas/pages/promociones-publicas.component';
 
-// Productos / checkout / notas
+// Productos / checkout / 
 import { ProductListComponent } from '../features/products/pages/product-list.component';
 import { CheckoutComponent } from '../features/checkout/pages/checkout.component';
-import { NotasComponent } from '../features/notas/notas.component';
 
 export const routes: Routes = [
   // Ruta principal
@@ -42,9 +40,6 @@ export const routes: Routes = [
   // Productos y ventas
   { path: 'productos', component: ProductListComponent },
   { path: 'checkout', component: CheckoutComponent },
-
-  // Notas
-  { path: 'notas', component: NotasComponent },
 
   // conciertos
   { path: 'conciertos', component: ConciertosListComponent },

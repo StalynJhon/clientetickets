@@ -1,7 +1,7 @@
 <div class="container fade-in">
   <header class="header-section">
-    <h2>🍿 Tienda de Extras</h2>
-    <p>Complementa tu experiencia con nuestros combos y bebidas</p>
+    <h2>🍿 Tienda de extras</h2>
+    <p>Complementa tu experiencia con nuestros combos, bebidas, accesorios y más</p>
   </header>
 
   <div class="search-bar-container">
@@ -44,25 +44,28 @@
 </div>
 
 <div class="modal-backdrop" *ngIf="selectedProduct" (click)="closeModal()">
+
   <div class="modal-content" (click)="$event.stopPropagation()">
+
     <button class="close-btn" (click)="closeModal()">×</button>
 
-    <div class="modal-body">
-      <img [src]="selectedProduct.imageProduct || 'assets/placeholder.png'" alt="Detalle">
-      <div class="modal-info">
-        <h3>{{ selectedProduct.nameProduct }}</h3>
-
-        <p class="modal-desc">
-          {{ selectedProduct.descriptionProduct || 'Disfruta de este excelente complemento para tu evento.' }}
-        </p>
-
-        <div class="modal-footer">
-          <span class="big-price">${{ selectedProduct.priceProduct }}</span>
-          <button class="btn-primary full-width" (click)="addToCart(selectedProduct)">
-            Agregar al Ticket
-          </button>
-        </div>
-      </div>
+    <div class="modal-image-col">
+      <img [src]="selectedProduct.imageProduct || 'assets/placeholder.png'" [alt]="selectedProduct.nameProduct">
     </div>
+
+    <div class="modal-info-col">
+      <h3>{{ selectedProduct.nameProduct }}</h3>
+
+      <p class="modal-desc">
+        {{ selectedProduct.descriptionProduct || 'Disfruta de este excelente complemento para tu evento.' }}
+      </p>
+
+      <span class="big-price">$ {{ selectedProduct.priceProduct }}</span>
+
+      <button class="btn-primary full-width" (click)="addToCart(selectedProduct)">
+        Agregar al Ticket
+      </button>
+    </div>
+
   </div>
 </div>

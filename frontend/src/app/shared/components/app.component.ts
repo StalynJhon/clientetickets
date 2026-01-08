@@ -17,6 +17,15 @@ import { NavbarComponent } from './navbar/navbar.component';
 })
 export class AppComponent {
   title = 'frontend-ticket';
+
+  // ===== Funcionalidad eventos =====
+  eventosAbierto = false;
+
+  toggleEventos(): void {
+    this.eventosAbierto = !this.eventosAbierto;
+  }
+
+  // ===== Funcionalidad accordion =====
   isAccordionOpen = false;
 
   toggleAccordion(): void {
@@ -28,7 +37,7 @@ export class AppComponent {
   }
 
   onSubItemClick(): void {
-    // Close the accordion after a short delay to allow navigation to occur
+    // Cierra el accordion después de navegar
     setTimeout(() => {
       this.isAccordionOpen = false;
     }, 150);

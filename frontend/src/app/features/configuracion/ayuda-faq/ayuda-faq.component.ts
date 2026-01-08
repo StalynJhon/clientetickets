@@ -55,6 +55,7 @@ export class AyudaFaqComponent implements OnInit {
             expandido: false
           }));
         }
+        this.error = false;
         this.cargando = false;
       },
       error: (err) => {
