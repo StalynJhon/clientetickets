@@ -5,9 +5,9 @@
 .dashboard-container {
   padding: 1.5rem;
   min-height: 100vh;
-  background: radial-gradient(circle at top, #0f2027, #0b0c10 70%);
+  background: var(--background-color);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  color: #e5e7eb;
+  color: var(--text-primary);
 }
 
 /* --- HEADER --- */
@@ -22,13 +22,13 @@
   font-size: 2rem;
   font-weight: 800;
   letter-spacing: 1px;
-  color: #66fcf1;
-  text-shadow: 0 0 12px rgba(102, 252, 241, 0.6);
+  color: var(--primary-color);
+  text-shadow: 0 0 12px var(--primary-color);
 }
 
 .user-info {
   font-size: 0.9rem;
-  color: #c5c6c7;
+  color: var(--text-secondary);
   opacity: 0.85;
 }
 
@@ -40,8 +40,8 @@
 .dashboard-section h2 {
   margin-bottom: 1.2rem;
   font-size: 1.4rem;
-  color: #f472b6;
-  text-shadow: 0 0 8px rgba(244, 114, 182, 0.6);
+  color: var(--primary-light);
+  text-shadow: 0 0 8px var(--primary-light);
 }
 
 /* --- GRID --- */
@@ -53,17 +53,11 @@
 
 /* --- CARD --- */
 .card {
-  background: linear-gradient(
-    145deg,
-    rgba(17, 24, 39, 0.95),
-    rgba(3, 7, 18, 0.95)
-  );
+  background: var(--card-bg);
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgba(102, 252, 241, 0.25);
-  box-shadow:
-    0 0 12px rgba(102, 252, 241, 0.15),
-    inset 0 0 10px rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--card-shadow);
   display: flex;
   flex-direction: column;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -71,9 +65,7 @@
 
 .card:hover {
   transform: translateY(-6px) scale(1.02);
-  box-shadow:
-    0 0 25px rgba(102, 252, 241, 0.45),
-    0 0 60px rgba(244, 114, 182, 0.15);
+  box-shadow: var(--hover-shadow);
 }
 
 /* --- IMAGEN --- */
@@ -93,13 +85,13 @@
   margin: 0.4rem 0;
   font-size: 1.15rem;
   font-weight: 700;
-  color: #e5e7eb;
+  color: var(--text-primary);
 }
 
 .card-content p {
   margin: 0.25rem 0;
   font-size: 0.85rem;
-  color: #9ca3af;
+  color: var(--text-secondary);
 }
 
 /* --- BADGES --- */

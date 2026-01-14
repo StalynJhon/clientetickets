@@ -3,8 +3,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #333;
-  color: #fff;
+  background: var(--card-bg-dark);
+  color: var(--text-primary);
   padding: 1rem;
   font-family: sans-serif;
 }
@@ -39,8 +39,8 @@
 }
 
 .badge-container .badge {
-  background: #007bff;
-  color: #fff;
+  background: var(--primary-color);
+  color: white;
   padding: 0.3rem 0.6rem;
   border-radius: 5px;
   font-size: 0.8rem;
@@ -53,12 +53,13 @@
 }
 
 .card {
-  background: #fff;
+  background: var(--card-bg);
   border-radius: 10px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  box-shadow: var(--card-shadow);
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  border: 1px solid var(--border-color);
 }
 
 .card img {
@@ -77,8 +78,8 @@
 }
 
 .card-badge {
-  background: #28a745;
-  color: #fff;
+  background: var(--success-color);
+  color: white;
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
   font-size: 0.75rem;
@@ -97,11 +98,11 @@
 }
 
 .btn-buy-card {
-  background-color: #007bff;
+  background-color: var(--primary-color);
 }
 
 .btn-buy-card:hover {
-  background-color: #0056b3;
+  background-color: var(--primary-dark);
 }
 
 /* Modal */
@@ -116,11 +117,12 @@
 }
 
 .modal-content {
-  background: #fff;
+  background: var(--card-bg);
   padding: 1.5rem;
   border-radius: 10px;
   width: 400px;
   max-width: 90%;
+  border: 1px solid var(--border-color);
 }
 
 .modal-content h3 {
@@ -144,8 +146,8 @@
 }
 
 .btn-submit {
-  background: #28a745;
-  color: #fff;
+  background: var(--success-color);
+  color: white;
   padding: 0.5rem 1rem;
   border-radius: 5px;
   border: none;
@@ -153,12 +155,13 @@
 }
 
 .btn-submit:hover {
-  background: #218838;
+  background: var(--success-color);
+  opacity: 0.8;
 }
 
 .btn-cancel {
-  background: #dc3545;
-  color: #fff;
+  background: var(--error-color);
+  color: white;
   padding: 0.5rem 1rem;
   border-radius: 5px;
   border: none;
@@ -166,5 +169,6 @@
 }
 
 .btn-cancel:hover {
-  background: #c82333;
+  background: var(--error-color);
+  opacity: 0.8;
 }

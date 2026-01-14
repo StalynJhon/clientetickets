@@ -1,7 +1,7 @@
 /* ==================== CONTENEDOR PRINCIPAL ==================== */
 .concierto-detail-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  background: linear-gradient(135deg, var(--background-color) 0%, var(--card-bg) 100%);
   padding: 2rem;
   padding-bottom: 150px;
 }
@@ -14,12 +14,13 @@
   padding: 3rem 2rem;
   text-align: center;
   margin-bottom: 3rem;
+  background-color: var(--card-bg);
 }
 
 .concierto-header h1 {
   font-size: 3rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-primary);
   margin-bottom: 1rem;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
@@ -34,7 +35,7 @@
 }
 
 .fecha-lugar {
-  color: #94a3b8;
+  color: var(--text-secondary);
   font-size: 1.2rem;
   font-weight: 500;
   display: flex;
@@ -56,11 +57,12 @@
 
 /* ==================== ZONA ==================== */
 .zona {
-  background: rgba(30, 41, 59, 0.6);
+  background: var(--card-bg);
   border: 1px solid rgba(236, 72, 153, 0.2);
   border-radius: 20px;
   padding: 2rem;
   transition: all 0.3s ease;
+  opacity: 0.9;
 }
 
 .zona:hover {
@@ -80,7 +82,7 @@
 .zona-header h3 {
   font-size: 1.8rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -103,8 +105,9 @@
   grid-template-columns: repeat(auto-fill, minmax(45px, 1fr));
   gap: 0.5rem;
   padding: 1.5rem;
-  background: rgba(15, 23, 42, 0.5);
+  background: var(--background-color);
   border-radius: 15px;
+  opacity: 0.7;
 }
 
 /* ==================== ASIENTO (MÁS PEQUEÑO Y MEJOR DISEÑO) ==================== */
@@ -226,12 +229,13 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(15, 23, 42, 0.98);
+  background: var(--background-color);
   border-top: 2px solid #ec4899;
   padding: 1.5rem 2rem;
   box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
   z-index: 1000;
   animation: slide-up 0.4s ease;
+  opacity: 0.98;
 }
 
 @keyframes slide-up {
@@ -259,14 +263,14 @@
 }
 
 .resumen-info h3 {
-  color: #fff;
+  color: var(--text-primary);
   font-size: 1.3rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
 }
 
 .resumen-info p {
-  color: #cbd5e1;
+  color: var(--text-secondary);
   font-size: 1rem;
   margin: 0.25rem 0;
 }
@@ -312,15 +316,16 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  background: rgba(30, 41, 59, 0.8);
+  background: var(--card-bg);
   border: 1px solid rgba(236, 72, 153, 0.3);
   border-radius: 10px;
-  color: #fff;
+  color: var(--text-primary);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
   margin-bottom: 2rem;
   text-decoration: none;
+  opacity: 0.9;
 }
 
 .btn-volver:hover {

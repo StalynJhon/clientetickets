@@ -20,11 +20,12 @@ body {
 /* ================= SIDEBAR ================= */
 .sidebar {
   width: 220px;
-  background-color: #1f2937;
-  color: white;
+  background-color: var(--card-bg);
+  color: var(--text-primary);
   padding: 1rem;
   flex-shrink: 0;
   overflow-y: auto;
+  border-right: 1px solid var(--border-color);
 }
 
 .sidebar ul {
@@ -42,10 +43,11 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: white;
+  color: var(--text-primary);
   text-decoration: none;
   font-weight: bold;
-  font-size: 0.9rem;
+  font-size: inherit;
+  font-family: inherit;
   padding: 0.75rem 0.5rem;
   border-radius: 4px;
   transition: background 0.2s ease;
@@ -53,11 +55,11 @@ body {
 }
 
 .sidebar a:hover {
-  background-color: #374151;
+  background-color: var(--border-color);
 }
 
 .sidebar a.active {
-  background-color: #007bff;
+  background-color: var(--primary-color);
   color: white;
 }
 
@@ -96,8 +98,10 @@ body {
   font-size: 0.85rem;
   padding: 0.4rem 0.5rem 0.4rem 1.5rem;
   font-weight: 500;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--card-bg-light);
   margin: 0.1rem 0;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
 }
 
 /* ================= ACCORDION ================= */
@@ -112,8 +116,10 @@ body {
   align-items: center;
   background: transparent;
   border: none;
-  color: white;
+  color: var(--text-primary);
   font-weight: bold;
+  font-size: inherit;
+  font-family: inherit;
   cursor: pointer;
   padding: 0.75rem 0.5rem;
   border-radius: 4px;
@@ -123,11 +129,13 @@ body {
 
 .accordion-header:hover,
 .accordion-header.active {
-  background-color: #374151;
+  background-color: var(--border-color);
 }
 
 .title {
   font-weight: bold;
+  font-size: inherit;
+  font-family: inherit;
 }
 
 .arrow {
@@ -167,12 +175,14 @@ body {
   display: block;
   border-radius: 4px;
   transition: background 0.2s;
-  color: #d1d5db;
+  color: var(--text-secondary);
+  font-size: inherit;
+  font-family: inherit;
 }
 
 .accordion-body a:hover {
-  background-color: #374151;
-  color: white;
+  background-color: var(--border-color);
+  color: var(--text-primary);
 }
 
 /* ================= BOTÓN CARRITO ================= */
@@ -195,7 +205,7 @@ body {
 /* ================= MAIN CONTENT ================= */
 .main-content {
   flex: 1;
-  background-color: #f3f4f6;
+  background-color: var(--background-color);
   height: 100vh;
   overflow-y: auto;
 }

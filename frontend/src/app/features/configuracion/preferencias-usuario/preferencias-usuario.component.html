@@ -1,0 +1,89 @@
+<div class="preferencias-container">
+  <div class="header-section">
+    <h2>Preferencias de Visualización</h2>
+    <p class="subtitle">Personaliza tu experiencia según tus preferencias</p>
+  </div>
+
+  <div class="settings-card">
+    <!-- Selector de Tema -->
+    <div class="setting-section">
+      <div class="section-header">
+        <h3><i class="icon-theme"></i> Modo de Visualización</h3>
+        <p>Elige entre modo claro u oscuro para navegar más cómodo</p>
+      </div>
+      
+      <div class="theme-selector">
+        <button 
+          class="theme-option light-theme"
+          [class.active]="currentPreferences.theme === 'light'"
+          (click)="setTheme('light')">
+          <div class="theme-preview light-preview">
+            <div class="preview-header"></div>
+            <div class="preview-content"></div>
+          </div>
+          <span>☀️ Modo Claro</span>
+        </button>
+        
+        <button 
+          class="theme-option dark-theme"
+          [class.active]="currentPreferences.theme === 'dark'"
+          (click)="setTheme('dark')">
+          <div class="theme-preview dark-preview">
+            <div class="preview-header"></div>
+            <div class="preview-content"></div>
+          </div>
+          <span>🌙 Modo Oscuro</span>
+        </button>
+      </div>
+      
+      <button class="quick-toggle" (click)="toggleTheme()">
+        Alternar Modo
+      </button>
+    </div>
+
+    <!-- Selector de Tamaño de Texto -->
+    <div class="setting-section">
+      <div class="section-header">
+        <h3><i class="icon-text"></i> Tamaño del Texto</h3>
+        <p>Ajusta el tamaño del texto para una mejor lectura</p>
+      </div>
+      
+      <div class="font-size-control">
+        <div class="slider-container">
+          <input 
+            type="range" 
+            min="12" 
+            max="20" 
+            step="2"
+            [value]="currentPreferences.fontSize"
+            (input)="changeFontSize($event)"
+            class="font-slider">
+          <div class="slider-labels">
+            <span>Pequeño</span>
+            <span>Mediano</span>
+            <span>Grande</span>
+          </div>
+        </div>
+        
+        <div class="font-size-display">
+          <span class="current-size">{{ getFontSizeLabel() }}</span>
+        </div>
+      </div>
+      
+      <div class="font-preview">
+        <p [style.font-size.px]="currentPreferences.fontSize">
+          Esta es una muestra del tamaño de texto seleccionado. 
+          Puedes ajustarlo según tu comodidad visual.
+        </p>
+      </div>
+    </div>
+
+    <!-- Botón de Restablecer -->
+    <div class="actions-section">
+      <button class="reset-button" (click)="resetToDefaults()">
+        <i class="icon-reset"></i>
+        Restablecer Valores Predeterminados
+      </button>
+    </div>
+  </div>
+</div>

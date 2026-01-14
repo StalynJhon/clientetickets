@@ -5,14 +5,14 @@
 .navbar {
   width: 100%;
   height: 70px;
-  background-color: #0B0C10;
-  color: white;
+  background-color: var(--background-color);
+  color: var(--text-primary);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 30px;
   box-sizing: border-box;
-  border-bottom: 1px solid rgba(102, 252, 241, 0.3);
+  border-bottom: 1px solid var(--primary-color);
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -24,7 +24,7 @@
   font-weight: bold;
   font-size: 1.5rem;
   letter-spacing: 1px;
-  color: #FFFFFF;
+  color: var(--text-primary);
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
 }
 
@@ -38,8 +38,8 @@
 /* --- BOTÓN DEL CARRITO --- */
 .cart-btn {
   background: transparent;
-  border: 1px solid #66FCF1;
-  color: #66FCF1;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
   padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer;
@@ -52,9 +52,9 @@
 }
 
 .cart-btn:hover {
-  background: #66FCF1;
-  color: #0B0C10;
-  box-shadow: 0 0 15px rgba(102, 252, 241, 0.5);
+  background: var(--primary-color);
+  color: var(--background-color);
+  box-shadow: 0 0 15px var(--primary-color);
 }
 
 .cart-count {
@@ -69,8 +69,8 @@
 /* --- BOTÓN DE PERFIL (MISMO ESTILO QUE CARRITO) --- */
 .user-icon-btn {
   background: transparent;
-  border: 1px solid #66FCF1;
-  color: #66FCF1;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
   padding: 8px;
   min-width: 80px;
   border-radius: 6px;
@@ -88,9 +88,9 @@
 
 /* Hover perfil */
 .user-icon-btn:hover {
-  background: #66FCF1;
-  color: #0B0C10;
-  box-shadow: 0 0 15px rgba(102, 252, 241, 0.5);
+  background: var(--primary-color);
+  color: var(--background-color);
+  box-shadow: 0 0 15px var(--primary-color);
   transform: scale(1.05);
 }
 

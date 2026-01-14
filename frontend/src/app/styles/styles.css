@@ -6,10 +6,71 @@
   box-sizing: border-box;
 }
 
+/* ==================== THEME VARIABLES ==================== */
+:root {
+  /* Light Theme Colors */
+  --primary-color: #10b981;
+  --primary-light: #a7f3d0;
+  --primary-dark: #047857;
+  
+  --background-color: #f1f5f9;
+  --card-bg: #ffffff;
+  --card-bg-dark: #1e293b;
+  
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  
+  --border-color: #e2e8f0;
+  --border-dark: #334155;
+  
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  
+  --warning-color: #f59e0b;
+  --warning-dark: #b45309;
+  
+  --success-color: #10b981;
+  --error-color: #ef4444;
+  
+  /* Default font size */
+  font-size: 16px;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --background-color: #0f172a;
+  --card-bg: #1e293b;
+  --card-bg-dark: #0f172a;
+  
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  
+  --border-color: #334155;
+  --border-dark: #475569;
+  
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  --hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+/* Apply theme to body and html */
 html, body {
+  background-color: var(--background-color);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
   width: 100%;
   height: 100%;
   overflow: hidden;
+}
+
+/* Ensure all elements inherit theme colors */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Font size controlled by theme service */
+html {
+  font-size: 16px; /* Default - will be overridden by JS */
 }
 
 /* ==================== SWEETALERT2 CUSTOM STYLES ==================== */

@@ -14,6 +14,7 @@ import { InfoEmpresaComponent } from '../features/configuracion/info-empresa/inf
 import { TerminosCondicionesComponent } from '../features/configuracion/terminos-condiciones/terminos-condiciones.component';
 import { PoliticaPrivacidadComponent } from '../features/configuracion/politica-privacidad/politica-privacidad.component';
 import { AyudaFaqComponent } from '../features/configuracion/ayuda-faq/ayuda-faq.component';
+import { PreferenciasUsuarioComponent } from '../features/configuracion/preferencias-usuario/preferencias-usuario.component';
 
 // Promociones
 import { PromocionesPublicasComponent } from '../features/promociones-publicas/pages/promociones-publicas.component';
@@ -54,6 +55,7 @@ export const routes: Routes = [
   { path: 'terminos', component: TerminosCondicionesComponent },
   { path: 'privacidad', component: PoliticaPrivacidadComponent },
   { path: 'ayuda', component: AyudaFaqComponent },
+  { path: 'preferencias', component: PreferenciasUsuarioComponent },
 
   // Ruta comodín
   { path: '**', redirectTo: 'dashboard' }

@@ -7,7 +7,7 @@
         <!-- INICIO -->
         <li>
           <a routerLink="/dashboard" routerLinkActive="active" class="nav-item">
-            Inicio
+            🏠 Inicio
           </a>
         </li>
 
@@ -15,7 +15,7 @@
         <li class="dropdown-group">
           <div class="dropdown-toggle" (click)="toggleEventos()">
             <a class="nav-item">
-              Eventos
+              🎭 Eventos
               <i class="dropdown-icon" [class.rotate]="eventosAbierto">▶</i>
             </a>
           </div>
@@ -40,14 +40,14 @@
         <!-- PRODUCTOS -->
         <li>
           <a routerLink="/productos" routerLinkActive="active" class="nav-item">
-            Productos / Extras
+            🛍️ Productos / Extras
           </a>
         </li>
 
         <!-- PROMOCIONES -->
         <li>
           <a routerLink="/promociones" routerLinkActive="active" class="nav-item">
-            Promociones
+            🎁 Promociones
           </a>
         </li>
 
@@ -58,32 +58,39 @@
             (click)="toggleAccordion()"
             [class.active]="isAccordionOpen"
           >
-            <span class="title">Acerca de nosotros</span>
+            <span class="title">ℹ️ Acerca de nosotros</span>
             <i class="arrow" [class.rotate]="isAccordionOpen">⌄</i>
           </button>
 
           <ul class="accordion-body" [class.show]="isAccordionOpen">
             <li>
               <a routerLink="/empresa" (click)="onSubItemClick()">
-                Sobre la Empresa
+                🏢 Sobre la Empresa
               </a>
             </li>
             <li>
               <a routerLink="/terminos" (click)="onSubItemClick()">
-                Términos y Condiciones
+                📄 Términos y Condiciones
               </a>
             </li>
             <li>
               <a routerLink="/privacidad" (click)="onSubItemClick()">
-                Política de Privacidad
+                🔐 Política de Privacidad
               </a>
             </li>
             <li>
               <a routerLink="/ayuda" (click)="onSubItemClick()">
-                Ayuda / FAQ
+                ❓ Ayuda / FAQ
               </a>
             </li>
           </ul>
+        </li>
+
+        <!-- PREFERENCIAS -->
+        <li>
+          <a routerLink="/preferencias" routerLinkActive="active" class="nav-item">
+            ⚙️ Preferencias
+          </a>
         </li>
       </ul>
     </nav>
