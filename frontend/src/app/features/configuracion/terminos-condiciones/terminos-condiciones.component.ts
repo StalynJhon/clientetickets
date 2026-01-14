@@ -12,6 +12,7 @@ import { ConfiguracionService } from '../configuracion.service';
 export class TerminosCondicionesComponent implements OnInit {
 
   terminos: any = null;
+  textosLegales: any = null;
   cargando = true;
   error = false;
   usuarioAcepto = false;

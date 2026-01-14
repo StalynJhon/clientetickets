@@ -12,6 +12,7 @@ import { ConfiguracionService } from '../configuracion.service';
 export class AyudaFaqComponent implements OnInit {
 
   ayuda: any = null;
+  textosLegales: any = null;
   cargando = true;
   error = false;
 
@@ -32,6 +33,7 @@ export class AyudaFaqComponent implements OnInit {
             expandido: false
           }));
         }
+        this.error = false;
         this.cargando = false;
       },
       error: (err) => {
