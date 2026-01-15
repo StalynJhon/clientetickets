@@ -12,24 +12,15 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) {}
 
-  // 🔹 Obtener usuario por ID
   obtenerUsuario(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/obtener/${id}`, {
-      withCredentials: true
-    });
+    return this.http.get(`${this.apiUrl}/obtener/${id}`);
   }
 
-  // 🔹 Crear usuario
   crearUsuario(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/crear`, data, {
-      withCredentials: true
-    });
+    return this.http.post(`${this.apiUrl}/crear`, data);
   }
 
-  // 🔹 Actualizar usuario
   actualizarUsuario(id: number, data: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/actualizar/${id}`, data, {
-      withCredentials: true
-    });
+    return this.http.put(`${this.apiUrl}/actualizar/${id}`, data);
   }
 }

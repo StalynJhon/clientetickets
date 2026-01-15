@@ -1,54 +1,114 @@
-<div class="profile-container" *ngIf="!cargando && usuario">
+<!-- PERFIL -->
+<div
+  class="profile-container"
+  *ngIf="!cargando && usuario"
+>
 
+  <!-- Card -->
   <div class="profile-card">
+
+    <!-- Línea decorativa superior (la que anima y cambia con el tema) -->
+    <div class="profile-top-line"></div>
+
+    <!-- Header -->
     <div class="profile-header">
+
+      <!-- Avatar -->
       <div class="avatar">
         {{ usuario.nameUsers.charAt(0) | uppercase }}
       </div>
-      <div>
+
+      <!-- Nombre -->
+      <div class="profile-title">
         <h2>{{ usuario.nameUsers }}</h2>
-        <span class="username">{{ '@' + usuario.userName }}</span>
+        <span class="username">
+          {{ usuario.userName ? '@' + usuario.userName : '' }}
+        </span>
       </div>
+
     </div>
 
+    <!-- Info -->
     <div class="profile-info">
-      <p><strong>Email:</strong> {{ usuario.emailUser }}</p>
-      <p><strong>Teléfono:</strong> {{ usuario.phoneUser }}</p>
+      <p>
+        <strong>Email:</strong>
+        <span>{{ usuario.emailUser }}</span>
+      </p>
+      <p>
+        <strong>Teléfono:</strong>
+        <span>{{ usuario.phoneUser }}</span>
+      </p>
     </div>
 
-    <button class="btn-primary" (click)="abrirModal()">Editar perfil</button>
+    <!-- Acción -->
+    <div class="profile-actions">
+      <button class="btn-primary" (click)="abrirModal()">
+        Editar perfil
+      </button>
+    </div>
+
   </div>
 </div>
 
-<!-- 🌌 MODAL -->
+<!-- =========================
+     MODAL EDITAR PERFIL
+     ========================= -->
 <div class="modal-overlay" *ngIf="mostrarModal">
+
   <div class="modal-card">
 
     <h3>Editar perfil</h3>
 
     <div class="form-group">
       <label>Nombre</label>
-      <input type="text" [(ngModel)]="usuarioEdit.nameUsers">
+      <input
+        type="text"
+        name="nameUsers"
+        [(ngModel)]="usuarioEdit.nameUsers"
+      />
     </div>
 
     <div class="form-group">
       <label>Usuario</label>
-      <input type="text" [(ngModel)]="usuarioEdit.userName">
+      <input
+        type="text"
+        name="userName"
+        [(ngModel)]="usuarioEdit.userName"
+      />
     </div>
 
     <div class="form-group">
       <label>Email</label>
-      <input type="email" [(ngModel)]="usuarioEdit.emailUser">
+      <input
+        type="email"
+        name="emailUser"
+        [(ngModel)]="usuarioEdit.emailUser"
+      />
     </div>
 
     <div class="form-group">
       <label>Teléfono</label>
-      <input type="text" [(ngModel)]="usuarioEdit.phoneUser">
+      <input
+        type="text"
+        name="phoneUser"
+        [(ngModel)]="usuarioEdit.phoneUser"
+      />
     </div>
 
     <div class="modal-actions">
-      <button class="btn-secondary" (click)="cerrarModal()">Cancelar</button>
-      <button class="btn-primary" (click)="guardarCambios()">Guardar</button>
+      <button
+        class="btn-secondary"
+        (click)="cerrarModal()"
+      >
+        Cancelar
+      </button>
+
+      <button
+        class="btn-primary"
+        (click)="guardarCambios()"
+      >
+        Guardar
+      </button>
     </div>
 
   </div>

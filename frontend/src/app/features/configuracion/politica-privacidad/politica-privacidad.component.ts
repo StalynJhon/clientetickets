@@ -12,6 +12,7 @@ import { ConfiguracionService } from '../configuracion.service';
 export class PoliticaPrivacidadComponent implements OnInit {
 
   politica: any = null;
+  textosLegales: any = null;
   cargando = true;
   error = false;
   readingProgress = 0;
@@ -27,10 +28,12 @@ export class PoliticaPrivacidadComponent implements OnInit {
       next: (data) => {
         this.politica = data;
         this.cargando = false;
-        // Set up scroll event listener after content is loaded
-        setTimeout(() => {
-          this.setupScrollListener();
-        }, 100);
+        // Set up scroll event listener after content is loaded (solo en el navegador)
+        if (typeof window !== 'undefined') {
+          setTimeout(() => {
+            this.setupScrollListener();
+          }, 100);
+        }
       },
       error: (err) => {
         console.error('Error al cargar política de privacidad:', err);
@@ -60,6 +63,11 @@ export class PoliticaPrivacidadComponent implements OnInit {
   }
 
   setupScrollListener(): void {
+    // Solo ejecutar en el navegador
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return;
+    }
+    
     const contentElement = document.querySelector('.privacidad-body');
     if (contentElement) {
       window.addEventListener('scroll', () => {
@@ -71,6 +79,11 @@ export class PoliticaPrivacidadComponent implements OnInit {
   }
 
   updateReadingProgress(): void {
+    // Solo ejecutar en el navegador
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return;
+    }
+    
     const contentElement = document.querySelector('.privacidad-body');
     if (contentElement) {
       const scrollTop = window.pageYOffset;

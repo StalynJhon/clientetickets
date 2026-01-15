@@ -12,6 +12,7 @@ import { ConfiguracionService } from '../configuracion.service';
 export class InfoEmpresaComponent implements OnInit {
 
   infoEmpresa: any = null;
+  configGeneral: any = null;
   cargando = true;
   error = false;
   

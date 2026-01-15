@@ -12,7 +12,7 @@
 /* ==================== CONTENEDOR PRINCIPAL ==================== */
 .transporte-layout {
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  background: linear-gradient(135deg, var(--background-color) 0%, var(--card-bg) 100%);
   padding: 2rem;
   padding-bottom: 180px;
 }
@@ -42,7 +42,7 @@
 }
 
 .loading-state p {
-  color: #94a3b8;
+  color: var(--text-secondary);
   font-size: 1.2rem;
   font-weight: 500;
   font-style: normal;
@@ -61,10 +61,10 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  background: rgba(30, 41, 59, 0.8);
+  background: var(--card-bg);
   border: 1px solid rgba(16, 185, 129, 0.3);
   border-radius: 10px;
-  color: #fff;
+  color: var(--text-primary);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -72,6 +72,7 @@
   backdrop-filter: blur(10px);
   font-style: normal;
   font-size: 0.95rem;
+  opacity: 0.9;
 }
 
 .btn-back:hover {
@@ -83,7 +84,7 @@
 
 /* ==================== HEADER TRANSPORTE ==================== */
 .transporte-header {
-  background: rgba(30, 41, 59, 0.6);
+  background: var(--card-bg);
   border: 1px solid rgba(16, 185, 129, 0.2);
   border-radius: 20px;
   padding: 2rem;
@@ -91,12 +92,13 @@
   max-width: 1400px;
   margin: 0 auto 2rem;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  opacity: 0.9;
 }
 
 .transporte-header h1 {
   font-size: 2.2rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-primary);
   margin-bottom: 1rem;
   text-align: center;
   font-style: normal;
@@ -134,7 +136,7 @@
   align-items: center;
   gap: 0.6rem;
   font-size: 1.2rem;
-  color: #cbd5e1;
+  color: var(--text-secondary);
   font-style: normal;
 }
 
@@ -161,7 +163,7 @@
 
 .fecha-hora,
 .asientos-total {
-  color: #cbd5e1;
+  color: var(--text-secondary);
   font-size: 1.05rem;
   margin-top: 0.5rem;
   display: flex;
@@ -180,7 +182,7 @@
 
 /* ==================== DESCRIPCIÓN ==================== */
 .descripcion-section {
-  background: rgba(30, 41, 59, 0.6);
+  background: var(--card-bg);
   border: 1px solid rgba(16, 185, 129, 0.2);
   border-radius: 15px;
   padding: 2rem;
@@ -188,10 +190,11 @@
   max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
+  opacity: 0.9;
 }
 
 .descripcion-section h3 {
-  color: #fff;
+  color: var(--text-primary);
   font-size: 1.4rem;
   font-weight: 700;
   margin-bottom: 1rem;
@@ -199,7 +202,7 @@
 }
 
 .descripcion-section p {
-  color: #cbd5e1;
+  color: var(--text-secondary);
   font-size: 1.05rem;
   line-height: 1.7;
   font-style: normal;
@@ -207,7 +210,7 @@
 
 /* ==================== SECCIÓN ASIENTOS ==================== */
 .asientos-section {
-  background: rgba(30, 41, 59, 0.6);
+  background: var(--card-bg);
   border: 1px solid rgba(16, 185, 129, 0.2);
   border-radius: 20px;
   padding: 2.5rem;
@@ -215,6 +218,7 @@
   max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
+  opacity: 0.9;
 }
 
 .asientos-header {
@@ -229,7 +233,7 @@
 .asientos-header h3 {
   font-size: 1.8rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-primary);
   font-style: normal;
 }
 
@@ -246,7 +250,7 @@
 
 /* ==================== BUS HORIZONTAL ==================== */
 .plano-asientos {
-  background: linear-gradient(135deg, rgba(51, 65, 85, 0.6), rgba(30, 41, 59, 0.5));
+  background: linear-gradient(135deg, var(--card-bg), var(--background-color));
   border-radius: 30px;
   padding: 2.5rem 1.5rem;
   position: relative;
@@ -257,6 +261,7 @@
   gap: 1rem;
   overflow-x: auto;
   min-height: 350px;
+  opacity: 0.8;
 }
 
 /* OCULTAR ENTRADA/PUERTA */
@@ -548,13 +553,14 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(15, 23, 42, 0.98);
+  background: var(--background-color);
   border-top: 2px solid #10b981;
   padding: 1.25rem 2rem;
   backdrop-filter: blur(20px);
   box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
   z-index: 1000;
   animation: slide-up 0.4s ease;
+  opacity: 0.98;
 }
 
 @keyframes slide-up {
@@ -582,7 +588,7 @@
 }
 
 .resumen-header h3 {
-  color: #fff;
+  color: var(--text-primary);
   font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
@@ -592,7 +598,7 @@
 .resumen-item {
   display: flex;
   justify-content: space-between;
-  color: #cbd5e1;
+  color: var(--text-secondary);
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
   font-style: normal;
@@ -601,7 +607,7 @@
 .resumen-cantidad {
   display: flex;
   justify-content: space-between;
-  color: #94a3b8;
+  color: var(--text-muted);
   font-size: 0.9rem;
   margin-bottom: 0.75rem;
   font-style: normal;
@@ -620,7 +626,7 @@
 }
 
 .resumen-total span:first-child {
-  color: #94a3b8;
+  color: var(--text-muted);
   font-size: 0.95rem;
   font-weight: 600;
   font-style: normal;
@@ -667,7 +673,7 @@
 
 .btn-volver-bottom {
   text-align: center;
-  color: #94a3b8;
+  color: var(--text-muted);
   cursor: pointer;
   font-size: 0.85rem;
   padding: 0.75rem;
@@ -684,11 +690,12 @@
 .estado-vacio {
   text-align: center;
   padding: 4rem 2rem;
-  background: rgba(30, 41, 59, 0.3);
+  background: var(--card-bg);
   border-radius: 20px;
   border: 1px solid rgba(16, 185, 129, 0.2);
   max-width: 600px;
   margin: 2rem auto;
+  opacity: 0.8;
 }
 
 .vacio-icon {
@@ -698,7 +705,7 @@
 }
 
 .estado-vacio h3 {
-  color: #fff;
+  color: var(--text-primary);
   font-size: 1.8rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
@@ -706,7 +713,7 @@
 }
 
 .estado-vacio p {
-  color: #94a3b8;
+  color: var(--text-muted);
   font-size: 1.1rem;
   font-style: normal;
 }
