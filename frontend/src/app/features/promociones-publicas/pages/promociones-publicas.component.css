@@ -1,79 +1,109 @@
+/* CONTENEDOR PRINCIPAL */
 .page {
   padding: 30px;
-  background: #f1f3f5; /* fondo gris externo */
+  background: #0B0C10; /* fondo oscuro general */
+  min-height: 100vh;
+  color: #C5C6C7;
 }
 
-/* 🔥 CUADRO BLANCO GRANDE */
+/* ❌ SE ELIMINA EL CUADRO BLANCO */
 .page-box {
-  background: white;
+  background: transparent; /* ya no blanco */
   border-radius: 20px;
   padding: 30px;
-  box-shadow: 0 12px 30px rgba(0,0,0,.1);
+  box-shadow: none;
 }
 
-/* opcional: separar título */
+/* título */
 .page-box h2 {
   margin-bottom: 20px;
+  color: #66FCF1;
 }
 
+/* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 25px;
 }
 
+/* CONTENEDOR EXTERNO DE CARD */
 .card-outer {
-  background: #f1f3f5;
-  padding: 12px;
-  border-radius: 16px;
+  background: transparent;
+  padding: 0;
 }
 
+/* CARD PRINCIPAL */
 .card-inner {
-  background: white;
+  background: #1F2833;
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0,0,0,.12);
-  transition: transform .3s;
+  border: 1px solid rgba(102, 252, 241, 0.25);
+  box-shadow: 0 0 15px rgba(102, 252, 241, 0.15);
+  transition: transform .3s ease, box-shadow .3s ease;
 }
 
 .card-inner:hover {
   transform: translateY(-6px);
+  box-shadow:
+    0 0 20px rgba(102, 252, 241, 0.6),
+    0 0 40px rgba(102, 252, 241, 0.25);
+  border-color: #66FCF1;
 }
 
+/* IMAGEN */
 .promo-img {
   width: 100%;
-  height: 12rem;      
-  object-fit: contain; 
-  background-color: #f3f4f6;
+  height: 12rem;
+  object-fit: contain;
+  background-color: #0B0C10;
+  padding: 20px;
 }
 
+/* INFO */
 .info {
   padding: 15px;
+  text-align: center;
 }
 
+/* BADGE */
 .badge {
-  background: #e63946;
-  color: white;
+  background: #FF0080;
+  color: #FFFFFF;
   padding: 4px 12px;
   border-radius: 20px;
   font-size: 13px;
+  box-shadow: 0 0 12px rgba(255, 0, 128, 0.7);
 }
 
 .badge.used {
-  background: #999; /* gris para usada */
+  background: #6b7280;
+  box-shadow: none;
 }
 
+/* BOTÓN PRINCIPAL */
 .btn-select {
   margin-top: 10px;
   width: 100%;
   padding: 10px;
-  background: #1d3557;
-  color: white;
+  background: #66FCF1;
+  color: #0B0C10;
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 0 16px rgba(102, 252, 241, 0.5);
+  transition: 0.25s;
 }
 
+.btn-select:hover {
+  background: #45a29e;
+  box-shadow:
+    0 0 20px rgba(102, 252, 241, 0.9),
+    0 0 40px rgba(102, 252, 241, 0.6);
+}
+
+/* CÓDIGO */
 .codigo-box {
   margin-top: 10px;
   display: flex;
@@ -84,51 +114,59 @@
   flex: 1;
   padding: 8px;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid rgba(102, 252, 241, 0.3);
+  background: #0B0C10;
+  color: #FFFFFF;
 }
 
 .codigo-box button {
-  background: #457b9d;
+  background: #66FCF1;
   border: none;
-  color: white;
+  color: #0B0C10;
   padding: 8px 12px;
   border-radius: 6px;
+  font-weight: 600;
 }
 
+/* TEXTO */
 .auto {
   margin-top: 8px;
-  color: green;
+  color: #22c55e;
   font-size: 14px;
 }
 
 .codigo {
   margin-top: 8px;
-  color: #1d3557;
+  color: #66FCF1;
   font-size: 14px;
   font-weight: 500;
 }
 
+/* PRECIOS */
 .precio-box {
   margin: 8px 0;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
 }
 
 .precio-original {
   text-decoration: line-through;
-  color: #999;
+  color: #9ca3af;
   font-size: 14px;
 }
 
 .precio-final {
-  color: #1d3557;
+  color: #66FCF1;
   font-size: 18px;
   font-weight: bold;
+  text-shadow: 0 0 8px rgba(102, 252, 241, 0.6);
 }
 
-/* 🔹 CARD USADA */
+/* CARD USADA */
 .card-used {
-  opacity: 0.5;           /* se ve gris */
-  pointer-events: none;    /* no se puede hacer click en nada dentro */
+  opacity: 0.45;
+  pointer-events: none;
+  filter: grayscale(1);
 }
