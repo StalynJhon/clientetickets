@@ -52,18 +52,49 @@
   border-bottom: 1px solid var(--border-color);
   padding: 3rem 2rem;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.header-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+  animation: pulse-bg 4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.header-section h1,
+.header-section p {
+  position: relative;
+  z-index: 1;
 }
 
 .header-section h1 {
   font-size: 3rem;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  animation: slide-bounce 3s ease-in-out infinite, color-wave 4s ease infinite;
+  background: linear-gradient(45deg, #10b981, #06b6d4, #3b82f6, #10b981) !important;
+  background-size: 300% 300% !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.4));
+  display: inline-block;
+  width: 100%;
   margin-bottom: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 2px;
   font-style: normal;
+}
+
+.header-section h1:hover {
+  animation: slide-bounce 1s ease-in-out infinite, color-wave 2s ease infinite, turbo-glow 1s ease-in-out infinite;
 }
 
 .header-section p {
@@ -71,6 +102,8 @@
   font-size: 1.2rem;
   font-weight: 400;
   font-style: normal;
+  animation: fade-in-out 3s ease-in-out infinite;
+  opacity: 0.9;
 }
 
 /* ==================== FILTROS ==================== */
@@ -236,21 +269,25 @@
   box-shadow: 0 0 30px var(--primary-color);
 }
 
+/* BADGE DESTACADO DORADO - MEJORADO Y MÁS VISIBLE */
 .destacado-badge {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 700;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #1a1a1a;
+  padding: 0.7rem 1.5rem;
+  border-radius: 30px;
+  font-size: 0.95rem;
+  font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   z-index: 10;
-  box-shadow: 0 4px 15px var(--primary-color);
+  box-shadow: 0 8px 25px rgba(251, 191, 36, 0.7), 0 0 0 4px rgba(255, 255, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  animation: pulse-badge 2s ease-in-out infinite;
+  border: 3px solid #ffffff;
   font-style: normal;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .card-image {
@@ -457,6 +494,70 @@
   color: white;
 }
 
+/* ==================== ANIMACIONES ==================== */
+@keyframes slide-bounce {
+  0%, 100% {
+    transform: translateX(0px) scale(1);
+  }
+  25% {
+    transform: translateX(-8px) scale(1.02);
+  }
+  75% {
+    transform: translateX(8px) scale(1.02);
+  }
+}
+
+@keyframes color-wave {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes fade-in-out {
+  0%, 100% {
+    opacity: 0.7;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes turbo-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.6));
+  }
+  50% {
+    filter: drop-shadow(0 0 30px rgba(6, 182, 212, 0.9));
+  }
+}
+
+@keyframes pulse-bg {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.6;
+  }
+}
+
+@keyframes pulse-badge {
+  0%, 100% { 
+    transform: scale(1);
+    box-shadow: 0 8px 25px rgba(251, 191, 36, 0.7), 0 0 0 4px rgba(255, 255, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+  50% { 
+    transform: scale(1.08);
+    box-shadow: 0 10px 30px rgba(251, 191, 36, 1), 0 0 0 5px rgba(255, 255, 255, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  }
+}
+
 /* ==================== RESPONSIVE ==================== */
 @media (max-width: 1024px) {
   .events-grid {
@@ -523,107 +624,5 @@
 
   .card-content h3 {
     font-size: 1.1rem;
-  }
-}
-/* ==================== ANIMACIÓN DEL TÍTULO ==================== */
-.header-section {
-  position: relative;
-  overflow: hidden;
-}
-
-.header-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
-  animation: pulse-bg 4s ease-in-out infinite;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.header-section h1,
-.header-section p {
-  position: relative;
-  z-index: 1;
-}
-
-.header-section h1 {
-  animation: slide-bounce 3s ease-in-out infinite, color-wave 4s ease infinite;
-  background: linear-gradient(45deg, #10b981, #06b6d4, #3b82f6, #10b981) !important;
-  background-size: 300% 300% !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  background-clip: text !important;
-  filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.4));
-  display: inline-block;
-  width: 100%;
-}
-
-@keyframes slide-bounce {
-  0%, 100% {
-    transform: translateX(0px) scale(1);
-  }
-  25% {
-    transform: translateX(-8px) scale(1.02);
-  }
-  75% {
-    transform: translateX(8px) scale(1.02);
-  }
-}
-
-@keyframes color-wave {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* Animación del subtítulo */
-.header-section p {
-  animation: fade-in-out 3s ease-in-out infinite;
-  opacity: 0.9;
-}
-
-@keyframes fade-in-out {
-  0%, 100% {
-    opacity: 0.7;
-    transform: scale(0.98);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.02);
-  }
-}
-
-/* Efecto boost en hover */
-.header-section h1:hover {
-  animation: slide-bounce 1s ease-in-out infinite, color-wave 2s ease infinite, turbo-glow 1s ease-in-out infinite;
-}
-
-@keyframes turbo-glow {
-  0%, 100% {
-    filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.6));
-  }
-  50% {
-    filter: drop-shadow(0 0 30px rgba(6, 182, 212, 0.9));
-  }
-}
-
-@keyframes pulse-bg {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.3;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 0.6;
   }
 }
