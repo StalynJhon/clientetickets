@@ -1,347 +1,203 @@
-/* You can add global styles to this file, and also import other style files */
-
+/* =========================================================
+   GLOBAL RESET
+========================================================= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* ==================== THEME VARIABLES ==================== */
+/* =========================================================
+   FONT GLOBAL (UNA SOLA PARA TODO EL PROYECTO)
+========================================================= */
+/* Si luego quieres cambiar de fuente, SOLO se cambia aquí */
 :root {
-  /* Light Theme Colors */
+  --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* =========================================================
+   THEME VARIABLES — LIGHT (DEFAULT)
+========================================================= */
+:root {
+  /* Brand */
   --primary-color: #10b981;
   --primary-light: #a7f3d0;
   --primary-dark: #047857;
-  
+
+  /* Backgrounds */
   --background-color: #f1f5f9;
   --card-bg: #ffffff;
-  --card-bg-dark: #1e293b;
-  
-  --text-primary: #1e293b;
-  --text-secondary: #64748b;
-  
+  --card-bg-dark: #e5e7eb;
+
+  /* Text */
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+
+  /* Borders */
   --border-color: #e2e8f0;
-  --border-dark: #334155;
-  
-  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  
+  --border-dark: #cbd5f5;
+
+  /* Shadows */
+  --card-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+  --hover-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+
+  /* Status */
   --warning-color: #f59e0b;
   --warning-dark: #b45309;
-  
   --success-color: #10b981;
   --error-color: #ef4444;
-  
-  /* Default font size */
+
+  /* Section titles (para dashboard y vistas) */
+  --section-title-color: #065f46;
+  --section-title-glow: rgba(16, 185, 129, 0.25);
+
+  /* UI */
   font-size: 16px;
 }
 
-/* Dark Theme */
+/* =========================================================
+   DARK THEME OVERRIDES
+========================================================= */
 [data-theme="dark"] {
   --background-color: #0f172a;
   --card-bg: #1e293b;
   --card-bg-dark: #0f172a;
-  
+
   --text-primary: #f1f5f9;
   --text-secondary: #94a3b8;
-  
+
   --border-color: #334155;
   --border-dark: #475569;
-  
-  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-  --hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+
+  --card-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+  --hover-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+
+  --section-title-color: #34d399;
+  --section-title-glow: rgba(52, 211, 153, 0.6);
 }
 
-/* Apply theme to body and html */
-html, body {
-  background-color: var(--background-color);
-  color: var(--text-primary);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  transition: background-color 0.3s ease, color 0.3s ease;
+/* =========================================================
+   HTML / BODY BASE
+========================================================= */
+html,
+body {
   width: 100%;
   height: 100%;
+  background-color: var(--background-color);
+  color: var(--text-primary);
+  font-family: var(--font-family-base);
+  transition: background-color 0.3s ease, color 0.3s ease;
   overflow: hidden;
 }
 
-/* Ensure all elements inherit theme colors */
+/* =========================================================
+   GLOBAL TRANSITIONS
+========================================================= */
 * {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
-/* Font size controlled by theme service */
-html {
-  font-size: 16px; /* Default - will be overridden by JS */
-}
-
-/* ==================== SWEETALERT2 CUSTOM STYLES ==================== */
+/* =========================================================
+   SWEETALERT2 — FULL CUSTOM THEME
+========================================================= */
 .sweet-popup {
   border-radius: 20px !important;
-  border: 1px solid rgba(16, 185, 129, 0.3) !important;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5) !important;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+  border: 1px solid rgba(16, 185, 129, 0.35) !important;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6) !important;
+  background: var(--card-bg) !important;
+  font-family: var(--font-family-base) !important;
 }
 
 .sweet-popup .swal2-title {
-  color: #fff !important;
+  color: var(--text-primary) !important;
   font-size: 1.8rem !important;
-  font-weight: 700 !important;
+  font-weight: 800 !important;
   margin-bottom: 1rem !important;
 }
 
 .sweet-popup .swal2-html-container {
-  color: #cbd5e1 !important;
+  color: var(--text-secondary) !important;
   font-size: 1rem !important;
   line-height: 1.6 !important;
 }
 
-.sweet-popup .swal2-content {
-  color: #cbd5e1 !important;
-}
-
 .sweet-button {
-  border-radius: 10px !important;
+  border-radius: 12px !important;
   padding: 0.75rem 2rem !important;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
   font-size: 1rem !important;
-  transition: all 0.3s ease !important;
   border: none !important;
-  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3) !important;
-  text-transform: none !important;
+  background: var(--primary-color) !important;
+  color: #fff !important;
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.4) !important;
 }
 
 .sweet-button:hover {
   transform: translateY(-2px) !important;
-  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4) !important;
-}
-
-.sweet-button:focus {
-  outline: none !important;
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3) !important;
+  box-shadow: 0 10px 28px rgba(16, 185, 129, 0.6) !important;
 }
 
 .sweet-button-cancel {
-  border-radius: 10px !important;
+  background: transparent !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 12px !important;
   padding: 0.75rem 2rem !important;
-  font-weight: 600 !important;
-  font-size: 1rem !important;
-  transition: all 0.3s ease !important;
-  border: 1px solid rgba(100, 116, 139, 0.5) !important;
-  background: rgba(100, 116, 139, 0.2) !important;
-  color: #cbd5e1 !important;
 }
 
 .sweet-button-cancel:hover {
-  background: rgba(100, 116, 139, 0.3) !important;
-  transform: translateY(-2px) !important;
-  border-color: rgba(100, 116, 139, 0.7) !important;
+  background: rgba(100, 116, 139, 0.15) !important;
 }
 
-.sweet-button-cancel:focus {
-  outline: none !important;
-  box-shadow: 0 0 0 3px rgba(100, 116, 139, 0.3) !important;
-}
-
-/* Icons */
-.swal2-icon {
-  border-width: 3px !important;
-  margin: 2rem auto 1.5rem !important;
-}
-
+/* =========================================================
+   ICONS
+========================================================= */
 .swal2-icon.swal2-success {
-  border-color: #10b981 !important;
-}
-
-.swal2-icon.swal2-success [class^='swal2-success-line'] {
-  background-color: #10b981 !important;
-}
-
-.swal2-icon.swal2-success .swal2-success-ring {
-  border-color: rgba(16, 185, 129, 0.3) !important;
+  border-color: var(--success-color) !important;
 }
 
 .swal2-icon.swal2-error {
-  border-color: #ef4444 !important;
-}
-
-.swal2-icon.swal2-error [class^='swal2-x-mark-line'] {
-  background-color: #ef4444 !important;
+  border-color: var(--error-color) !important;
 }
 
 .swal2-icon.swal2-warning {
-  border-color: #f59e0b !important;
-  color: #f59e0b !important;
+  border-color: var(--warning-color) !important;
 }
 
-.swal2-icon.swal2-info {
-  border-color: #3b82f6 !important;
-  color: #3b82f6 !important;
-}
-
-.swal2-icon.swal2-question {
-  border-color: #8b5cf6 !important;
-  color: #8b5cf6 !important;
-}
-
-/* Loading Spinner */
-.swal2-loader {
-  border-color: #10b981 transparent #10b981 transparent !important;
-}
-
-/* Progress Bar */
-.swal2-timer-progress-bar {
-  background: #10b981 !important;
-}
-
-/* Toast Notifications */
-.swal2-toast {
-  border-radius: 12px !important;
-  padding: 1rem !important;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4) !important;
-  border: 1px solid rgba(16, 185, 129, 0.3) !important;
-}
-
-.swal2-toast .swal2-title {
-  font-size: 1rem !important;
-  margin: 0 !important;
-  color: #fff !important;
-}
-
-.swal2-toast .swal2-icon {
-  margin: 0 0.5rem 0 0 !important;
-  width: 1.5rem !important;
-  height: 1.5rem !important;
-  font-size: 1rem !important;
-}
-
-/* Close Button */
-.swal2-close {
-  color: #94a3b8 !important;
-  font-size: 2rem !important;
-  transition: all 0.3s ease !important;
-}
-
-.swal2-close:hover {
-  color: #fff !important;
-  transform: scale(1.1) !important;
-}
-
-/* Input Fields */
+/* =========================================================
+   INPUTS
+========================================================= */
 .swal2-input,
 .swal2-textarea {
-  background: rgba(30, 41, 59, 0.8) !important;
-  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+  background: var(--card-bg-dark) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
   border-radius: 10px !important;
-  color: #fff !important;
-  padding: 0.75rem 1rem !important;
-  font-size: 1rem !important;
 }
 
-.swal2-input:focus,
-.swal2-textarea:focus {
-  outline: none !important;
-  border-color: #10b981 !important;
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2) !important;
-}
-
-.swal2-input::placeholder,
-.swal2-textarea::placeholder {
-  color: #64748b !important;
-}
-
-/* Validation Messages */
-.swal2-validation-message {
-  background: rgba(239, 68, 68, 0.1) !important;
-  border: 1px solid rgba(239, 68, 68, 0.3) !important;
-  color: #fca5a5 !important;
-  border-radius: 8px !important;
-}
-
-/* Footer */
-.swal2-footer {
-  border-top: 1px solid rgba(100, 116, 139, 0.3) !important;
-  color: #94a3b8 !important;
-  padding-top: 1rem !important;
-  margin-top: 1rem !important;
-}
-
-/* Actions */
-.swal2-actions {
-  margin-top: 1.5rem !important;
-  gap: 1rem !important;
-}
-
-
-
-/* Animations */
-.swal2-show {
-  animation: swal2-show 0.3s !important;
-}
-
-.swal2-hide {
-  animation: swal2-hide 0.2s !important;
-}
-
+/* =========================================================
+   ANIMATIONS
+========================================================= */
 @keyframes swal2-show {
-  0% {
-    transform: scale(0.7);
-    opacity: 0;
-  }
-  45% {
-    transform: scale(1.05);
-    opacity: 1;
-  }
-  80% {
-    transform: scale(0.95);
-  }
-  100% {
-    transform: scale(1);
-  }
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 @keyframes swal2-hide {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(0.5);
-    opacity: 0;
-  }
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(0.6); opacity: 0; }
 }
 
-/* Responsive */
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 @media (max-width: 768px) {
   .sweet-popup {
-    width: 90% !important;
-    padding: 1.5rem !important;
-  }
-
-  .sweet-popup .swal2-title {
-    font-size: 1.5rem !important;
-  }
-
-  .sweet-button,
-  .sweet-button-cancel {
-    padding: 0.65rem 1.5rem !important;
-    font-size: 0.9rem !important;
-  }
-
-  .swal2-actions {
-    flex-direction: column !important;
-    width: 100% !important;
-  }
-
-  .swal2-actions button {
-    width: 100% !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .sweet-popup .swal2-title {
-    font-size: 1.3rem !important;
-  }
-
-  .sweet-popup .swal2-html-container {
-    font-size: 0.9rem !important;
+    width: 92% !important;
   }
 }

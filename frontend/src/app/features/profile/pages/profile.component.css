@@ -1,33 +1,101 @@
 /* =========================================================
-   PERFIL – TEMA CYBER / DARK PREMIUM
+   PERFIL – CYBER PROFILE (LIGHT / DARK)
    ========================================================= */
 
-/* 🌌 Fondo */
+/* ===============================
+   CONTENEDOR PRINCIPAL
+   =============================== */
+
 .profile-container {
   min-height: 100vh;
-  background: #0B0C10;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 2rem;
   font-family: 'Inter', sans-serif;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+/* DARK (default) */
+.profile-container {
+  background: #0B0C10;
   color: #FFFFFF;
 }
 
-/* 🧊 Card principal */
+/* LIGHT */
+:root:not([data-theme="dark"]) .profile-container {
+  background: #ffffff;
+  color: #0B0C10;
+}
+
+/* ===============================
+   CARD PRINCIPAL
+   =============================== */
+
 .profile-card {
+  width: 420px;
   background: #1F2833;
   border-radius: 20px;
   padding: 2rem;
-  width: 420px;
-  color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
   box-shadow:
     0 0 25px rgba(102, 252, 241, 0.25),
     0 0 50px rgba(102, 252, 241, 0.15);
   border: 1px solid rgba(102, 252, 241, 0.25);
+  transition: background 0.4s ease, box-shadow 0.4s ease;
 }
 
-/* Header */
+/* Light card */
+:root:not([data-theme="dark"]) .profile-card {
+  background: #ffffff;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e5e7eb;
+}
+
+/* ===============================
+   LÍNEA SUPERIOR ANIMADA
+   =============================== */
+
+.profile-top-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    #45A29E,
+    #66FCF1,
+    #ff4ecd,
+    #45A29E
+  );
+  background-size: 300% 100%;
+  animation: lineMove 4s linear infinite;
+}
+
+/* Light line */
+:root:not([data-theme="dark"]) .profile-top-line {
+  background: linear-gradient(
+    90deg,
+    #16a34a,
+    #22c55e,
+    #ec4899,
+    #16a34a
+  );
+  background-size: 300% 100%;
+}
+
+@keyframes lineMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+/* ===============================
+   HEADER
+   =============================== */
+
 .profile-header {
   display: flex;
   align-items: center;
@@ -49,7 +117,13 @@
   box-shadow: 0 0 15px rgba(102, 252, 241, 0.8);
 }
 
-.profile-header h2 {
+:root:not([data-theme="dark"]) .avatar {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.6);
+}
+
+/* Títulos */
+.profile-title h2 {
   margin: 0;
 }
 
@@ -58,7 +132,14 @@
   color: #66FCF1;
 }
 
-/* Info */
+:root:not([data-theme="dark"]) .username {
+  color: #16a34a;
+}
+
+/* ===============================
+   INFO
+   =============================== */
+
 .profile-info {
   margin: 1.5rem 0;
 }
@@ -68,9 +149,9 @@
   opacity: 0.85;
 }
 
-/* =========================================================
+/* ===============================
    BOTONES
-   ========================================================= */
+   =============================== */
 
 button {
   border: none;
@@ -81,7 +162,6 @@ button {
   transition: all 0.25s ease;
 }
 
-/* Botón principal */
 .btn-primary {
   background: #66FCF1;
   color: #0B0C10;
@@ -89,27 +169,33 @@ button {
 }
 
 .btn-primary:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
   box-shadow:
     0 0 25px rgba(102, 252, 241, 1),
     0 0 50px rgba(102, 252, 241, 0.6);
 }
 
-/* Botón secundario */
+:root:not([data-theme="dark"]) .btn-primary {
+  background: #22c55e;
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(34, 197, 94, 0.45);
+}
+
+/* Secundario */
 .btn-secondary {
   background: transparent;
   color: #66FCF1;
   border: 1px solid rgba(102, 252, 241, 0.4);
 }
 
-.btn-secondary:hover {
-  background: rgba(102, 252, 241, 0.1);
-  border-color: #66FCF1;
+:root:not([data-theme="dark"]) .btn-secondary {
+  color: #16a34a;
+  border-color: #16a34a;
 }
 
-/* =========================================================
+/* ===============================
    MODAL
-   ========================================================= */
+   =============================== */
 
 .modal-overlay {
   position: fixed;
@@ -122,137 +208,70 @@ button {
   z-index: 999;
 }
 
+:root:not([data-theme="dark"]) .modal-overlay {
+  background: rgba(255, 255, 255, 0.75);
+}
+
 .modal-card {
+  width: 420px;
   background: #1F2833;
   color: #FFFFFF;
-  width: 420px;
   padding: 2rem;
   border-radius: 18px;
   animation: pop 0.25s ease;
-  box-shadow:
-    0 0 25px rgba(102, 252, 241, 0.35),
-    0 0 50px rgba(102, 252, 241, 0.2);
+}
+
+:root:not([data-theme="dark"]) .modal-card {
+  background: #ffffff;
+  color: #0B0C10;
 }
 
 @keyframes pop {
-  from {
-    transform: scale(0.92);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+  from { transform: scale(0.92); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
-.modal-card h3 {
-  margin-bottom: 1rem;
-  color: #66FCF1;
-}
+/* ===============================
+   INPUTS
+   =============================== */
 
-/* Inputs */
 .form-group {
   margin-bottom: 1rem;
 }
 
 .form-group label {
-  display: block;
   font-size: 0.85rem;
   margin-bottom: 0.3rem;
+  display: block;
   color: #66FCF1;
+}
+
+:root:not([data-theme="dark"]) .form-group label {
+  color: #16a34a;
 }
 
 .form-group input {
   width: 100%;
-  padding: 0.6rem 0.7rem;
+  padding: 0.6rem;
   border-radius: 10px;
   border: 1px solid rgba(102, 252, 241, 0.25);
-  outline: none;
   background: #0B0C10;
   color: #FFFFFF;
 }
 
-.form-group input::placeholder {
-  color: rgba(197, 198, 199, 0.6);
+:root:not([data-theme="dark"]) .form-group input {
+  background: #f9fafb;
+  color: #0B0C10;
+  border: 1px solid #d1d5db;
 }
 
-.form-group input:focus {
-  border-color: #66FCF1;
-  box-shadow: 0 0 0 2px rgba(102, 252, 241, 0.35);
-}
+/* ===============================
+   MODAL ACTIONS
+   =============================== */
 
-/* Acciones modal */
 .modal-actions {
   display: flex;
   justify-content: flex-end;
   gap: 0.6rem;
   margin-top: 1.2rem;
-}
-
-/* =========================================================
-   SWEETALERT2 – TEMA CYBER (MISMA PALETA)
-   ========================================================= */
-
-.swal-cyber-popup {
-  background: #1F2833 !important;
-  border-radius: 16px !important;
-  border: 1px solid rgba(102, 252, 241, 0.35);
-  box-shadow:
-    0 0 25px rgba(102, 252, 241, 0.35),
-    0 0 50px rgba(102, 252, 241, 0.15);
-  color: #FFFFFF;
-  font-family: 'Inter', sans-serif;
-}
-
-.swal-cyber-title {
-  color: #66FCF1 !important;
-  font-size: 1.4rem;
-  font-weight: 700;
-  text-shadow: 0 0 10px rgba(102, 252, 241, 0.6);
-}
-
-.swal-cyber-text {
-  color: #C5C6C7 !important;
-  font-size: 0.95rem;
-}
-
-.swal-cyber-icon {
-  border-color: #66FCF1 !important;
-  color: #66FCF1 !important;
-  box-shadow: 0 0 18px rgba(102, 252, 241, 0.8);
-}
-
-/* Botones SweetAlert */
-.swal-cyber-confirm {
-  background: #66FCF1 !important;
-  color: #0B0C10 !important;
-  font-weight: 700;
-  padding: 0.6rem 1.4rem;
-  border-radius: 10px;
-  box-shadow:
-    0 0 15px rgba(102, 252, 241, 0.8),
-    0 0 30px rgba(102, 252, 241, 0.5);
-}
-
-.swal-cyber-confirm:hover {
-  transform: translateY(-1px);
-}
-
-.swal-cyber-cancel {
-  background: transparent !important;
-  color: #C5C6C7 !important;
-  border: 1px solid rgba(197, 198, 199, 0.4);
-  padding: 0.6rem 1.4rem;
-  border-radius: 10px;
-}
-
-.swal-cyber-cancel:hover {
-  color: #FFFFFF !important;
-  border-color: #FFFFFF;
-}
-
-/* Backdrop */
-.swal2-backdrop-show {
-  background: rgba(11, 12, 16, 0.85) !important;
-  backdrop-filter: blur(6px);
 }

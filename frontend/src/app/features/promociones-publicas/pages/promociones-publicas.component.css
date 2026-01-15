@@ -1,168 +1,226 @@
-/* CONTENEDOR PRINCIPAL */
+/* ===============================
+   CONTENEDOR GENERAL
+================================ */
 .page {
-  padding: 30px;
-  background: var(--background-color);
+  width: 100%;
   min-height: 100vh;
-  color: var(--text-primary);
+  background: var(--background-color);
+  padding: 2rem;
+  box-sizing: border-box;
 }
 
-/* ❌ SE ELIMINA EL CUADRO BLANCO */
 .page-box {
-  background: transparent; /* ya no blanco */
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: none;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
 }
 
-/* título */
-.page-box h2 {
-  margin-bottom: 20px;
-  color: var(--primary-color);
+/* ===============================
+   HEADER PROMOCIONES
+================================ */
+.header-section {
+  position: relative;
+  overflow: hidden;
+
+  background: var(--card-bg);
+  padding: 2rem 2.5rem;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.35);
+  text-align: left;
 }
 
-/* GRID */
+/* ===== LINEA SUPERIOR HEADER (DEFAULT) ===== */
+.header-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  border-radius: 16px 16px 0 0;
+
+  /* 🔥 DEFAULT (LIGHT) */
+  background: linear-gradient(
+    90deg,
+    var(--primary-color),
+    #34d399,
+    #ff0080
+  );
+
+  box-shadow:
+    0 0 10px rgba(16, 185, 129, 0.6),
+    0 0 12px rgba(255, 0, 128, 0.6);
+}
+
+/* ===== DARK MODE ===== */
+[data-theme="dark"] .header-section::before {
+  background: linear-gradient(
+    90deg,
+    #34d399,
+    #10b981,
+    #059669
+  );
+
+  box-shadow:
+    0 0 10px rgba(52, 211, 153, 0.8),
+    0 0 16px rgba(16, 185, 129, 0.6);
+}
+
+
+/* ===============================
+   GRID DE PROMOCIONES (CENTRADO REAL)
+================================ */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(auto-fit, 280px);
+  justify-content: center;
+  gap: 2rem;
 }
 
-/* CONTENEDOR EXTERNO DE CARD */
+/* ===============================
+   TARJETA PROMO
+================================ */
 .card-outer {
-  background: transparent;
-  padding: 0;
-}
-
-/* CARD PRINCIPAL */
-.card-inner {
   background: var(--card-bg);
-  border-radius: 14px;
-  overflow: hidden;
+  border-radius: 16px;
   border: 1px solid var(--border-color);
   box-shadow: var(--card-shadow);
-  transition: transform .3s ease, box-shadow .3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card-inner:hover {
+.card-outer:hover {
   transform: translateY(-6px);
   box-shadow: var(--hover-shadow);
   border-color: var(--primary-color);
 }
 
-/* IMAGEN */
-.promo-img {
-  width: 100%;
-  height: 12rem;
-  object-fit: contain;
-  background-color: var(--background-color);
-  padding: 20px;
+.card-used {
+  opacity: 0.55;
+  filter: grayscale(0.4);
 }
 
-/* INFO */
-.info {
-  padding: 15px;
+.card-inner {
+  padding: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
-/* BADGE */
-.badge {
-  background: var(--primary-color);
-  color: white;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 13px;
-  box-shadow: 0 0 12px var(--primary-color);
-}
-
-.badge.used {
-  background: var(--text-secondary);
-  box-shadow: none;
-}
-
-/* BOTÓN PRINCIPAL */
-.btn-select {
-  margin-top: 10px;
+/* ===============================
+   IMAGEN
+================================ */
+.promo-img {
   width: 100%;
-  padding: 10px;
-  background: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  box-shadow: 0 0 16px var(--primary-color);
-  transition: 0.25s;
+  max-height: 220px;
+  object-fit: contain;
+  margin-bottom: 1.2rem;
 }
 
-.btn-select:hover {
-  background: var(--primary-dark);
-  box-shadow: var(--hover-shadow);
-}
-
-/* CÓDIGO */
-.codigo-box {
-  margin-top: 10px;
-  display: flex;
-  gap: 8px;
-}
-
-.codigo-box input {
-  flex: 1;
-  padding: 8px;
-  border-radius: 6px;
-  border: 1px solid var(--primary-color);
-  background: var(--background-color);
+/* ===============================
+   INFO
+================================ */
+.info h3 {
+  margin: 0.5rem 0;
+  font-size: 1.3rem;
   color: var(--text-primary);
 }
 
-.codigo-box button {
-  background: var(--primary-color);
-  border: none;
+.fecha {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0.5rem 0 1rem;
+}
+
+/* ===============================
+   BADGE
+================================ */
+.badge {
+  background: #ff0080;
   color: white;
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  box-shadow: 0 0 12px rgba(255, 0, 128, 0.7);
+  margin-bottom: 0.5rem;
 }
 
-/* TEXTO */
-.auto {
-  margin-top: 8px;
-  color: var(--success-color);
-  font-size: 14px;
+.badge.used {
+  background: #6b7280;
+  box-shadow: none;
 }
 
-.codigo {
-  margin-top: 8px;
-  color: var(--primary-color);
-  font-size: 14px;
-  font-weight: 500;
-}
-
-/* PRECIOS */
+/* ===============================
+   PRECIOS
+================================ */
 .precio-box {
-  margin: 8px 0;
   display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 10px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
 .precio-original {
   text-decoration: line-through;
-  color: var(--text-secondary);
-  font-size: 14px;
+  color: #94a3b8;
 }
 
 .precio-final {
+  font-size: 1.6rem;
+  font-weight: 800;
   color: var(--primary-color);
-  font-size: 18px;
-  font-weight: bold;
-  text-shadow: 0 0 8px var(--primary-color);
+  text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
 }
 
-/* CARD USADA */
-.card-used {
-  opacity: 0.45;
-  pointer-events: none;
-  filter: grayscale(1);
+/* ===============================
+   BOTÓN
+================================ */
+.btn-select {
+  margin-top: 0.5rem;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  background: var(--primary-color);
+  color: white;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.6);
+  transition: all 0.25s ease;
+}
+
+.btn-select:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 22px rgba(16, 185, 129, 0.9);
+}
+
+/* ===============================
+   TEXTO EXTRA
+================================ */
+.auto,
+.codigo {
+  font-size: 0.85rem;
+  margin-top: 0.8rem;
+  color: var(--text-secondary);
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+  .header-section {
+    padding: 1.5rem;
+  }
+
+  .header-section h2 {
+    font-size: 1.6rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }

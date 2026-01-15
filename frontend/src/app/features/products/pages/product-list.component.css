@@ -1,25 +1,78 @@
-/* Contenedor general - AHORA FULL WIDTH */
+/* =========================================================
+   CONTENEDOR GENERAL
+========================================================= */
 .container {
-  padding: 2rem;
-  color: var(--text-primary);
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  background: var(--background-color);
   min-height: 100vh;
-  box-sizing: border-box; 
+  width: 100%;
+  padding: 2.5rem 1.5rem;
+
+  background: var(--background-color);
+  color: var(--text-primary);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Encabezado */
+.container > * {
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* =========================================================
+   HEADER (CON LINEA SUPERIOR)
+========================================================= */
 .header-section {
+  position: relative;
+  overflow: hidden;
+
   background: var(--card-bg);
-  padding: 1.5rem;
-  border-radius: 10px;
-  margin-bottom: 2rem;
-  text-align: left;
-  color: var(--primary-color);
-  box-shadow: 0 0 20px var(--primary-color);
+  padding: 2rem;
+  border-radius: 16px;
+  margin-bottom: 3rem;
+
   border: 1px solid var(--border-color);
+  box-shadow: var(--card-shadow);
+
+  text-align: left;
+}
+
+/* LINEA SUPERIOR */
+.header-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 4px;
+  border-radius: 16px 16px 0 0;
+
+  /* LIGHT DEFAULT */
+  background: linear-gradient(
+    90deg,
+    var(--primary-color),
+    #34d399,
+    #ff0080
+  );
+
+  box-shadow:
+    0 0 10px rgba(16, 185, 129, 0.6),
+    0 0 12px rgba(255, 0, 128, 0.6);
+}
+
+/* DARK MODE */
+[data-theme="dark"] .header-section::before {
+  background: linear-gradient(
+    90deg,
+    #34d399,
+    #10b981,
+    #059669
+  );
+
+  box-shadow:
+    0 0 10px rgba(52, 211, 153, 0.8),
+    0 0 16px rgba(16, 185, 129, 0.6);
 }
 
 .header-section h2 {
@@ -32,9 +85,12 @@
 
 .header-section p {
   color: var(--text-secondary);
+  margin-top: 0.5rem;
 }
 
-/* Buscador */
+/* =========================================================
+   BUSCADOR
+========================================================= */
 .search-bar-container {
   display: flex;
   justify-content: center;
@@ -44,30 +100,37 @@
 .search-input {
   width: 100%;
   max-width: 600px;
-  padding: 12px 20px;
-  border-radius: 8px;
+  padding: 14px 22px;
+
+  border-radius: 999px;
   border: 1px solid var(--primary-color);
+
   background: var(--card-bg);
   color: var(--text-primary);
   font-size: 1rem;
-  box-shadow: 0 0 12px var(--primary-color);
+
+  box-shadow: 0 0 18px rgba(16, 185, 129, 0.35);
   transition: all 0.3s ease;
 }
 
 .search-input::placeholder {
-  color: #6b7c85;
+  color: var(--text-secondary);
 }
 
 .search-input:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 16px var(--primary-color);
+  box-shadow: 0 0 26px rgba(16, 185, 129, 0.6);
 }
 
-/* GRID DE PRODUCTOS */
+/* =========================================================
+   GRID DE PRODUCTOS (CENTRADO REAL)
+========================================================= */
 .product-grid {
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, 260px);
+  justify-content: center;
   gap: 2rem;
 }
 
@@ -76,104 +139,141 @@
   text-align: center;
   font-size: 1.2rem;
   color: var(--text-secondary);
-  padding: 2rem;
+  padding: 3rem;
 }
 
-/* Tarjeta de Producto */
+/* =========================================================
+   PRODUCT CARD
+========================================================= */
 .product-card {
+  width: 100%;
+  max-width: 260px;
+
   background: var(--card-bg);
-  border-radius: 10px;
+  border-radius: 16px;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
   border: 1px solid var(--border-color);
   box-shadow: var(--card-shadow);
+
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .product-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--hover-shadow);
+  transform: translateY(-10px);
   border-color: var(--primary-color);
+  box-shadow: var(--hover-shadow);
 }
 
+/* =========================================================
+   CARD IMAGE
+========================================================= */
 .card-image {
   height: 200px;
-  background: var(--background-color); /* Theme-aware background for image */
-  padding: 20px;
+  background: linear-gradient(
+    135deg,
+    var(--background-color),
+    var(--card-bg-dark)
+  );
+
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+
   position: relative;
-  border-bottom: 1px solid rgba(102, 252, 241, 0.15);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .card-image img {
-  max-height: 100%;
   max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
 }
 
-/* Badge (Etiqueta) */
+/* =========================================================
+   BADGE
+========================================================= */
 .badge {
   position: absolute;
-  top: 10px; right: 10px;
-  background: #FF0080; /* ROSA NEÓN */
-  color: #FFFFFF;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: bold;
-  box-shadow: 0 0 12px rgba(255, 0, 128, 0.7);
+  top: 12px;
+  right: 12px;
+
+  background: linear-gradient(135deg, #ff0080, #ff5ea8);
+  color: #fff;
+
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+
+  box-shadow: 0 0 18px rgba(255, 0, 128, 0.7);
 }
 
+/* =========================================================
+   CARD CONTENT
+========================================================= */
 .card-content {
   padding: 1.5rem;
   text-align: center;
 }
 
 .card-content h3 {
-  margin: 0 0 10px 0;
-  font-size: 1.2rem;
+  margin: 0 0 0.75rem;
+  font-size: 1.1rem;
   color: var(--text-primary);
 }
 
+/* =========================================================
+   PRICE
+========================================================= */
 .price {
-  font-size: 1.5rem;
-  color: var(--primary-color);
-  font-weight: bold;
-  margin-bottom: 1rem;
-  text-shadow: 0 0 8px var(--primary-color);
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 1.2rem;
+
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--primary-dark)
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-/* Botones */
+/* =========================================================
+   ACTION BUTTONS
+========================================================= */
 .card-actions {
   display: flex;
-  gap: 10px;
   justify-content: center;
+  gap: 12px;
 }
 
-.btn-primary, .btn-outline {
-  padding: 8px 16px;
-  border-radius: 5px;
+.btn-primary,
+.btn-outline {
+  padding: 10px 18px;
+  border-radius: 999px;
   cursor: pointer;
-  font-weight: 600;
-  border: none;
-  transition: all 0.25s;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: all 0.25s ease;
 }
 
-/* Botón Principal (Agregar) */
+/* Primary */
 .btn-primary {
+  border: none;
   background: var(--primary-color);
-  color: white;
-  box-shadow: 0 0 16px var(--primary-color);
+  color: #fff;
+  box-shadow: 0 0 18px rgba(16, 185, 129, 0.5);
 }
 
 .btn-primary:hover {
-  background: var(--primary-dark);
-  box-shadow: var(--hover-shadow);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.7);
 }
 
-/* Botón Secundario (Ver Detalle) */
+/* Outline */
 .btn-outline {
   background: transparent;
   border: 1px solid var(--primary-color);
@@ -182,147 +282,14 @@
 
 .btn-outline:hover {
   background: var(--primary-color);
-  color: white;
-  box-shadow: 0 0 15px var(--primary-color);
+  color: #fff;
 }
 
-.full-width {
-  width: 100%;
-  padding: 12px;
-  font-size: 1.1rem;
-}
-
-/* =========================================
-   ESTILOS DEL MODAL (DARK MODE + ESTRUCTURA FIJA)
-   ========================================= */
-
-.modal-backdrop {
-  position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.9); /* Theme-aware dark overlay */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-  backdrop-filter: blur(4px);
-}
-
-.modal-content {
-  background: var(--card-bg); /* Theme-aware card background */
-  width: 90%;
-  max-width: 800px;
-  height: 450px; /* Altura Fija */
-
-  display: flex;
-  flex-direction: row !important; /* Lado a lado OBLIGATORIO */
-
-  border-radius: 12px;
-  overflow: hidden;
-  position: relative;
-  border: 1px solid rgba(102, 252, 241, 0.3);
-  box-shadow:
-    0 0 25px rgba(102, 252, 241, 0.2),
-    0 0 50px rgba(102, 252, 241, 0.1);
-}
-
-/* --- COLUMNA IMAGEN (IZQUIERDA) --- */
-.modal-image-col {
-  width: 50%;
-  min-width: 50%;
-  max-width: 50%;
-  background: var(--background-color); /* Theme-aware photo zone background */
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  overflow: hidden;
-  border-right: 1px solid rgba(102, 252, 241, 0.1);
-}
-
-.modal-image-col img {
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  filter: drop-shadow(0 0 10px rgba(102, 252, 241, 0.2)); /* Sombra neón a la imagen */
-}
-
-/* --- COLUMNA TEXTO (DERECHA) --- */
-.modal-info-col {
-  width: 50%;
-  min-width: 50%;
-  padding: 40px 30px;
-  color: var(--text-primary); /* Theme-aware text color */
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: left;
-  overflow-y: auto;
-}
-
-.modal-info-col h3 {
-  margin-top: 0;
-  font-size: 1.8rem;
-  color: var(--text-primary); /* Theme-aware title color */
-  line-height: 1.2;
-  margin-bottom: 15px;
-}
-
-.modal-desc {
-  font-size: 1rem;
-  color: var(--text-secondary);
-  margin-bottom: 25px;
-  line-height: 1.6;
-}
-
-.big-price {
-  font-size: 2.2rem;
-  color: var(--primary-color); /* Theme-aware price color */
-  font-weight: 800;
-  margin-bottom: 25px;
-  display: block;
-  text-shadow: 0 0 10px rgba(102, 252, 241, 0.5);
-}
-
-/* Botón Cerrar */
-.close-btn {
-  position: absolute;
-  top: 15px; right: 15px;
-  width: 35px; height: 35px;
-  background: var(--background-color); /* Theme-aware background */
-  border: 1px solid rgba(102, 252, 241, 0.3);
-  border-radius: 50%;
-  font-weight: bold; font-size: 1.2rem;
-  color: var(--primary-color);
-  cursor: pointer; z-index: 50;
-  display: flex; align-items: center; justify-content: center;
-  transition: 0.2s;
-}
-.close-btn:hover {
-  background: #FF0080; /* Rosa al pasar el mouse */
-  color: white;
-  border-color: #FF0080;
-  box-shadow: 0 0 10px #FF0080;
-}
-
-/* --- RESPONSIVE (Móvil) --- */
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 @media (max-width: 768px) {
-  .modal-content {
-    flex-direction: column !important;
-    height: auto;
-    max-height: 90vh;
-  }
-  .modal-image-col {
-    width: 100%; min-width: 100%; max-width: 100%;
-    height: 200px;
-    border-right: none;
-    border-bottom: 1px solid rgba(102, 252, 241, 0.1);
-  }
-  .modal-info-col {
-    width: 100%; min-width: 100%;
-    padding: 20px;
+  .header-section h2 {
+    font-size: 1.6rem;
   }
 }
