@@ -12,14 +12,14 @@
 /* ==================== CONTENEDOR PRINCIPAL ==================== */
 .conciertos-container {
   min-height: 100vh;
-  background: var(--background-color);
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
   padding: 0;
 }
 
 /* ==================== HERO SECTION ==================== */
 .hero-section {
-  background: linear-gradient(135deg, var(--primary-light), var(--secondary-color));
-  border-bottom: 1px solid var(--border-color);
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), rgba(139, 92, 246, 0.1));
+  border-bottom: 1px solid rgba(236, 72, 153, 0.2);
   padding: 3rem 2rem;
   text-align: center;
 }
@@ -32,7 +32,7 @@
 .hero-title {
   font-size: 3rem;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(135deg, #ec4899, #8b5cf6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 0.5rem;
@@ -42,7 +42,7 @@
 }
 
 .hero-subtitle {
-  color: var(--text-secondary);
+  color: #94a3b8;
   font-size: 1.2rem;
   margin-bottom: 2rem;
   font-style: normal;
@@ -68,10 +68,10 @@
   width: 100%;
   padding: 1rem 1.5rem;
   padding-left: 3.5rem;
-  background: var(--card-bg);
-  border: 1px solid var(--primary-color);
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(236, 72, 153, 0.3);
   border-radius: 50px;
-  color: var(--text-primary);
+  color: #fff;
   font-size: 1rem;
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
@@ -80,21 +80,21 @@
 
 .search-input:focus {
   outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 20px var(--primary-color);
-  background: var(--card-bg);
+  border-color: #ec4899;
+  box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
+  background: rgba(30, 41, 59, 0.95);
 }
 
 .search-input::placeholder {
-  color: var(--text-secondary);
+  color: #64748b;
   font-style: normal;
 }
 
 /* ==================== FILTROS ==================== */
 .filtros-section {
   padding: 2rem;
-  background: var(--card-bg);
-  border-bottom: 1px solid var(--border-color);
+  background: rgba(15, 23, 42, 0.5);
+  border-bottom: 1px solid rgba(236, 72, 153, 0.1);
 }
 
 .filtros-grid {
@@ -113,7 +113,7 @@
 }
 
 .filtro-group label {
-  color: var(--text-secondary);
+  color: #94a3b8;
   font-size: 0.85rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -132,10 +132,10 @@
 .filtro-select,
 .filtro-date {
   padding: 0.75rem 1rem;
-  background: var(--card-bg);
-  border: 1px solid var(--primary-color);
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(236, 72, 153, 0.2);
   border-radius: 10px;
-  color: var(--text-primary);
+  color: #fff;
   font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -144,15 +144,15 @@
 
 .filtro-select:hover,
 .filtro-date:hover {
-  border-color: var(--primary-color);
-  background: var(--card-bg);
+  border-color: #ec4899;
+  background: rgba(30, 41, 59, 0.95);
 }
 
 .filtro-select:focus,
 .filtro-date:focus {
   outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 15px var(--primary-color);
+  border-color: #ec4899;
+  box-shadow: 0 0 15px rgba(236, 72, 153, 0.2);
 }
 
 .filtro-actions {
@@ -163,10 +163,10 @@
 
 .btn-limpiar {
   padding: 0.75rem 1.5rem;
-  background: var(--error-light);
-  border: 1px solid var(--error-color);
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
   border-radius: 10px;
-  color: var(--error-color);
+  color: #ef4444;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -178,18 +178,17 @@
 }
 
 .btn-limpiar:hover {
-  background: var(--error-color);
-  border-color: var(--error-color);
-  color: white;
+  background: rgba(239, 68, 68, 0.2);
+  border-color: #ef4444;
   transform: translateY(-2px);
 }
 
 .resultados-count {
-  color: var(--text-secondary);
+  color: #94a3b8;
   font-size: 0.9rem;
   text-align: center;
   padding: 0.5rem;
-  background: var(--card-bg);
+  background: rgba(30, 41, 59, 0.5);
   border-radius: 8px;
   font-style: normal;
 }
@@ -215,7 +214,7 @@
 }
 
 .loading-state p {
-  color: var(--text-secondary);
+  color: #94a3b8;
   font-size: 1.1rem;
   font-style: normal;
 }
@@ -225,8 +224,8 @@
   text-align: center;
   padding: 2rem;
   margin: 2rem;
-  background: var(--error-light);
-  border: 1px solid var(--error-color);
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
   border-radius: 15px;
 }
 
@@ -237,7 +236,7 @@
 }
 
 .error-state p {
-  color: var(--error-color);
+  color: #fca5a5;
   font-size: 1.1rem;
   font-style: normal;
 }
@@ -253,7 +252,7 @@
 .section-title {
   font-size: 2rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: #fff;
   margin-bottom: 2rem;
   display: flex;
   align-items: center;
@@ -268,7 +267,7 @@
 }
 
 .counter {
-  color: var(--text-secondary);
+  color: #94a3b8;
   font-size: 1.5rem;
   font-weight: 400;
   font-style: normal;
@@ -291,33 +290,32 @@
 
 /* ==================== CARD ==================== */
 .concierto-card {
-  background: var(--card-bg);
+  background: rgba(30, 41, 59, 0.6);
   border-radius: 20px;
   overflow: hidden;
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(236, 72, 153, 0.2);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   cursor: pointer;
   backdrop-filter: blur(10px);
   position: relative;
-  box-shadow: var(--card-shadow);
 }
 
 .concierto-card:hover {
   transform: translateY(-10px) scale(1.02);
-  border-color: var(--primary-color);
-  box-shadow: var(--hover-shadow);
+  border-color: #ec4899;
+  box-shadow: 0 20px 40px rgba(236, 72, 153, 0.3);
 }
 
 .concierto-card.destacado {
-  border: 2px solid var(--primary-color);
-  box-shadow: 0 0 30px var(--primary-color);
+  border: 2px solid #ec4899;
+  box-shadow: 0 0 30px rgba(236, 72, 153, 0.3);
 }
 
 .destacado-badge {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(135deg, #ec4899, #8b5cf6);
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 20px;
@@ -326,7 +324,7 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   z-index: 10;
-  box-shadow: 0 4px 15px var(--primary-color);
+  box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
   font-style: normal;
 }
 
@@ -354,7 +352,7 @@
   left: 0;
   right: 0;
   height: 50%;
-  background: linear-gradient(to top, var(--background-color), transparent);
+  background: linear-gradient(to top, rgba(15, 23, 42, 0.9), transparent);
 }
 
 .genero-badge {
@@ -370,7 +368,6 @@
   letter-spacing: 1px;
   z-index: 5;
   backdrop-filter: blur(10px);
-  background: var(--primary-color);
   font-style: normal;
 }
 
@@ -378,7 +375,7 @@
   position: absolute;
   bottom: 1rem;
   right: 1rem;
-  background: linear-gradient(135deg, var(--error-color), var(--error-dark));
+  background: linear-gradient(135deg, #ef4444, #dc2626);
   color: white;
   padding: 0.4rem 0.9rem;
   border-radius: 20px;
@@ -403,7 +400,7 @@
 .card-title {
   font-size: 1.3rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: #fff;
   margin-bottom: 0.5rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -414,7 +411,7 @@
 }
 
 .card-artist {
-  color: var(--primary-color);
+  color: #ec4899;
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 1rem;
@@ -432,14 +429,14 @@
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  color: var(--text-secondary);
+  color: #cbd5e1;
   font-size: 0.9rem;
   font-style: normal;
 }
 
 .detail-icon {
   font-size: 1.1rem;
-  color: var(--secondary-color);
+  color: #8b5cf6;
   font-style: normal;
 }
 
@@ -448,7 +445,7 @@
   justify-content: space-between;
   align-items: center;
   padding-top: 1rem;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid rgba(236, 72, 153, 0.2);
 }
 
 .price-section {
@@ -458,7 +455,7 @@
 }
 
 .price-label {
-  color: var(--text-secondary);
+  color: #94a3b8;
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -468,7 +465,7 @@
 .price {
   font-size: 1.8rem;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(135deg, #ec4899, #8b5cf6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-style: normal;
@@ -476,7 +473,7 @@
 
 .btn-ver {
   padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(135deg, #ec4899, #8b5cf6);
   border: none;
   border-radius: 10px;
   color: white;
@@ -492,7 +489,7 @@
 
 .btn-ver:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px var(--primary-color);
+  box-shadow: 0 8px 20px rgba(236, 72, 153, 0.4);
 }
 
 .btn-icon {
@@ -509,9 +506,9 @@
 .no-results {
   text-align: center;
   padding: 4rem 2rem;
-  background: var(--card-bg);
+  background: rgba(30, 41, 59, 0.3);
   border-radius: 20px;
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(236, 72, 153, 0.2);
 }
 
 .no-results-icon {
@@ -521,14 +518,14 @@
 }
 
 .no-results h3 {
-  color: var(--text-primary);
+  color: #fff;
   font-size: 1.8rem;
   margin-bottom: 0.5rem;
   font-style: normal;
 }
 
 .no-results p {
-  color: var(--text-secondary);
+  color: #94a3b8;
   font-size: 1.1rem;
   margin-bottom: 2rem;
   font-style: normal;
@@ -536,7 +533,7 @@
 
 .btn-reset {
   padding: 1rem 2rem;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(135deg, #ec4899, #8b5cf6);
   border: none;
   border-radius: 12px;
   color: white;
@@ -549,7 +546,7 @@
 
 .btn-reset:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 30px var(--primary-color);
+  box-shadow: 0 10px 30px rgba(236, 72, 153, 0.4);
 }
 
 /* ==================== RESPONSIVE ==================== */

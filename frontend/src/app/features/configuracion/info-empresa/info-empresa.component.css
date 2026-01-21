@@ -13,10 +13,11 @@
 }
 
 .header-section h2 {
-  color: var(--text-primary);
+  color: var(--primary-color);
   font-size: 2.2rem;
   margin: 0 0 10px 0;
   font-weight: 600;
+  text-shadow: 0 0 10px var(--section-title-glow);
 }
 
 .subtitle {
@@ -93,6 +94,7 @@
   flex-direction: column;
   align-items: center;
   color: white;
+  box-shadow: 0 0 20px var(--primary-glow);
 }
 
 .empresa-logo-container {
@@ -147,10 +149,11 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  color: var(--text-primary);
+  color: var(--primary-color);
   margin: 0 0 15px 0;
   font-size: 1.3rem;
   font-weight: 600;
+  text-shadow: 0 0 8px var(--section-title-glow);
 }
 
 .empresa-description p {
@@ -168,10 +171,11 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  color: var(--text-primary);
+  color: var(--primary-color);
   margin: 0 0 20px 0;
   font-size: 1.3rem;
   font-weight: 600;
+  text-shadow: 0 0 8px var(--section-title-glow);
 }
 
 .contact-item {
@@ -253,9 +257,10 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  color: var(--text-primary);
+  color: var(--primary-color);
   font-size: 1.3rem;
   font-weight: 600;
+  text-shadow: 0 0 8px var(--section-title-glow);
 }
 
 .section-toggle {

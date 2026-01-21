@@ -70,6 +70,9 @@ export class ThemeService {
     // Aplicar tamaño de fuente
     document.documentElement.style.fontSize = `${preferences.fontSize}px`;
     
+    // Aplicar variables CSS para colores celestes
+    this.applyThemeColors(preferences.theme);
+    
     // Forzar repaint
     document.body.offsetHeight;
   }
@@ -79,6 +82,40 @@ export class ThemeService {
     
     localStorage.setItem('user-theme', preferences.theme);
     localStorage.setItem('user-font-size', preferences.fontSize.toString());
+  }
+
+  private applyThemeColors(theme: 'light' | 'dark') {
+    const root = document.documentElement;
+    
+    if (theme === 'dark') {
+      // Colores celestes del admin - modo oscuro
+      root.style.setProperty('--primary-color', '#00f0ff');
+      root.style.setProperty('--primary-light', '#3a86ff');
+      root.style.setProperty('--primary-dark', '#0066cc');
+      root.style.setProperty('--bg-primary', '#0f172a');
+      root.style.setProperty('--bg-secondary', '#1a1a40');
+      root.style.setProperty('--bg-card', '#162447');
+      root.style.setProperty('--text-primary', '#c0d6ff');
+      root.style.setProperty('--text-secondary', '#80aaff');
+      root.style.setProperty('--border-color', '#3a3f5c');
+      root.style.setProperty('--success-color', '#10b981');
+      root.style.setProperty('--error-color', '#ef4444');
+      root.style.setProperty('--warning-color', '#f59e0b');
+    } else {
+      // Colores celestes del admin - modo claro
+      root.style.setProperty('--primary-color', '#0ea5e9');
+      root.style.setProperty('--primary-light', '#0284c7');
+      root.style.setProperty('--primary-dark', '#0369a1');
+      root.style.setProperty('--bg-primary', '#f8fafc');
+      root.style.setProperty('--bg-secondary', '#e2e8f0');
+      root.style.setProperty('--bg-card', '#ffffff');
+      root.style.setProperty('--text-primary', '#1e293b');
+      root.style.setProperty('--text-secondary', '#64748b');
+      root.style.setProperty('--border-color', '#cbd5e1');
+      root.style.setProperty('--success-color', '#10b981');
+      root.style.setProperty('--error-color', '#ef4444');
+      root.style.setProperty('--warning-color', '#f59e0b');
+    }
   }
 
   getCurrentPreferences(): UserPreferences {

@@ -46,27 +46,27 @@
   background: linear-gradient(
     90deg,
     var(--primary-color),
-    #34d399,
-    #ff0080
+    var(--primary-light),
+    var(--secondary-color)
   );
 
   box-shadow:
-    0 0 10px rgba(16, 185, 129, 0.6),
-    0 0 12px rgba(255, 0, 128, 0.6);
+    0 0 10px var(--section-title-glow),
+    0 0 12px var(--accent-glow);
 }
 
 /* ===== DARK MODE ===== */
 [data-theme="dark"] .header-section::before {
   background: linear-gradient(
     90deg,
-    #34d399,
-    #10b981,
-    #059669
+    var(--primary-light),
+    var(--primary-color),
+    var(--primary-dark)
   );
 
   box-shadow:
-    0 0 10px rgba(52, 211, 153, 0.8),
-    0 0 16px rgba(16, 185, 129, 0.6);
+    0 0 10px var(--section-title-glow),
+    0 0 16px var(--primary-glow);
 }
 
 
@@ -139,18 +139,18 @@
    BADGE
 ================================ */
 .badge {
-  background: #ff0080;
+  background: var(--secondary-color);
   color: white;
   padding: 5px 12px;
   border-radius: 20px;
   font-size: 0.85rem;
   font-weight: bold;
-  box-shadow: 0 0 12px rgba(255, 0, 128, 0.7);
+  box-shadow: 0 0 12px var(--accent-glow);
   margin-bottom: 0.5rem;
 }
 
 .badge.used {
-  background: #6b7280;
+  background: var(--text-secondary);
   box-shadow: none;
 }
 
@@ -174,7 +174,7 @@
   font-size: 1.6rem;
   font-weight: 800;
   color: var(--primary-color);
-  text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+  text-shadow: 0 0 10px var(--section-title-glow);
 }
 
 /* ===============================
@@ -189,13 +189,13 @@
   font-weight: 600;
   background: var(--primary-color);
   color: white;
-  box-shadow: 0 0 15px rgba(16, 185, 129, 0.6);
+  box-shadow: 0 0 15px var(--primary-glow);
   transition: all 0.25s ease;
 }
 
 .btn-select:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 22px rgba(16, 185, 129, 0.9);
+  box-shadow: 0 0 22px var(--primary-glow-strong);
 }
 
 /* ===============================
