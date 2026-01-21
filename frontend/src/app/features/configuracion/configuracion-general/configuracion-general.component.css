@@ -59,12 +59,13 @@
 
 .card-header h3 {
   margin: 0;
-  color: var(--text-primary);
+  color: var(--primary-color);
   font-size: 1.4rem;
   font-weight: 600;
   display: flex;
   align-items: center;
   gap: 10px;
+  text-shadow: 0 0 8px var(--section-title-glow);
 }
 
 .card-header h3 i {
@@ -243,7 +244,7 @@
   -ms-user-select: none;
   user-select: none;
   font-weight: 500;
-  color: #2c3e50;
+  color: var(--text-primary);
 }
 
 .checkbox-container input {
@@ -260,19 +261,19 @@
   left: 0;
   height: 22px;
   width: 22px;
-  background-color: #fff;
-  border: 2px solid #eaeaea;
+  background-color: var(--card-bg);
+  border: 2px solid var(--border-color);
   border-radius: 4px;
   transition: all 0.3s ease;
 }
 
 .checkbox-container:hover input ~ .checkmark {
-  border-color: #3498db;
+  border-color: var(--primary-color);
 }
 
 .checkbox-container input:checked ~ .checkmark {
-  background-color: #3498db;
-  border-color: #3498db;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
 .checkmark:after {
@@ -326,14 +327,14 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
   color: white;
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #2980b9 0%, #3498db 100%);
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
   transform: translateY(-2px);
-  box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 7px 14px var(--section-title-glow), 0 3px 6px rgba(0, 0, 0, 0.08);
 }
 
 /* Responsive */

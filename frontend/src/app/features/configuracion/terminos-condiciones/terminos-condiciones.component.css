@@ -13,10 +13,11 @@
 }
 
 .header-section h2 {
-  color: var(--text-primary);
+  color: var(--primary-color);
   font-size: 2.2rem;
   margin: 0 0 10px 0;
   font-weight: 600;
+  text-shadow: 0 0 10px var(--section-title-glow);
 }
 
 .subtitle {
@@ -113,9 +114,10 @@
 
 .terminos-title h3 {
   margin: 0 0 5px 0;
-  color: var(--text-primary);
+  color: var(--primary-color);
   font-size: 1.5rem;
   font-weight: 600;
+  text-shadow: 0 0 8px var(--section-title-glow);
 }
 
 .terminos-date {
@@ -136,7 +138,8 @@
 
 .terminos-body h1, .terminos-body h2, .terminos-body h3 {
   margin: 25px 0 15px 0;
-  color: var(--text-primary);
+  color: var(--primary-color);
+  text-shadow: 0 0 8px var(--section-title-glow);
 }
 
 .terminos-body ul, .terminos-body ol {
@@ -208,9 +211,10 @@
 }
 
 .no-content h3 {
-  color: var(--text-primary);
+  color: var(--primary-color);
   font-size: 1.5rem;
   margin: 0 0 15px 0;
+  text-shadow: 0 0 8px var(--section-title-glow);
 }
 
 .no-content p {
