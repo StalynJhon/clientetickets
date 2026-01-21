@@ -1,7 +1,7 @@
 const transportCtl = {};
-const orm = require('../../../infrastructure/database/connection/dataBase.orm');
-const sql = require('../../../infrastructure/database/connection/dataBase.sql');
-const mongo = require('../../../infrastructure/database/connection/dataBaseMongose');
+const orm = require('../../database/connection/dataBase.orm');
+const sql = require('../../database/connection/dataBase.sql');
+const mongo = require('../../database/connection/dataBaseMongose');
 const { cifrarDatos, descifrarSeguro } = require('../../../application/encrypDates');
 
 // ================ GESTIÓN DE EMPRESAS DE TRANSPORTE ================
